@@ -36,5 +36,5 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://rlrson.github.uiowa.edu/viz-immigration"
+  "homepage": "https://github.uiowa.edu/rlrson/viz-immigration"
 }
