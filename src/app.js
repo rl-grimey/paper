@@ -6,7 +6,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Cartogrid from './Cartogrid/Cartogrid';
 import TopicDetails from './dod/topicDetails';
 import SpatialDetails from './dod/spatialDetail';
-import { loadData, clickTreeTile, clickCountTile } from './utilities';
+import { 
+  loadData, 
+  clickTreeTile, 
+  clickCountTile,
+  getStateHeirarchy
+} from './utilities';
 import { Slider } from './widgets';
 
 
@@ -28,13 +33,14 @@ class App extends React.Component {
 
       // Inputs
       cartoType: 'tree',
+      num_topics: 5,
       topic: null,
       statefp: null,
       period: null,
 
       // Data
-      counts: [],
-      topicVectors: {},
+      counts: undefined,
+      topicVectors: undefined,
       counties: []
     }
 
@@ -58,8 +64,9 @@ class App extends React.Component {
         colorScale = [],
         callback;
 
-    if (this.state.cartoType === 'tree' && this.state.topTopicVectors !== undefined) {
-      data = this.state.topTopicVectors;
+    if (this.state.cartoType === 'tree' && this.state.topicVectors) {
+      data = this.state.topicVectors.values()
+        .map(stateVec => getStateHeirarchy(stateVec, this.state.num_topics));
 
       // Get unique topics across all states
       let topics = [].concat.apply([], data.map(d => d.children))
@@ -75,7 +82,7 @@ class App extends React.Component {
       // Assign callback
       callback = this.clickTreeTile;
     }
-    else if (this.state.cartoType === 'count' && this.state.counts.length > 0) {
+    else if (this.state.cartoType === 'count' && this.state.counts) {
       data = this.state.counts;
       colorScale = d3.scaleThreshold()
         .domain([0, 1])
@@ -84,13 +91,15 @@ class App extends React.Component {
     }
 
     // Make sure we're updating correctly
+    //console.log('-' * 80);
     console.log('statefp', this.state.statefp);
     console.log('topic', this.state.topic);
     console.log('period', this.state.period);
+    console.log('Num topics', this.state.num_topics);
 
     return (
       <div className="App">
-        <Grid>
+        <Grid fluid={true}>
 
           <Row>
             <Col xs={12}>
@@ -131,6 +140,15 @@ class App extends React.Component {
                   value={this.state.height}
                   onChange={this.onChange}
                 />
+                <Slider
+                  label={'Number of Topics'}
+                  name={'num_topics'}
+                  min={3}
+                  max={10}
+                  step={1}
+                  value={this.state.num_topics}
+                  onChange={this.onChange}
+                />
               </div>
               <div>
                 <button 
@@ -148,6 +166,7 @@ class App extends React.Component {
             </Col>
 
             <Col xs={10}>
+              <Row>
               <Cartogrid
                 width={this.state.width}
                 height={this.state.height}
@@ -157,32 +176,33 @@ class App extends React.Component {
                 colorScale={colorScale}
                 clickCallback={e => this.setState(callback(e))}
               />
+              </Row>
+              <Row>
+                <Col xsOffset={2}>
+                  <TopicDetails
+                    width={this.state.width * 0.33}
+                    height={this.state.height * 0.66}
+                    margin={margin}
+                  />
+                </Col>
+                <Col>
+                  <TopicDetails
+                    width={this.state.width * 0.33}
+                    height={this.state.height * 0.66}
+                    margin={margin}
+                  />
+                </Col>
+                <Col>
+                  <SpatialDetails
+                    data={this.state.counties}
+                    statefp={this.state.statefp}
+                    width={this.state.width * 0.33}
+                    height={this.state.height * 0.66}
+                  />
+                </Col>
+              </Row>
             </Col>
 
-          </Row>
-          <Row>
-            <Col>
-              <TopicDetails
-                width={this.state.width * 0.33}
-                height={this.state.height * 0.66}
-                margin={margin}
-              />
-            </Col>
-            <Col>
-              <TopicDetails
-                width={this.state.width * 0.33}
-                height={this.state.height * 0.66}
-                margin={margin}
-              />
-            </Col>
-            <Col>
-              <SpatialDetails
-                data={this.state.counties}
-                statefp={this.state.statefp}
-                width={this.state.width * 0.33}
-                height={this.state.height * 0.66}
-              />
-            </Col>
           </Row>
         </Grid>
       </div>

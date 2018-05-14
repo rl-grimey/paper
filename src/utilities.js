@@ -142,8 +142,7 @@ export const loadData = (callback = _.noop) => {
       // Assign them to our app by using the callback function provided to us
       callback({
         counts: countsByState,
-        topicVectors: topicVectorsByState,
-        topTopicVectors: top_topic_vectors
+        topicVectors: topicVectorsByState
       });
     });
 };
