@@ -191,81 +191,6 @@ class App extends React.Component {
             </Col>
           </Row>
 
-          {/* UI Controls */}
-          <Row>
-            <Col xs={12}>
-              <div>
-                <h5>Settings</h5>        
-              </div>
-              <div>
-                <Slider
-                  label={'Tile Padding'}
-                  name={'padding'}
-                  min={0}
-                  max={1}
-                  step={0.1}
-                  value={this.state.value}
-                  onChange={this.onChange}
-                />
-                <Slider
-                  label={'Width'}
-                  name={'width'}
-                  min={960}
-                  max={1200}
-                  step={5}
-                  value={this.state.width}
-                  onChange={this.onChange}
-                />
-                <Slider
-                  label={'Height'}
-                  name={'height'}
-                  min={500}
-                  max={750}
-                  step={5}
-                  value={this.state.height}
-                  onChange={this.onChange}
-                />
-                {/*<Slider
-                  label={'Number of Topics'}
-                  name={'num_topics'}
-                  min={3}
-                  max={10}
-                  step={1}
-                  value={this.state.num_topics}
-                  onChange={this.onChange}
-                />*/}
-              </div>
-              <div>
-                {/*<button 
-                  name={'cartoType'} 
-                  value={'tree'}
-                  onClick={this.onChange}
-                  selected
-                >TreeMap</button>*/}
-                <button 
-                  name={'cartoType'} 
-                  value={'cluster'}
-                  onClick={this.onChange}
-                >Clusters</button>
-                <button 
-                  name={'cartoType'} 
-                  value={'count'}
-                  onClick={this.onChange}
-                >Counts</button>
-                {/*<button 
-                  name={'cartoType'} 
-                  value={'dot'}
-                  onClick={this.onChange}
-                >Dots</button>
-                <button 
-                  name={'cartoType'} 
-                  value={'bar'}
-                  onClick={this.onChange}
-                >Bars</button>*/}
-              </div>
-            </Col>
-          </Row>
-
           <hr/>
 
           {/* Top clusters*/}
@@ -384,6 +309,94 @@ class App extends React.Component {
                 //onWordClick={}
               />
             </Row>}
+
+            <hr/>
+
+            {/* UI Controls */}
+            <Row>
+              <Col xs={6}>
+                <div>
+                  <h5>Charts</h5>        
+                </div>
+                <div>
+                  {/*<button 
+                    name={'cartoType'} 
+                    value={'tree'}
+                    onClick={this.onChange}
+                    selected
+                  >TreeMap</button>*/}
+                  <button 
+                    name={'cartoType'} 
+                    value={'cluster'}
+                    onClick={this.onChange}
+                  >Clusters</button>
+                  <button 
+                    name={'cartoType'} 
+                    value={'count'}
+                    onClick={this.onChange}
+                  >Counts</button>
+                  {/*<button 
+                    name={'cartoType'} 
+                    value={'dot'}
+                    onClick={this.onChange}
+                  >Dots</button>
+                  <button 
+                    name={'cartoType'} 
+                    value={'bar'}
+                    onClick={this.onChange}
+                  >Bars</button>*/}
+                </div>
+              </Col>
+
+              <Col 
+                className={'pull-right'}
+                xs={3}
+                xsPull={9}
+              >
+                <div>
+                  <h5>Settings</h5>        
+                </div>
+                <div>
+                  <Slider
+                    label={'Tile Padding'}
+                    name={'padding'}
+                    min={0}
+                    max={1}
+                    step={0.1}
+                    value={this.state.value}
+                    onChange={this.onChange}
+                  />
+                  <Slider
+                    label={'Width'}
+                    name={'width'}
+                    min={960}
+                    max={1200}
+                    step={5}
+                    value={this.state.width}
+                    onChange={this.onChange}
+                  />
+                  <Slider
+                    label={'Height'}
+                    name={'height'}
+                    min={500}
+                    max={750}
+                    step={5}
+                    value={this.state.height}
+                    onChange={this.onChange}
+                  />
+                  {/*<Slider
+                    label={'Number of Topics'}
+                    name={'num_topics'}
+                    min={3}
+                    max={10}
+                    step={1}
+                    value={this.state.num_topics}
+                    onChange={this.onChange}
+                  />*/}
+                </div>
+              </Col>
+            </Row>
+
             {/*<TopicCloud
                 data={this.state.topicTokens}
                 topic={this.state.topic}
@@ -414,7 +427,8 @@ class App extends React.Component {
                   width={this.state.width * 0.33}
                   height={this.state.height * 0.66}
                 />
-            </Col>*/}   
+            </Col>*/}  
+
           </Col>             
         </Grid>
       </div>
