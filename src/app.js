@@ -6,13 +6,20 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Cartogrid from './Cartogrid/Cartogrid';
 import TopicDetails from './dod/topicDetails';
 import SpatialDetails from './dod/spatialDetail';
+import TopicCloud from './dod/topicCloud';
+import ClusterCloud from './dod/clusterCloud';
+import ClusterLegend from './dod/legend';
 import { 
   loadData, 
   clickTreeTile, 
   clickCountTile,
-  getStateHeirarchy
+  clickClusterTile,
+  getStateHeirarchy,
+  getStateTimeHeirarchy,
+  getStateTimeCluster
 } from './utilities';
 import { Slider } from './widgets';
+import './style.css';
 
 
 const margin = {
@@ -27,25 +34,32 @@ class App extends React.Component {
     super();
     this.state = {
       // Charts
-      width: 960,
-      height: 500,
-      padding: 0.1,
+      width: 1000,
+      height: 600,
+      padding: 0.2,
 
       // Inputs
-      cartoType: 'tree',
+      cartoType:  'cluster',
       num_topics: 5,
-      topic: null,
-      statefp: null,
-      period: null,
+      topic:      0,
+      cluster:    0,
+      statefp:    '11',
+      period:     null,
 
       // Data
-      counts: undefined,
+      counts:       undefined,
+      maxCount:     undefined,
       topicVectors: undefined,
-      counties: []
+      topicTimeVectors: undefined,
+      topicTokens:  undefined,
+      clusterTokens:undefined,
+      counties:     undefined,
+      tweets:       undefined
     }
 
     this.clickTreeTile = clickTreeTile.bind(this);
     this.clickCountTile = clickCountTile.bind(this);
+    this.clickClusterTile = clickClusterTile.bind(this);
   }
 
   componentWillMount() {
@@ -62,7 +76,14 @@ class App extends React.Component {
   render() {
     let data = [],
         colorScale = [],
-        callback;
+        callback = null;
+
+    const org_colors = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3',
+        '#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd', '#333333'];
+    const clusterScale = d3.scaleOrdinal()
+      .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, undefined])
+      .range(['#80b1d3', '#fdb462', '#dddddd', '#fb8072', '#ffffb3',
+        '#bc80bd', '#fccde5', '#bebada', '#d9d9d9', '#1f78b4', '#222222']);
 
     if (this.state.cartoType === 'tree' && this.state.topicVectors) {
       data = this.state.topicVectors.values()
@@ -82,6 +103,63 @@ class App extends React.Component {
       // Assign callback
       callback = this.clickTreeTile;
     }
+    if (this.state.cartoType === 'cluster' && this.state.topicTimeVectors) {
+      // Get state cluster for before and after
+      data = d3.entries(this.state.topicTimeVectors)
+        .map(state => {
+          let fips = state.key;
+          let top_topics_time = getStateTimeCluster(state.value);
+          top_topics_time['statefp'] = fips;
+          return top_topics_time;
+        });
+
+      // Color scale, we only have 8 clusters
+      colorScale = clusterScale;
+
+      // Assign the cluster callback 
+      callback = this.clickClusterTile;
+    }
+    else if (this.state.cartoType === 'dot' && this.state.topicTimeVectors) {
+      // Create an array of objects with each state's FIPS and top n topics by time
+      // e.g. [... {
+      //  statefp: 01, 
+      //  before: [{name: 1, prob: 1.00}, ...]}, 
+      //  after: [{name: 1, prob: 1.00}], ...]
+      // }, ...]
+      data = d3.entries(this.state.topicTimeVectors)
+        .map(state => {
+          let fips = state.key;
+          let top_topics_time = getStateTimeHeirarchy(state.value, this.state.num_topics);
+          top_topics_time['statefp'] = fips;
+          return top_topics_time;
+        });
+      
+      // Get the distinct topics from each vector
+      // Before and after
+      let topics_before = [].concat.apply([], data.map(d => d.before)).map(d => d.topic);
+      let topics_after = [].concat.apply([], data.map(d => d.after)).map(d => d.topic);
+      // Combine them and get unique
+      let topics = topics_before.concat(topics_after).filter((x, i, a) => a.indexOf(x) === i);
+      // Get their counts
+      let topic_cnts = d3.nest().key(d => d).rollup(v => v.length).entries(topics);
+
+      // Map them to an ordinal color scale
+      colorScale = d3.scaleOrdinal()
+        .domain(topics)
+        .range(d3.schemeCategory20c);
+
+      //console.log(data, topics_before, topics_after, topics, topic_cnts);
+    }
+    else if (this.state.cartoType === 'bar' && this.state.topicTimeVectors) {
+      // Create an array of objects with each state's FIPS and top n topics by time
+      // e.g. [... {
+      //  statefp: 01, 
+      //  before: [{name: 1, prob: 1.00}, ...]}, 
+      //  after: [{name: 1, prob: 1.00}], ...]
+      // }, ...]
+      data = d3.entries(this.state.topicVectorsLong);
+
+    }
     else if (this.state.cartoType === 'count' && this.state.counts) {
       data = this.state.counts;
       colorScale = d3.scaleThreshold()
@@ -91,24 +169,31 @@ class App extends React.Component {
     }
 
     // Make sure we're updating correctly
-    //console.log('-' * 80);
+    console.log('-----------------------------------------------------');
     console.log('statefp', this.state.statefp);
     console.log('topic', this.state.topic);
+    console.log('cluster', this.state.cluster);
     console.log('period', this.state.period);
     console.log('Num topics', this.state.num_topics);
+    console.log(this.state);
+
+    //console.log(this.state.clusterTokens);
 
     return (
       <div className="App">
-        <Grid fluid={true}>
+        <Grid>
+          <Col>
 
+          {/* Title */}
           <Row>
             <Col xs={12}>
               <h3>CartoGrid</h3>
             </Col>
           </Row>
 
+          {/* UI Controls */}
           <Row>
-            <Col xs={2}>
+            <Col xs={12}>
               <div>
                 <h5>Settings</h5>        
               </div>
@@ -159,51 +244,178 @@ class App extends React.Component {
                 >TreeMap</button>
                 <button 
                   name={'cartoType'} 
+                  value={'cluster'}
+                  onClick={this.onChange}
+                >Clusters</button>
+                <button 
+                  name={'cartoType'} 
                   value={'count'}
                   onClick={this.onChange}
                 >Counts</button>
+                <button 
+                  name={'cartoType'} 
+                  value={'dot'}
+                  onClick={this.onChange}
+                >Dots</button>
+                <button 
+                  name={'cartoType'} 
+                  value={'bar'}
+                  onClick={this.onChange}
+                >Bars</button>
               </div>
             </Col>
-
-            <Col xs={10}>
-              <Row>
-              <Cartogrid
-                width={this.state.width}
-                height={this.state.height}
-                padding={this.state.padding}
-                cartoType={this.state.cartoType}
-                data={data}
-                colorScale={colorScale}
-                clickCallback={e => this.setState(callback(e))}
-              />
-              </Row>
-              <Row>
-                <Col xsOffset={2}>
-                  <TopicDetails
-                    width={this.state.width * 0.33}
-                    height={this.state.height * 0.66}
-                    margin={margin}
-                  />
-                </Col>
-                <Col>
-                  <TopicDetails
-                    width={this.state.width * 0.33}
-                    height={this.state.height * 0.66}
-                    margin={margin}
-                  />
-                </Col>
-                <Col>
-                  <SpatialDetails
-                    data={this.state.counties}
-                    statefp={this.state.statefp}
-                    width={this.state.width * 0.33}
-                    height={this.state.height * 0.66}
-                  />
-                </Col>
-              </Row>
-            </Col>
-
           </Row>
+
+          <hr/>
+
+          {/* Top clusters*/}
+          {this.state.clusterTokens && 
+            <Row>
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'0'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'1'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'2'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'3'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'4'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+            </Row>}
+
+          {/* Overview */}
+          <Row>
+            <Cartogrid
+              width={this.state.width}
+              height={this.state.height}
+              padding={this.state.padding}
+              cartoType={this.state.cartoType}
+              data={data}
+              colorScale={colorScale}
+              clickCallback={e => this.setState(callback(e))}
+              maxCount={this.state.maxCount}
+              cluster={this.state.cluster}
+            />
+          </Row>
+          
+          {/* Details on demand */}
+          {this.state.clusterTokens && 
+            <Row>
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'5'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'6'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'7'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'8'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'9'}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.3}
+                colorScale={clusterScale}
+                //onWordClick={}
+              />
+            </Row>}
+            {/*<TopicCloud
+                data={this.state.topicTokens}
+                topic={this.state.topic}
+                width={this.state.width * 0.2}
+                height={this.state.height * 0.2}
+                //onWordClick={}
+              />
+              <Col xsOffset={2}>
+                <TopicDetails
+                  width={this.state.width * 0.33}
+                  height={this.state.height * 0.66}
+                  margin={margin}
+                  topic={this.state.topic}
+                  data={this.state.topicTokens}
+                />
+              </Col>
+              <Col>
+                <TopicDetails
+                  width={this.state.width * 0.33}
+                  height={this.state.height * 0.66}
+                  margin={margin}
+                />
+              </Col>
+              <Col>
+                <SpatialDetails
+                  data={this.state.counties}
+                  statefp={this.state.statefp}
+                  width={this.state.width * 0.33}
+                  height={this.state.height * 0.66}
+                />
+            </Col>*/}   
+          </Col>             
         </Grid>
       </div>
     );

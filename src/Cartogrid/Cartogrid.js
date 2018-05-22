@@ -4,7 +4,10 @@ import { scaleBand } from '@vx/scale';
 import * as d3 from 'd3';
 import Gridtile from './Gridtile';
 import TreeTile from './plots/treeTile';
+import ClusterTile from './plots/clusterTile';
 import CountTile from './plots/countPlot';
+import DotTile from './plots/dotTile';
+import BarTile from './plots/barTile';
 import states from '../states';
 
 
@@ -39,6 +42,7 @@ export default class Cartogrid extends React.Component {
     this.create_tile = this.create_tile.bind(this);
     this.createTreeTile = this.createTreeTile.bind(this);
     this.createCountTile = this.createCountTile.bind(this);
+    this.createDotTile = this.createDotTile.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -96,14 +100,58 @@ export default class Cartogrid extends React.Component {
     );
   }
 
-  createCountTile = (d, i) => {
+  createClusterTile = (d, i) => {
     return (
-      <CountTile
-        data={d.values}
+      <ClusterTile
+        statefp={d.statefp}
+        before={d.before}
+        after={d.after}
+        cluster={this.state.cluster}
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
         colorScale={this.props.colorScale}
         clickCallback={this.props.clickCallback}
+      />
+    );
+  }
+
+  createCountTile = (d, i) => {
+    // Normalize the values by state population
+    let state_data = this.state.states[d.key];
+    
+    console.log(d.values);
+    d.values.forEach(v => v.count = v.count / state_data.pop17);
+    console.log(d, state_data);
+    
+    return (
+      <CountTile
+        data={d.values}
+        maxCount={this.props.maxCount}
+        width={this.state.x_scale.bandwidth()}
+        height={this.state.y_scale.bandwidth()}
+        colorScale={this.props.colorScale}
+        clickCallback={this.props.clickCallback}
+      />
+    );
+  }
+
+  createDotTile = (d, i) => {
+    return (
+      <DotTile
+        statefp={d.statefp}
+        before={d.before}
+        after={d.after}
+        width={this.state.x_scale.bandwidth()}
+        height={this.state.y_scale.bandwidth()}
+        colorScale={this.props.colorScale}
+      />
+    );
+  }
+
+  createBarTile = (d, i) => {
+    return (
+      <BarTile
+        data={d3.values(d.value)}
       />
     );
   }
@@ -117,25 +165,15 @@ export default class Cartogrid extends React.Component {
     const data = this.props.data;
     const cartoType = this.props.cartoType;
 
-    //console.log(this.state, this.props);
+    console.log('-------\nCartogrid --------------------------------------------');
+    console.log(this.state, this.props);
 
     return (
       <svg 
+        className={'cartogrid'}
         width={this.state.width}
         height={this.state.height}
       >
-        {/* Map using states with no data
-        states.map((d, i) => 
-            <Gridtile
-              key={i}
-              abbrv={d.abbrv}
-              top={y_scale(d.y)}
-              left={x_scale(d.x)}
-              width={x_scale.bandwidth()}
-              height={y_scale.bandwidth()}
-              //data={data[d.statefp]}
-            />
-        )*/}
         {cartoType === 'tree' && this.state.data && this.state.data.map((d, i) => 
           <Gridtile
             key={i}
@@ -146,6 +184,17 @@ export default class Cartogrid extends React.Component {
             height={y_scale.bandwidth()}
           >
             {this.createTreeTile(d, i)}
+          </Gridtile>
+        )}
+        {cartoType === 'cluster' && this.state.data && this.state.data.map((d, i) => 
+          <Gridtile
+            key={i}
+            abbrv={this.state.states[d.statefp].abbrv}
+            top={y_scale(this.state.states[d.statefp].y)}
+            left={x_scale(this.state.states[d.statefp].x)}
+            width={x_scale.bandwidth()}
+            height={y_scale.bandwidth()}
+          >{this.createClusterTile(d, i)}
           </Gridtile>
         )}
         {cartoType === 'count' && this.state.data && this.state.data.map((d, i) => 
@@ -160,9 +209,46 @@ export default class Cartogrid extends React.Component {
             {this.createCountTile(d, i)}
           </Gridtile>
         )}
+        {cartoType === 'dot' && this.state.data && this.state.data.map((d, i) => 
+          <Gridtile
+            key={i}
+            abbrv={this.state.states[d.statefp].abbrv}
+            top={y_scale(this.state.states[d.statefp].y)}
+            left={x_scale(this.state.states[d.statefp].x)}
+            width={x_scale.bandwidth()}
+            height={y_scale.bandwidth()}
+          >
+            {this.createDotTile(d, i)}
+          </Gridtile>
+        )}
+        {cartoType === 'bar' && this.state.data && this.state.data.map((d, i) => 
+          <Gridtile
+            key={i}
+            abbrv={this.state.states[d.key].abbrv}
+            top={y_scale(this.state.states[d.key].y)}
+            left={x_scale(this.state.states[d.key].x)}
+            width={x_scale.bandwidth()}
+            height={y_scale.bandwidth()}
+          >
+            {this.createBarTile(d, i)}
+          </Gridtile>
+        )}
       </svg>
     );
   } 
 };
 
-//const tiles = states.map((d, i) => this.create_tile(d, i));
+/* Map using states with no data
+states.map((d, i) => 
+    <Gridtile
+      key={i}
+      abbrv={d.abbrv}
+      top={y_scale(d.y)}
+      left={x_scale(d.x)}
+      width={x_scale.bandwidth()}
+      height={y_scale.bandwidth()}
+      //data={data[d.statefp]}
+    />
+)
+const tiles = states.map((d, i) => this.create_tile(d, i));
+*/

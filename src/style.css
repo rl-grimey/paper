@@ -1,0 +1,13 @@
+svg text {
+  fill: #222222 !important;
+}
+
+body {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.cartogrid {
+  display: block;
+  margin: auto;
+}

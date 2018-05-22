@@ -16,7 +16,7 @@ export default class Gridtile extends React.Component {
         <Bar
           className={'tile-bg'}
           fill={'none'}
-          stroke={'#333333'}
+          stroke={'#33333300'}
           strokeWidth={1}
           width={this.props.width}
           height={this.props.height}
@@ -28,9 +28,9 @@ export default class Gridtile extends React.Component {
           fontFamily={'sans-serif'}
           textAnchor={'end'}
           dx={this.props.width * 0.85}
-          dy={this.props.height * -0.25}
-        >
-          {this.props.abbrv}
+          y={this.props.height * -0.05}
+          style={{}}
+        >{this.props.abbrv}
         </Text>
         {this.props.children}
       </Group>

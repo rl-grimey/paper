@@ -5,7 +5,7 @@ import {
   scaleBand, 
   scaleLinear,
   scaleThreshold,
-  scaleLog 
+  scalePow
 } from 'd3-scale';
 import { max } from 'd3-array';
 
@@ -13,17 +13,18 @@ import { max } from 'd3-array';
 
 export default class CountTile extends React.Component {
   render() {
-    let { width, height, colorScale, data } = this.props;
+    let { width, height, colorScale, data, maxCount } = this.props;
 
     const x_scale = scaleBand()
-      .domain([-4, -3, -2, -1, 0, 1, 2, 3, 4])
+      .domain([-4, -3, -2, -1, 1, 2, 3, 4])
       .range([0, width])
       .paddingOuter(0.3)
       .paddingInner(0.2);
 
-    const y_scale = scaleLinear()
+    const y_scale = scalePow()
+      .exponent(2)
       .domain([0, max(data, d => d.count)])
-      .range([0, height]);
+      .range([height, 0]);
 
     return (
       <Group onClick={this.props.clickCallback} >
@@ -37,7 +38,7 @@ export default class CountTile extends React.Component {
             x={x_scale(d.period)}
             y={y_scale(d.count)}
             width={x_scale.bandwidth()}
-            height={height - y_scale(d.count)}
+            height={y_scale(0) - y_scale(d.count)}
           />);
         })}
       </Group>
