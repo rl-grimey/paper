@@ -118,10 +118,7 @@ export default class Cartogrid extends React.Component {
   createCountTile = (d, i) => {
     // Normalize the values by state population
     let state_data = this.state.states[d.key];
-    
-    console.log(d.values);
     d.values.forEach(v => v.count = v.count / state_data.pop17);
-    console.log(d, state_data);
     
     return (
       <CountTile

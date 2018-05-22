@@ -187,7 +187,7 @@ class App extends React.Component {
           {/* Title */}
           <Row>
             <Col xs={12}>
-              <h3>CartoGrid</h3>
+              <h3>CarTopic Visualization of Immigrant-related Tweets <i>before</i> and <i>after</i> the Travel Ban.</h3>
             </Col>
           </Row>
 
@@ -225,7 +225,7 @@ class App extends React.Component {
                   value={this.state.height}
                   onChange={this.onChange}
                 />
-                <Slider
+                {/*<Slider
                   label={'Number of Topics'}
                   name={'num_topics'}
                   min={3}
@@ -233,15 +233,15 @@ class App extends React.Component {
                   step={1}
                   value={this.state.num_topics}
                   onChange={this.onChange}
-                />
+                />*/}
               </div>
               <div>
-                <button 
+                {/*<button 
                   name={'cartoType'} 
                   value={'tree'}
                   onClick={this.onChange}
                   selected
-                >TreeMap</button>
+                >TreeMap</button>*/}
                 <button 
                   name={'cartoType'} 
                   value={'cluster'}
@@ -252,7 +252,7 @@ class App extends React.Component {
                   value={'count'}
                   onClick={this.onChange}
                 >Counts</button>
-                <button 
+                {/*<button 
                   name={'cartoType'} 
                   value={'dot'}
                   onClick={this.onChange}
@@ -261,7 +261,7 @@ class App extends React.Component {
                   name={'cartoType'} 
                   value={'bar'}
                   onClick={this.onChange}
-                >Bars</button>
+                >Bars</button>*/}
               </div>
             </Col>
           </Row>

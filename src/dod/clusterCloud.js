@@ -42,7 +42,7 @@ export default class ClusterCloud extends React.Component {
     const fontScale = scaleLog()
       .base(2)
       .domain([1, 447786])
-      .range([8, 22]);
+      .range([6, 24]);
 
     const fontSizeMapper = word => {
       return (word.value === 1) ? 12 : fontScale(word.value);
@@ -55,8 +55,6 @@ export default class ClusterCloud extends React.Component {
       'padding': '10px'
     };
 
-    console.log(this.props, this.state);
-
     return (
       <div style={divStyle}>
         <b>Cluster {this.props.cluster}</b>
@@ -67,6 +65,7 @@ export default class ClusterCloud extends React.Component {
             width={this.props.width}
             height={this.props.height}
             font={'sans-serif'}
+            padding={2}
           />
           ) : (
             <div></div>

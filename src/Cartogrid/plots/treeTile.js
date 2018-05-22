@@ -17,7 +17,6 @@ import { localPoint } from '@vx/event';
 export default class TreeTile extends React.Component {
   handleMouseOver = (event, datum) => {
     const coords = localPoint(event.target.ownerSVGElement, event);
-    console.log(coords);
   }
 
   render() {

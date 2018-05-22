@@ -7,7 +7,9 @@ import {
   scaleThreshold,
   scalePow
 } from 'd3-scale';
+import { AxisLeft, AxisBottom } from '@vx/axis';
 import { max } from 'd3-array';
+import { format } from 'd3-format';
 
 
 
@@ -29,17 +31,33 @@ export default class CountTile extends React.Component {
     return (
       <Group onClick={this.props.clickCallback} >
         {data.map((d, i) => {
-          return (<Bar
-            key={i}
-            className={d.period + ' ' + d.statefp}
-            fill={colorScale(d.period)}
-            stroke={null}
-            strokeWidth={1}
-            x={x_scale(d.period)}
-            y={y_scale(d.count)}
-            width={x_scale.bandwidth()}
-            height={y_scale(0) - y_scale(d.count)}
-          />);
+          return (
+            <Group key={i}>
+              <Bar
+                className={d.period + ' ' + d.statefp}
+                fill={colorScale(d.period)}
+                stroke={null}
+                strokeWidth={1}
+                x={x_scale(d.period)}
+                y={y_scale(d.count)}
+                width={x_scale.bandwidth()}
+                height={y_scale(0) - y_scale(d.count)}
+              />
+              <AxisBottom
+                scale={x_scale}
+                top={height}
+                numTicks={2}
+                hideAxisLine={true}
+                tickLength={3}
+              />
+              {/*<AxisLeft
+                scale={y_scale}
+                numTicks={4}
+                tickLength={3}
+                tickFormat={format(".00%")}
+              />*/}
+            </Group>              
+          );
         })}
       </Group>
     );
