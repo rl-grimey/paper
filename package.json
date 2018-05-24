@@ -38,7 +38,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://github.uiowa.edu/pages/rlrson/viz-immigration/",
+  "homepage": "https://ryan-p-larson.github.io/paper",
   "devDependencies": {
     "gh-pages": "^1.1.0"
   }
