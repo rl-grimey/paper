@@ -6,8 +6,6 @@ import Gridtile from './Gridtile';
 import TreeTile from './plots/treeTile';
 import ClusterTile from './plots/clusterTile';
 import CountTile from './plots/countPlot';
-import DotTile from './plots/dotTile';
-import BarTile from './plots/barTile';
 import states from '../states';
 
 
@@ -42,7 +40,6 @@ export default class Cartogrid extends React.Component {
     this.create_tile = this.create_tile.bind(this);
     this.createTreeTile = this.createTreeTile.bind(this);
     this.createCountTile = this.createCountTile.bind(this);
-    this.createDotTile = this.createDotTile.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -132,26 +129,6 @@ export default class Cartogrid extends React.Component {
     );
   }
 
-  createDotTile = (d, i) => {
-    return (
-      <DotTile
-        statefp={d.statefp}
-        before={d.before}
-        after={d.after}
-        width={this.state.x_scale.bandwidth()}
-        height={this.state.y_scale.bandwidth()}
-        colorScale={this.props.colorScale}
-      />
-    );
-  }
-
-  createBarTile = (d, i) => {
-    return (
-      <BarTile
-        data={d3.values(d.value)}
-      />
-    );
-  }
 
   render() {
     // Create new scales each render

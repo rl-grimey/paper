@@ -4,11 +4,8 @@ import * as d3 from 'd3';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Cartogrid from './Cartogrid/Cartogrid';
-import TopicDetails from './dod/topicDetails';
-import SpatialDetails from './dod/spatialDetail';
-import TopicCloud from './dod/topicCloud';
 import ClusterCloud from './dod/clusterCloud';
-import ClusterLegend from './dod/legend';
+import ClusterTile from './Cartogrid/plots/clusterTile';
 import { 
   loadData, 
   clickTreeTile, 
