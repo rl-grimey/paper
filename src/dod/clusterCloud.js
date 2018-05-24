@@ -7,27 +7,45 @@ import {
   scalePow 
 } from 'd3-scale';
 
-export default class ClusterCloud extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: undefined,
-      cluster: undefined
-    }
-  }
-
+class Cloud extends React.Component {
   /* Prevent word clouds from rerendering every interaction. */
   shouldComponentUpdate(nextProps, nextState) {
     return false;
   }
 
+  render() {
+    let { data, fontSizeMapper, width, height } = this.props;
+
+    return (
+      <WordCloud
+        data={data}
+        fontSizeMapper={fontSizeMapper}
+        width={width}
+        height={height}
+        font={'sans-serif'}
+        padding={2}
+      />
+    );
+  }
+}
+
+export default class ClusterCloud extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: undefined,
+      cluster: undefined,
+      selected: false
+    }
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
-    //console.log(prevState);
-    //console.log(nextProps);
-    //const cluster = (nextProps.cluster === prevState.cluster) ? prevState.cluster : nextProps.cluster;
+    const selected = nextProps.selectedCluster === +nextProps.cluster;
+
     return {
       ...prevState,
-      ...nextProps
+      ...nextProps,
+      selected
     }
   }
 
@@ -48,18 +66,23 @@ export default class ClusterCloud extends React.Component {
       return (word.value === 1) ? 12 : fontScale(word.value);
     }
 
+    let border = '2px solid ' + (this.state.selected ? 'black' : 'white' );
 
     let colorScale = this.props.colorScale;
     let divStyle = {
       'backgroundColor': colorScale(this.props.cluster),
-      'padding': '10px'
+      'padding': '10px',
+      'border': border
     };
 
     return (
-      <div style={divStyle}>
+      <div 
+        style={divStyle}
+        onClick={this.props.onClick}
+      >
         <b>Cluster {this.props.cluster}</b>
         {cluster_tokens ? (
-          <WordCloud
+          <Cloud
             data={cluster_tokens}
             fontSizeMapper={fontSizeMapper}
             width={this.props.width}

@@ -14,6 +14,7 @@ import {
   clickTreeTile, 
   clickCountTile,
   clickClusterTile,
+  clickClusterCloud,
   getStateHeirarchy,
   getStateTimeHeirarchy,
   getStateTimeCluster
@@ -60,6 +61,7 @@ class App extends React.Component {
     this.clickTreeTile = clickTreeTile.bind(this);
     this.clickCountTile = clickCountTile.bind(this);
     this.clickClusterTile = clickClusterTile.bind(this);
+    this.clickClusterCloud = clickClusterCloud.bind(this);
   }
 
   componentWillMount() {
@@ -175,9 +177,7 @@ class App extends React.Component {
     console.log('cluster', this.state.cluster);
     console.log('period', this.state.period);
     console.log('Num topics', this.state.num_topics);
-    console.log(this.state);
-
-    //console.log(this.state.clusterTokens);
+    //console.log(this.state);
 
     return (
       <div className="App">
@@ -203,6 +203,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(0))}
                 //onWordClick={}
               />
 
@@ -213,6 +214,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(1))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -222,6 +224,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(2))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -231,6 +234,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(3))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -240,6 +244,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(4))}
                 //onWordClick={}
               />
             </Row>}
@@ -269,6 +274,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(5))}
                 //onWordClick={}
               />
 
@@ -279,6 +285,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(6))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -288,6 +295,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(7))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -297,6 +305,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(8))}
                 //onWordClick={}
               />
               <ClusterCloud
@@ -306,6 +315,7 @@ class App extends React.Component {
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(9))}
                 //onWordClick={}
               />
             </Row>}

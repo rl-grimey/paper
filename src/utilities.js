@@ -100,11 +100,14 @@ export const clickClusterTile = (e) => {
     .attr('class').split(' ');
 
   const click_cluster = +classes[0];
-  const click_statefp = classes[1];
+
   return {
-    cluster: click_cluster,
-    statefp: click_statefp
+    cluster: click_cluster
   }
+}
+
+export const clickClusterCloud = (cluster) => {
+  return {cluster: cluster};
 }
 
 
