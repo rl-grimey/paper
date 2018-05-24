@@ -6,6 +6,7 @@ import {
   scaleLog, 
   scalePow 
 } from 'd3-scale';
+import { max } from 'd3-array';
 
 class Cloud extends React.Component {
   /* Prevent word clouds from rerendering every interaction. */
@@ -57,10 +58,15 @@ export default class ClusterCloud extends React.Component {
       cluster_tokens = this.props.data[this.props.cluster].values;
     }
 
-    const fontScale = scaleLog()
+    /*const fontScale = scaleLog()
       .base(2)
       .domain([1, 447786])
       .range([6, 24]);
+      */
+    const fontScale = scaleLinear()
+      //scaleLog().base(2)
+      .domain([1, max(cluster_tokens.map(d => d.value))])
+      .range([8, 28]);
 
     const fontSizeMapper = word => {
       return (word.value === 1) ? 12 : fontScale(word.value);

@@ -162,8 +162,8 @@ export default class Cartogrid extends React.Component {
     const data = this.props.data;
     const cartoType = this.props.cartoType;
 
-    console.log('-------\nCartogrid --------------------------------------------');
-    console.log(this.state, this.props);
+    //console.log('-------\nCartogrid --------------------------------------------');
+    //console.log(this.state, this.props);
 
     return (
       <svg 

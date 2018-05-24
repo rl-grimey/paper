@@ -361,7 +361,7 @@ class App extends React.Component {
               <Col 
                 className={'pull-right'}
                 xs={3}
-                xsPull={9}
+                xsPush={9}
               >
                 <div>
                   <h5>Settings</h5>        
