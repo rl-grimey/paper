@@ -3,7 +3,6 @@ import { scaleBand } from '@vx/scale';
 
 import * as d3 from 'd3';
 import Gridtile from './Gridtile';
-import TreeTile from './plots/treeTile';
 import ClusterTile from './plots/clusterTile';
 import CountTile from './plots/countPlot';
 import states from '../states';
@@ -38,7 +37,6 @@ export default class Cartogrid extends React.Component {
     };
 
     this.create_tile = this.create_tile.bind(this);
-    this.createTreeTile = this.createTreeTile.bind(this);
     this.createCountTile = this.createCountTile.bind(this);
   }
 
@@ -77,22 +75,6 @@ export default class Cartogrid extends React.Component {
         left={left}
         width={tile_width}
         height={tile_height} 
-      />
-    );
-  }
-
-  createTreeTile = (d, i) => {
-    return (
-      <TreeTile 
-        data={d}
-        top={0}
-        left={0}
-        size={[
-          this.state.x_scale.bandwidth(), 
-          this.state.y_scale.bandwidth()
-        ]}
-        colorScale={this.props.colorScale}
-        clickCallback={this.props.clickCallback}
       />
     );
   }
@@ -148,18 +130,6 @@ export default class Cartogrid extends React.Component {
         width={this.state.width}
         height={this.state.height}
       >
-        {cartoType === 'tree' && this.state.data && this.state.data.map((d, i) => 
-          <Gridtile
-            key={i}
-            abbrv={d.data.name}
-            top={y_scale(this.state.states[d.data.statefp].y)}
-            left={x_scale(this.state.states[d.data.statefp].x)}
-            width={x_scale.bandwidth()}
-            height={y_scale.bandwidth()}
-          >
-            {this.createTreeTile(d, i)}
-          </Gridtile>
-        )}
         {cartoType === 'cluster' && this.state.data && this.state.data.map((d, i) => 
           <Gridtile
             key={i}
@@ -183,46 +153,7 @@ export default class Cartogrid extends React.Component {
             {this.createCountTile(d, i)}
           </Gridtile>
         )}
-        {cartoType === 'dot' && this.state.data && this.state.data.map((d, i) => 
-          <Gridtile
-            key={i}
-            abbrv={this.state.states[d.statefp].abbrv}
-            top={y_scale(this.state.states[d.statefp].y)}
-            left={x_scale(this.state.states[d.statefp].x)}
-            width={x_scale.bandwidth()}
-            height={y_scale.bandwidth()}
-          >
-            {this.createDotTile(d, i)}
-          </Gridtile>
-        )}
-        {cartoType === 'bar' && this.state.data && this.state.data.map((d, i) => 
-          <Gridtile
-            key={i}
-            abbrv={this.state.states[d.key].abbrv}
-            top={y_scale(this.state.states[d.key].y)}
-            left={x_scale(this.state.states[d.key].x)}
-            width={x_scale.bandwidth()}
-            height={y_scale.bandwidth()}
-          >
-            {this.createBarTile(d, i)}
-          </Gridtile>
-        )}
       </svg>
     );
   } 
 };
-
-/* Map using states with no data
-states.map((d, i) => 
-    <Gridtile
-      key={i}
-      abbrv={d.abbrv}
-      top={y_scale(d.y)}
-      left={x_scale(d.x)}
-      width={x_scale.bandwidth()}
-      height={y_scale.bandwidth()}
-      //data={data[d.statefp]}
-    />
-)
-const tiles = states.map((d, i) => this.create_tile(d, i));
-*/
