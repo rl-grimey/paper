@@ -98,47 +98,6 @@ class App extends React.Component {
       // Assign the cluster callback 
       callback = this.clickClusterTile;
     }
-    else if (this.state.cartoType === 'dot' && this.state.topicTimeVectors) {
-      // Create an array of objects with each state's FIPS and top n topics by time
-      // e.g. [... {
-      //  statefp: 01, 
-      //  before: [{name: 1, prob: 1.00}, ...]}, 
-      //  after: [{name: 1, prob: 1.00}], ...]
-      // }, ...]
-      data = d3.entries(this.state.topicTimeVectors)
-        .map(state => {
-          let fips = state.key;
-          let top_topics_time = getStateTimeHeirarchy(state.value, this.state.num_topics);
-          top_topics_time['statefp'] = fips;
-          return top_topics_time;
-        });
-      
-      // Get the distinct topics from each vector
-      // Before and after
-      let topics_before = [].concat.apply([], data.map(d => d.before)).map(d => d.topic);
-      let topics_after = [].concat.apply([], data.map(d => d.after)).map(d => d.topic);
-      // Combine them and get unique
-      let topics = topics_before.concat(topics_after).filter((x, i, a) => a.indexOf(x) === i);
-      // Get their counts
-      let topic_cnts = d3.nest().key(d => d).rollup(v => v.length).entries(topics);
-
-      // Map them to an ordinal color scale
-      //colorScale = d3.scaleOrdinal()
-        //.domain(topics)
-        //.range(d3.schemeCategory20c);
-
-      //console.log(data, topics_before, topics_after, topics, topic_cnts);
-    }
-    else if (this.state.cartoType === 'bar' && this.state.topicTimeVectors) {
-      // Create an array of objects with each state's FIPS and top n topics by time
-      // e.g. [... {
-      //  statefp: 01, 
-      //  before: [{name: 1, prob: 1.00}, ...]}, 
-      //  after: [{name: 1, prob: 1.00}], ...]
-      // }, ...]
-      data = d3.entries(this.state.topicVectorsLong);
-
-    }
     else if (this.state.cartoType === 'count' && this.state.counts) {
       data = this.state.counts;
       colorScale = d3.scaleThreshold()
@@ -306,12 +265,6 @@ class App extends React.Component {
                   <h5>Charts</h5>        
                 </div>
                 <div>
-                  {/*<button 
-                    name={'cartoType'} 
-                    value={'tree'}
-                    onClick={this.onChange}
-                    selected
-                  >TreeMap</button>*/}
                   <button 
                     name={'cartoType'} 
                     value={'cluster'}
@@ -322,16 +275,6 @@ class App extends React.Component {
                     value={'count'}
                     onClick={this.onChange}
                   >Counts</button>
-                  {/*<button 
-                    name={'cartoType'} 
-                    value={'dot'}
-                    onClick={this.onChange}
-                  >Dots</button>
-                  <button 
-                    name={'cartoType'} 
-                    value={'bar'}
-                    onClick={this.onChange}
-                  >Bars</button>*/}
                 </div>
               </Col>
 
