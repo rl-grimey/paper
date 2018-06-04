@@ -8,7 +8,6 @@ import ClusterCloud from './dod/clusterCloud';
 import ClusterTile from './Cartogrid/plots/clusterTile';
 import { 
   loadData, 
-  clickTreeTile, 
   clickCountTile,
   clickClusterTile,
   clickClusterCloud,
@@ -55,7 +54,6 @@ class App extends React.Component {
       tweets:       undefined
     }
 
-    this.clickTreeTile = clickTreeTile.bind(this);
     this.clickCountTile = clickCountTile.bind(this);
     this.clickClusterTile = clickClusterTile.bind(this);
     this.clickClusterCloud = clickClusterCloud.bind(this);
@@ -84,24 +82,6 @@ class App extends React.Component {
       .range(['#80b1d3', '#fdb462', '#dddddd', '#fb8072', '#ffffb3',
         '#bc80bd', '#fccde5', '#bebada', '#d9d9d9', '#1f78b4', '#222222']);
 
-    if (this.state.cartoType === 'tree' && this.state.topicVectors) {
-      data = this.state.topicVectors.values()
-        .map(stateVec => getStateHeirarchy(stateVec, this.state.num_topics));
-
-      // Get unique topics across all states
-      let topics = [].concat.apply([], data.map(d => d.children))
-        .filter(d => typeof(d.name) == 'number')
-        .map(d => d.name)
-        .filter((x, i, a) => a.indexOf(x) === i);
-      
-      // Map them to an ordinal color scale
-      colorScale = d3.scaleOrdinal()
-        .domain(topics)
-        .range(d3.schemeCategory20c);
-
-      // Assign callback
-      callback = this.clickTreeTile;
-    }
     if (this.state.cartoType === 'cluster' && this.state.topicTimeVectors) {
       // Get state cluster for before and after
       data = d3.entries(this.state.topicTimeVectors)
@@ -143,9 +123,9 @@ class App extends React.Component {
       let topic_cnts = d3.nest().key(d => d).rollup(v => v.length).entries(topics);
 
       // Map them to an ordinal color scale
-      colorScale = d3.scaleOrdinal()
-        .domain(topics)
-        .range(d3.schemeCategory20c);
+      //colorScale = d3.scaleOrdinal()
+        //.domain(topics)
+        //.range(d3.schemeCategory20c);
 
       //console.log(data, topics_before, topics_after, topics, topic_cnts);
     }

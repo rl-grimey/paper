@@ -66,21 +66,6 @@ const callbackTweets = (d) => {
 
 
 /* Interaction callbacks */
-export const clickTreeTile = (e) => {
-  const classes = d3.select(e.target)
-    .attr('class')
-    .split(' ');
-
-  const click_topic = +classes[0];
-  const click_state = classes[1].slice(3);
-
-  return {
-    topic: click_topic,
-    statefp: click_state
-  };
-  //console.log(classes, click_state, click_topic);
-}
-
 export const clickCountTile = (e) => {
   const classes = d3.select(e.target)
     .attr('class')
@@ -198,6 +183,15 @@ export const getStateTimeCluster = (state) => {
 
 
 export const loadData = (callback = _.noop) => {
+  let files = [
+    'data/state-weekly-count.csv',
+    'data/avg-state-vectors.csv',
+    'data/avg-state-vectors-time.csv',
+    'data/topic-word-ranks.csv',
+    'data/cluster-token-counts.csv',
+    'data/avg-state-vector-long.csv'
+  ];
+
   let countsByState, 
       topicVectorsByState, 
       topicVectorsByTime,
@@ -207,19 +201,16 @@ export const loadData = (callback = _.noop) => {
       clusterTokens;
 
   // Load all the data synchronously. AKA get all of them back at once.
-  d3.queue()
-    .defer(d3.csv, 'data/state-weekly-count.csv', callbackCount)
-    .defer(d3.csv, 'data/avg-state-vectors.csv', callbackTopicVector)
-    .defer(d3.csv, 'data/avg-state-vectors-time.csv', callbackTopicVector)
-    .defer(d3.csv, 'data/topic-word-ranks.csv', callbackTopicTokens)
-    .defer(d3.csv, 'data/cluster-token-counts.csv', callbackClusterTokens)
-    .defer(d3.csv, 'data/avg-state-vector-long.csv', callbackLong)
-    //.defer(d3.json, 'county.topo.json')
-    //.defer(d3.csv, 'data/tweets.csv', callbackTweets)
-    .awaitAll((err, data) => {
-      if (err) throw err;
-
+  Promise.all(files.map(f => d3.csv(f)))
+    .then(data => {
       /* Do any data manipulations before passing to the app */
+      data[0] = data[0].map(d => callbackCount(d));
+      data[1] = data[1].map(d => callbackTopicVector(d));
+      data[2] = data[2].map(d => callbackTopicVector(d));
+      data[3] = data[3].map(d => callbackTopicTokens(d));
+      data[4] = data[4].map(d => callbackClusterTokens(d));
+      data[5] = data[5].map(d => callbackLong(d));
+
 
       // Format the state weekly counts, 'groupby' state fips
       countsByState = d3.nest()
