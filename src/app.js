@@ -37,9 +37,7 @@ class App extends React.Component {
 
       // Inputs
       cartoType:  'cluster',
-      num_topics: 5,
-      topic:      0,
-      cluster:    0,
+      cluster:    undefined,
       statefp:    '11',
       period:     null,
 
@@ -247,6 +245,15 @@ class App extends React.Component {
                     onClick={this.onChange}
                   >Counts</button>
                 </div>
+                {this.state.cartoType === 'cluster' && 
+                  <button
+                    className="btn btn-dark"
+                    name={'cluster'}
+                    value={undefined}
+                    onClick={() => this.setState({ cluster: undefined })}
+                  >Reset Cluster
+                  </button>
+                }
               </Col>
 
               <Col 
