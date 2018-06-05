@@ -216,9 +216,9 @@ export const loadData = (callback = _.noop) => {
       countsByState = d3.nest()
         .key((d) => { return d.statefp; })
         .entries(data[0]);
+      
       // Get the max so we can scale across states
       let maxCount = d3.max(data[0], d => d.count);
-      
       
       // Create map for faster lookup when interacting
       topicVectorsByState = d3.map(data[1], (d) => { return d.statefp; });
@@ -236,22 +236,12 @@ export const loadData = (callback = _.noop) => {
         .key(d => d.topic)
         .object(data[5].filter(d => d.macro_period !== 0));
 
-
-      //counties = d3.nest()
-      //  .key(d => d.properties.statefp)
-      //  .entries(data[2].features);
-
       // Assign them to our app by using the callback function provided to us
       callback({
         counts: countsByState,
         maxCount: maxCount,
-        topicVectors: topicVectorsByState,
         topicTimeVectors: topicVectorsByTime,
-        topicVectorsLong: topicVectorsLong,
-        topicTokens: topicTokens,
         clusterTokens: clusterTokens
-        //tweets: data[5]
-        //counties: data[2]
       });
     });
 };

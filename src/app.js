@@ -48,10 +48,7 @@ class App extends React.Component {
       maxCount:     undefined,
       topicVectors: undefined,
       topicTimeVectors: undefined,
-      topicTokens:  undefined,
-      clusterTokens:undefined,
-      counties:     undefined,
-      tweets:       undefined
+      clusterTokens:undefined
     }
 
     this.clickCountTile = clickCountTile.bind(this);
@@ -82,6 +79,8 @@ class App extends React.Component {
       .range(['#80b1d3', '#fdb462', '#dddddd', '#fb8072', '#ffffb3',
         '#bc80bd', '#fccde5', '#bebada', '#d9d9d9', '#1f78b4', '#222222']);
 
+
+    /* Data manipulation for each chart type */
     if (this.state.cartoType === 'cluster' && this.state.topicTimeVectors) {
       // Get state cluster for before and after
       data = d3.entries(this.state.topicTimeVectors)
@@ -113,7 +112,7 @@ class App extends React.Component {
     console.log('cluster', this.state.cluster);
     console.log('period', this.state.period);
     console.log('Num topics', this.state.num_topics);
-    //console.log(this.state);
+    console.log(this.state);
 
     return (
       <div className="App">
@@ -266,11 +265,13 @@ class App extends React.Component {
                 </div>
                 <div>
                   <button 
+                    className="btn btn-light"
                     name={'cartoType'} 
                     value={'cluster'}
                     onClick={this.onChange}
                   >Clusters</button>
                   <button 
+                    className="btn btn-light"
                     name={'cartoType'} 
                     value={'count'}
                     onClick={this.onChange}
@@ -314,50 +315,9 @@ class App extends React.Component {
                     value={this.state.height}
                     onChange={this.onChange}
                   />
-                  {/*<Slider
-                    label={'Number of Topics'}
-                    name={'num_topics'}
-                    min={3}
-                    max={10}
-                    step={1}
-                    value={this.state.num_topics}
-                    onChange={this.onChange}
-                  />*/}
                 </div>
               </Col>
             </Row>
-
-            {/*<TopicCloud
-                data={this.state.topicTokens}
-                topic={this.state.topic}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.2}
-                //onWordClick={}
-              />
-              <Col xsOffset={2}>
-                <TopicDetails
-                  width={this.state.width * 0.33}
-                  height={this.state.height * 0.66}
-                  margin={margin}
-                  topic={this.state.topic}
-                  data={this.state.topicTokens}
-                />
-              </Col>
-              <Col>
-                <TopicDetails
-                  width={this.state.width * 0.33}
-                  height={this.state.height * 0.66}
-                  margin={margin}
-                />
-              </Col>
-              <Col>
-                <SpatialDetails
-                  data={this.state.counties}
-                  statefp={this.state.statefp}
-                  width={this.state.width * 0.33}
-                  height={this.state.height * 0.66}
-                />
-            </Col>*/}  
 
           </Col>             
         </Grid>
