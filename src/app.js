@@ -120,7 +120,12 @@ class App extends React.Component {
           {/* Title */}
           <Row>
             <Col xs={12}>
-              <h3>CarTopic Visualization of Immigrant-related Tweets <i>before</i> and <i>after</i> the Travel Ban.</h3>
+              <h3>
+                <abbr 
+                  title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
+                >CarTopicVis
+                </abbr>
+              </h3>
             </Col>
           </Row>
 
