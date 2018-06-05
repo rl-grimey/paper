@@ -114,7 +114,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Grid>
+        <Grid fluid={true}>
           <Col>
 
           {/* Title */}
@@ -131,51 +131,100 @@ class App extends React.Component {
 
           <hr/>
 
-          {/* Before clusters*/}
-          {this.state.clusterTokens && 
-            <Row>
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'1'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(1))}
-                //onWordClick={}
-              />
+          {/* Wordclouds! */}
+          <Row>
+            {/* Before */}
+            <Col>
+              {this.state.clusterTokens && 
+                <Row className={"clouds-before"}>
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'1'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(1))}
+                    //onWordClick={}
+                  />
 
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'3'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(3))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'4'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(4))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'6'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(6))}
-                //onWordClick={}
-              />
-            </Row>}
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'3'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(3))}
+                    //onWordClick={}
+                  />
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'4'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(4))}
+                    //onWordClick={}
+                  />
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'6'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(6))}
+                    //onWordClick={}
+                  />
+                </Row>
+              }
+            </Col>
+            {/* After */}
+            <Col>
+              {this.state.clusterTokens && 
+                <Row className={"clouds-after"}>
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'0'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(0))}
+                    //onWordClick={}
+                  />
+
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'5'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(5))}
+                    //onWordClick={}
+                  />
+                  <ClusterCloud
+                    data={this.state.clusterTokens}
+                    selectedCluster={this.state.cluster}
+                    cluster={'7'}
+                    width={this.state.width * 0.2}
+                    height={this.state.height * 0.3}
+                    colorScale={clusterScale}
+                    onClick={() => this.setState(clickClusterCloud(7))}
+                    //onWordClick={}
+                  />
+                </Row>
+              }
+            </Col>
+          </Row>
+
+          <hr/>
+
+          {/* Before clusters*/}
+
 
           {/* Overview */}
           <Row>
@@ -193,40 +242,7 @@ class App extends React.Component {
           </Row>
           
           {/* After clusters */}
-          {this.state.clusterTokens && 
-            <Row>
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'0'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(0))}
-                //onWordClick={}
-              />
-
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'5'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(5))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'7'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(7))}
-                //onWordClick={}
-              />
-            </Row>}
+          
 
             <hr/>
 
