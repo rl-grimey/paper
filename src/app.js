@@ -72,10 +72,21 @@ class App extends React.Component {
 
     const org_colors = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3',
         '#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd', '#333333'];
-    const clusterScale = d3.scaleOrdinal()
+
+    const clusterScaleOld = d3.scaleOrdinal()
       .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, undefined])
       .range(['#80b1d3', '#fdb462', '#dddddd', '#fb8072', '#ffffb3',
         '#bc80bd', '#fccde5', '#bebada', '#d9d9d9', '#1f78b4', '#222222']);
+
+    const clusterScale = d3.scaleOrdinal()
+        .domain([
+          1, 3, 4, 6, 
+          0, 5, 7, 
+          2, 8, 9, undefined])
+        .range([
+          '#fccde5', '#bebada', '#bc80bd', '#80b1d3',
+          '#8dd3c7', '#b3de69', '#ccebc5', 
+          '#dddddd', '#dddddd', '#dddddd', '#222222']);
 
 
     /* Data manipulation for each chart type */
