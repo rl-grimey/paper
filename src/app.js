@@ -155,16 +155,6 @@ class App extends React.Component {
               <ClusterCloud
                 data={this.state.clusterTokens}
                 selectedCluster={this.state.cluster}
-                cluster={'2'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(2))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
                 cluster={'3'}
                 width={this.state.width * 0.2}
                 height={this.state.height * 0.3}
@@ -231,26 +221,6 @@ class App extends React.Component {
                 height={this.state.height * 0.3}
                 colorScale={clusterScale}
                 onClick={() => this.setState(clickClusterCloud(7))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'8'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(8))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'9'}
-                width={this.state.width * 0.2}
-                height={this.state.height * 0.3}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(9))}
                 //onWordClick={}
               />
             </Row>}
