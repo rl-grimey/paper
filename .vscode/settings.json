@@ -1,0 +1,16 @@
+{
+    "git.ignoreLimitWarning": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        // Project files to hide
+        "**/.vscode/": true,
+        "**/node_modules": true,
+        "**/build": true,
+        ".gitignore": true,
+        "package-lock.json": true
+    }
+}
