@@ -126,7 +126,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Grid fluid={true}>
-          <Col>
 
           {/* Title */}
           <Row>
@@ -145,103 +144,54 @@ class App extends React.Component {
 
           <hr/>
 
-          {/* Wordclouds! */}
-          <Row>
-            {/* Before */}
-            <Col>
-              {this.state.clusterTokens && 
-                <Row className={"clouds-before"}>
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'1'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(1))}
-                    //onWordClick={}
-                  />
-
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'3'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(3))}
-                    //onWordClick={}
-                  />
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'4'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(4))}
-                    //onWordClick={}
-                  />
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'6'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(6))}
-                    //onWordClick={}
-                  />
-                </Row>
-              }
-            </Col>
-            {/* After */}
-            <Col>
-              {this.state.clusterTokens && 
-                <Row className={"clouds-after"}>
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'0'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(0))}
-                    //onWordClick={}
-                  />
-
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'5'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(5))}
-                    //onWordClick={}
-                  />
-                  <ClusterCloud
-                    data={this.state.clusterTokens}
-                    selectedCluster={this.state.cluster}
-                    cluster={'7'}
-                    width={this.state.width * 0.2}
-                    height={this.state.height * 0.3}
-                    colorScale={clusterScale}
-                    onClick={() => this.setState(clickClusterCloud(7))}
-                    //onWordClick={}
-                  />
-                </Row>
-              }
-            </Col>
-          </Row>
-
-          <hr/>
-
-          {/* Before clusters*/}
-
-
           {/* Overview */}
           <Row>
+          {this.state.clusterTokens && 
+            <Col xs={2}>
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'1'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(1))}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'3'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(3))}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'4'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(4))}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'6'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(6))}
+                //onWordClick={}
+              />
+            </Col>
+          }
+
+          <Col xs={8}>
             <Cartogrid
               width={this.state.width}
               height={this.state.height}
@@ -253,33 +203,54 @@ class App extends React.Component {
               maxCount={this.state.maxCount}
               cluster={this.state.cluster}
             />
-          </Row>
-          
-          {/* After clusters */}
-          
+          </Col>
 
-            <hr/>
-
-            {/* UI Controls */}
-            <Row>
-              <Col xs={6}>
-                <div>
-                  <h5>Charts</h5>        
-                </div>
-                <div>
-                  <button 
-                    className="btn btn-light"
-                    name={'cartoType'} 
-                    value={'cluster'}
-                    onClick={this.onChange}
-                  >Clusters</button>
-                  <button 
-                    className="btn btn-light"
-                    name={'cartoType'} 
-                    value={'count'}
-                    onClick={this.onChange}
-                  >Counts</button>
-                </div>
+          {this.state.clusterTokens && 
+            <Col xs={2}>
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'0'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(0))}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'5'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(5))}
+                //onWordClick={}
+              />
+              <ClusterCloud
+                data={this.state.clusterTokens}
+                selectedCluster={this.state.cluster}
+                cluster={'7'}
+                width={this.state.width * 0.175}
+                height={this.state.height * 0.25}
+                colorScale={clusterScale}
+                onClick={() => this.setState(clickClusterCloud(7))}
+                //onWordClick={}
+              />
+              <div>
+                <h4>Charts</h4>
+                <button 
+                  className="btn btn-light"
+                  name={'cartoType'} 
+                  value={'cluster'}
+                  onClick={this.onChange}
+                >Clusters</button>
+                <button 
+                  className="btn btn-light"
+                  name={'cartoType'} 
+                  value={'count'}
+                  onClick={this.onChange}
+                >Counts</button>
                 {this.state.cartoType === 'cluster' && 
                   <button
                     className="btn btn-dark"
@@ -289,49 +260,69 @@ class App extends React.Component {
                   >Reset Cluster
                   </button>
                 }
-              </Col>
+              </div>
+            </Col>
+          }
+          </Row>
 
-              <Col 
-                className={'pull-right'}
-                xs={3}
-                xsPush={9}
-              >
-                <div>
-                  <h5>Settings</h5>        
-                </div>
-                <div>
-                  <Slider
-                    label={'Tile Padding'}
-                    name={'padding'}
-                    min={0}
-                    max={1}
-                    step={0.1}
-                    value={this.state.value}
-                    onChange={this.onChange}
-                  />
-                  <Slider
-                    label={'Width'}
-                    name={'width'}
-                    min={960}
-                    max={1200}
-                    step={5}
-                    value={this.state.width}
-                    onChange={this.onChange}
-                  />
-                  <Slider
-                    label={'Height'}
-                    name={'height'}
-                    min={500}
-                    max={750}
-                    step={5}
-                    value={this.state.height}
-                    onChange={this.onChange}
-                  />
-                </div>
-              </Col>
-            </Row>
+          <hr/>
 
-          </Col>             
+          {/* UI Controls */}
+          <Row>
+            <Col xs={4}>
+              <div>
+                <h4>Before Table</h4>        
+              </div>
+              <div>
+                <p>Table</p>
+              </div>
+            </Col>
+
+            <Col xs={4}>
+              <div>
+                <h4>After Table</h4>        
+              </div>
+              <div>
+                <p>Table</p>
+              </div>
+            </Col>
+
+            <Col xs={4}>
+              <div>
+                <h4>Settings</h4>        
+              </div>
+              <div>
+                <Slider
+                  label={'Tile Padding'}
+                  name={'padding'}
+                  min={0}
+                  max={1}
+                  step={0.1}
+                  value={this.state.value}
+                  onChange={this.onChange}
+                />
+                <Slider
+                  label={'Width'}
+                  name={'width'}
+                  min={960}
+                  max={1200}
+                  step={5}
+                  value={this.state.width}
+                  onChange={this.onChange}
+                />
+                <Slider
+                  label={'Height'}
+                  name={'height'}
+                  min={500}
+                  max={750}
+                  step={5}
+                  value={this.state.height}
+                  onChange={this.onChange}
+                />
+              </div>
+            </Col>
+          </Row>
+          
         </Grid>
       </div>
     );

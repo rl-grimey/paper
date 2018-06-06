@@ -52,7 +52,6 @@ export class HelpButton extends React.Component {
         <Button
           onClick={this.handleOpen}
           bsStyle="primary"
-          bsSize="medium"
         >
           <Glyphicon glyph="info-sign" />
         </Button>
