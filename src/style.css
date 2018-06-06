@@ -1,3 +1,7 @@
+/* Roboto fonts from Google, and Glyphicons from Bootstrap. */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+
 svg text {
   fill: #222222 !important;
 }
@@ -11,7 +15,6 @@ body {
 
 .clouds-before {
   border-right: 1px solid black;
-  
 }
 
 .clouds-after {
@@ -25,4 +28,9 @@ body {
 
 .chart-settings {
   float: right;
+}
+
+/* Help Modal */
+.modal-backdrop {
+  background-color: #00000094;
 }

@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import 'bootstrap/dist/css/bootstrap.css';
 
 import Cartogrid from './Cartogrid/Cartogrid';
-import ClusterCloud from './dod/clusterCloud';
+import ClusterCloud from './Cartogrid/plots/clusterCloud';
 import ClusterTile from './Cartogrid/plots/clusterTile';
 import { 
   loadData, 
@@ -15,7 +15,7 @@ import {
   getStateTimeHeirarchy,
   getStateTimeCluster
 } from './utilities';
-import { Slider } from './widgets';
+import { Slider, HelpButton } from './widgets';
 import './style.css';
 
 
@@ -115,13 +115,13 @@ class App extends React.Component {
     }
 
     // Make sure we're updating correctly
-    console.log('-----------------------------------------------------');
-    console.log('statefp', this.state.statefp);
-    console.log('topic', this.state.topic);
-    console.log('cluster', this.state.cluster);
-    console.log('period', this.state.period);
-    console.log('Num topics', this.state.num_topics);
-    console.log(this.state);
+    //console.log('-----------------------------------------------------');
+    //console.log('statefp', this.state.statefp);
+    //console.log('topic', this.state.topic);
+    //console.log('cluster', this.state.cluster);
+    //console.log('period', this.state.period);
+    //console.log('Num topics', this.state.num_topics);
+    //console.log(this.state);
 
     return (
       <div className="App">
@@ -130,13 +130,16 @@ class App extends React.Component {
 
           {/* Title */}
           <Row>
-            <Col xs={12}>
+            <Col xs={11}>
               <h3>
                 <abbr 
                   title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
                 >CarTopicVis
                 </abbr>
               </h3>
+            </Col>
+            <Col xs={1}>
+              <h3><HelpButton/></h3>
             </Col>
           </Row>
 
