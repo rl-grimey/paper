@@ -11,7 +11,39 @@ import { curveBasis } from '@vx/curve';
 export default class SentimentTile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+
+    // Calculate distributions *ONCE*, params
+    const x = scaleLinear({
+      domain: [-1, 1],
+      range: [0, this.props.width]
+    });
+    const k = 0.075;
+
+    // Actually calc the distributions
+    const beforePosKDE = this.calcKernel(this.props.beforePos, k, x.ticks(100));
+    const beforeNegKDE = this.calcKernel(this.props.beforeNeg, k, x.ticks(100));
+    const afterPosKDE  = this.calcKernel(this.props.afterPos, k, x.ticks(100));
+    const afterNegKDE  = this.calcKernel(this.props.afterNeg, k, x.ticks(100));
+
+    // Find max density for better scaling
+    const flatKDE = [].concat.apply([], [beforeNegKDE, beforePosKDE, afterNegKDE, afterPosKDE])
+    const maxKDE = max(flatKDE.map(d => d[1]));
+
+    // Only display axes on the following states
+    let stateAxes = new Set([
+      'AK', 'CA', 'HI', 'AZ', 'NM', 'TX',
+      'LA', 'MS', 'AL', 'GA', 'FL', 'DC', 'DE',
+      'RI', 'NH'
+    ]);
+
+    this.state = {
+      beforePosKDE,
+      beforeNegKDE,
+      afterPosKDE,
+      afterNegKDE,
+      maxKDE,
+      showAxis: stateAxes.has(props.abbrv)
+    };
 
     this.kernelDensityEstimator = this.kernelDensityEstimator.bind(this);
     this.kernelEpanechnikov = this.kernelEpanechnikov.bind(this);
@@ -25,6 +57,8 @@ export default class SentimentTile extends React.Component {
     };
   }
   
+  // Replace w/ Gaussian? 
+  //https://gist.github.com/curran/b595fde4d771c5784421
   kernelEpanechnikov(k) {
     return function(v) {
       return Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k: 0;
@@ -38,33 +72,31 @@ export default class SentimentTile extends React.Component {
   render() {
     const color = this.props.colorScale;
     const x = scaleLinear({
-      domain: [-1, 1],
+      domain: [-1.1, 1.1],
       range: [0, this.props.width]
     });
-    const k = 0.075;
+    const xTicks = x.tickFormat(".1");
 
-    // Calc distributions
-    const beforePosKDE = this.calcKernel(this.props.beforePos, k, x.ticks(100));
-    const beforeNegKDE = this.calcKernel(this.props.beforeNeg, k, x.ticks(100));
-    const afterPosKDE  = this.calcKernel(this.props.afterPos, k, x.ticks(100));
-    const afterNegKDE  = this.calcKernel(this.props.afterNeg, k, x.ticks(100));
-
-    const flatKDE = [].concat.apply([], [beforeNegKDE, beforePosKDE, afterNegKDE, afterPosKDE])
-    const maxKDE = max(flatKDE.map(d => d[1]));
     const y = scaleLinear({
-      domain: [0, maxKDE],
+      domain: [0, this.state.maxKDE],
       range: [this.props.height, 0]
     });
 
+    // Only display axes on the following states
+    let stateAxes = new Set([
+      'AK', 'CA', 'HI', 'AZ', 'NM', 'TX',
+      'LA', 'MS', 'AL', 'GA', 'FL', 'DC', 'DE',
+      'RI', 'NH'
+    ]);
 
     return (
-      <Group>
+      <Group>  
         <AreaClosed
           x={d => d[0]}
           y={d => d[1]}
           xScale={x}
           yScale={y}
-          data={beforePosKDE}
+          data={this.state.beforePosKDE}
           curve={curveBasis}
           strokeWidth={1}
           stroke={color(-1)}
@@ -76,7 +108,7 @@ export default class SentimentTile extends React.Component {
           y={d => d[1]}
           xScale={x}
           yScale={y}
-          data={beforeNegKDE}
+          data={this.state.beforeNegKDE}
           curve={curveBasis}
           strokeWidth={1}
           stroke={color(-1)}
@@ -88,7 +120,7 @@ export default class SentimentTile extends React.Component {
           y={d => d[1]}
           xScale={x}
           yScale={y}
-          data={afterPosKDE}
+          data={this.state.afterPosKDE}
           curve={curveBasis}
           strokeWidth={1}
           stroke={color(1)}
@@ -100,13 +132,27 @@ export default class SentimentTile extends React.Component {
           y={d => d[1]}
           xScale={x}
           yScale={y}
-          data={afterNegKDE}
+          data={this.state.afterNegKDE}
           curve={curveBasis}
           strokeWidth={1}
           stroke={color(1)}
           fill={color(1)}
           defined={d => (d[0] < -0.33) && (d[0] && d[1])}
         />
+        {this.state.showAxis && <AxisBottom
+          scale={x}
+          top={this.props.height}
+          left={0}
+          stroke="#33333333"
+          tickStroke="#33333366"
+          hideAxisLine={true}
+          rangePadding={20}
+          numTicks={3}
+          tickLength={3}
+          tickValues={[-1, 0, 1]}
+          tickFormat={xTicks}
+          tickClassName={'sentiment-ticks'}
+        />}
       </Group>
     );
   }
