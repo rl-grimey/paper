@@ -121,6 +121,7 @@ export default class Cartogrid extends React.Component {
     return (
       <CountTile
         data={d.values}
+        abbrv={state_data.abbrv}
         maxCount={this.props.maxCount}
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
@@ -146,6 +147,7 @@ export default class Cartogrid extends React.Component {
       <SentimentTile
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
+        kernelSize={this.props.kernelSize}
         colorScale={this.props.colorScale}
         abbrv={abbrv}
         beforePos={beforePos}

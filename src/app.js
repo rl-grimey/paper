@@ -35,6 +35,8 @@ class App extends React.Component {
       height: 600,
       padding: 0.2,
 
+      kernelSize: 0.075,
+
       // Inputs
       cartoType:  'cluster',
       cluster:    undefined,
@@ -201,6 +203,7 @@ class App extends React.Component {
                 width={this.state.width}
                 height={this.state.height}
                 padding={this.state.padding}
+                kernelSize={this.state.kernelSize}
                 cartoType={this.state.cartoType}
                 data={data}
                 colorScale={colorScale}
@@ -331,6 +334,15 @@ class App extends React.Component {
                   value={this.state.height}
                   onChange={this.onChange}
                 />
+                <Slider
+                  label={'Kernel'}
+                  name={'kernelSize'}
+                  min={0.001}
+                  max={0.25}
+                  step={0.01}
+                  value={this.state.kernelSize}
+                  onChange={this.onChange}
+                />                
               </div>
             </Col>
           </Row>

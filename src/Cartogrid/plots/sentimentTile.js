@@ -17,7 +17,7 @@ export default class SentimentTile extends React.Component {
       domain: [-1, 1],
       range: [0, this.props.width]
     });
-    const k = 0.075;
+    const k = props.kernelSize;
 
     // Actually calc the distributions
     const beforePosKDE = this.calcKernel(this.props.beforePos, k, x.ticks(100));
@@ -42,11 +42,47 @@ export default class SentimentTile extends React.Component {
       afterPosKDE,
       afterNegKDE,
       maxKDE,
+      kernelSize: props.kernelSize,
       showAxis: stateAxes.has(props.abbrv)
     };
 
     this.kernelDensityEstimator = this.kernelDensityEstimator.bind(this);
     this.kernelEpanechnikov = this.kernelEpanechnikov.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Only update component if kernel size has changed, or dimensions
+    return (nextProps.kernelSize !== nextState.kernelSize) ||
+      (nextProps.width !== nextState.width) || 
+      (nextProps.height !== nextState.height);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // Calculculate the new densities
+    const x = scaleLinear({
+      domain: [-1, 1],
+      range: [0, nextProps.width]
+    });
+    const k = nextProps.kernelSize;
+
+    // Actually calc the distributions
+    const beforePosKDE = this.calcKernel(nextProps.beforePos, k, x.ticks(100));
+    const beforeNegKDE = this.calcKernel(nextProps.beforeNeg, k, x.ticks(100));
+    const afterPosKDE  = this.calcKernel(nextProps.afterPos, k, x.ticks(100));
+    const afterNegKDE  = this.calcKernel(nextProps.afterNeg, k, x.ticks(100));
+
+    // Find max density for better scaling
+    const flatKDE = [].concat.apply([], [beforeNegKDE, beforePosKDE, afterNegKDE, afterPosKDE])
+    const maxKDE = max(flatKDE.map(d => d[1]));
+
+    this.setState({
+      kernelSize: nextProps.kernelSize,
+      beforePosKDE,
+      beforeNegKDE,
+      afterPosKDE,
+      afterNegKDE,
+      maxKDE
+    });
   }
 
   kernelDensityEstimator(kernel, X) {
@@ -89,8 +125,10 @@ export default class SentimentTile extends React.Component {
       'RI', 'NH'
     ]);
 
+    const groupStyles = { "isolation": "isolate" };
+    const inlineStyles = { "mixBlendMode": "multiply" };
     return (
-      <Group>  
+      <Group style={groupStyles}>  
         <AreaClosed
           x={d => d[0]}
           y={d => d[1]}
@@ -102,6 +140,7 @@ export default class SentimentTile extends React.Component {
           stroke={color(-1)}
           fill={color(-1)}
           defined={d => (d[0] && d[1]) && (d[0] > 0.33)}
+          className={'distributions'}
         />
         <AreaClosed
           x={d => d[0]}
@@ -114,6 +153,7 @@ export default class SentimentTile extends React.Component {
           stroke={color(-1)}
           fill={color(-1)}
           defined={d => (d[0] < -0.33) && (d[0] && d[1])}
+          className={'distributions'}
         />
         <AreaClosed
           x={d => d[0]}
@@ -151,7 +191,7 @@ export default class SentimentTile extends React.Component {
           tickLength={3}
           tickValues={[-1, 0, 1]}
           tickFormat={xTicks}
-          tickClassName={'sentiment-ticks'}
+          tickClassName={'grid-ticks'}
         />}
       </Group>
     );
