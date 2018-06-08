@@ -16,22 +16,12 @@ export default class Gridtile extends React.Component {
         <Bar
           className={'tile-bg'}
           fill={'none'}
-          stroke={'#33333300'}
+          stroke={this.props.cartoType === 'cluster' ?
+            '#33333300' : '#33333333'}
           strokeWidth={1}
           width={this.props.width}
           height={this.props.height}
         />
-        
-        <Text
-          fontSize={10}
-          fontWeight={'bold'}
-          fontFamily={'sans-serif'}
-          textAnchor={'end'}
-          dx={this.props.width * 0.85}
-          y={this.props.height * -0.05}
-          style={{}}
-        >{this.props.abbrv}
-        </Text>
         {this.props.children}
       </Group>
     );

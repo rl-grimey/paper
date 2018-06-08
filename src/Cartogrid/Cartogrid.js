@@ -1,6 +1,7 @@
 import React from 'react';
 import { scaleBand } from '@vx/scale';
 import * as d3 from 'd3';
+import { Text } from '@vx/text';
 
 import Gridtile from './Gridtile';
 import ClusterTile from './plots/clusterTile';
@@ -80,6 +81,23 @@ export default class Cartogrid extends React.Component {
     );
   }
 
+  create_label = (statefp) => {
+    const abbrv = this.state.states[statefp].abbrv;
+
+    return (
+      <Text
+        fontSize={10}
+        fontWeight={'bold'}
+        fontFamily={'sans-serif'}
+        textAnchor={'end'}
+        style={{"opacity": 0.75}}
+        x={this.state.x_scale.bandwidth() * 0.9}
+        y={this.state.y_scale.bandwidth() * 0.2}
+      >{abbrv}
+      </Text>
+    );
+  }
+
   createClusterTile = (d, i) => {
     return (
       <ClusterTile
@@ -114,6 +132,11 @@ export default class Cartogrid extends React.Component {
 
   createSentimentTile = (d, i) => {
     let vals = d.value;
+    
+    // State abbrv, so we can filter axes later
+    let abbrv = this.state.states[d.key].abbrv;
+
+    // Data
     let beforePos = vals.before.positive;
     let beforeNeg = vals.before.negative;
     let afterPos = vals.after.positive;
@@ -124,6 +147,7 @@ export default class Cartogrid extends React.Component {
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
         colorScale={this.props.colorScale}
+        abbrv={abbrv}
         beforePos={beforePos}
         beforeNeg={beforeNeg}
         afterPos={afterPos}
@@ -159,7 +183,10 @@ export default class Cartogrid extends React.Component {
             left={x_scale(this.state.states[d.statefp].x)}
             width={x_scale.bandwidth()}
             height={y_scale.bandwidth()}
-          >{this.createClusterTile(d, i)}
+            cartoType={cartoType}
+          >
+            {this.createClusterTile(d, i)}
+            {this.create_label(d.statefp)}
           </Gridtile>
         )}
         {cartoType === 'count' && this.state.data && this.state.data.map((d, i) => 
@@ -170,8 +197,10 @@ export default class Cartogrid extends React.Component {
             left={x_scale(this.state.states[d.key].x)}
             width={x_scale.bandwidth()}
             height={y_scale.bandwidth()}
+            cartoType={cartoType}
           >
             {this.createCountTile(d, i)}
+            {this.create_label(d.key)}
           </Gridtile>
         )}
         {cartoType === 'sentiment' && this.state.data && d3.entries(this.state.data).map((d, i) => 
@@ -182,8 +211,10 @@ export default class Cartogrid extends React.Component {
             left={x_scale(this.state.states[d.key].x)}
             width={x_scale.bandwidth()}
             height={y_scale.bandwidth()}
+            cartoType={cartoType}
           >
             {this.createSentimentTile(d, i)}
+            {this.create_label(d.key)}
           </Gridtile>
         )}
         
