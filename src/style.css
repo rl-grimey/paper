@@ -13,13 +13,6 @@ body {
   margin-top: 2%;
 }
 
-.clouds-before {
-  border-right: 1px solid black;
-}
-
-.clouds-after {
-  margin-left: 20px;
-}
 
 .cartogrid {
   display: block;
@@ -28,6 +21,11 @@ body {
 
 .chart-settings {
   float: right;
+}
+
+/* Sentiment ticks */
+.sentiment-ticks {
+  font-size: 8px !important;
 }
 
 /* Help Modal */
