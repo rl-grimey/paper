@@ -72,8 +72,8 @@ export const clickCountTile = (e) => {
     .attr('class')
     .split(' ');
 
-  const click_period = +classes[1];
-  const click_state = classes[2];
+  const click_period = +classes[0];
+  const click_state = classes[1];
 
   return {
     period: click_period,

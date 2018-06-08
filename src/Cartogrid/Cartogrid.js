@@ -181,6 +181,7 @@ export default class Cartogrid extends React.Component {
           <Gridtile
             key={i}
             abbrv={this.state.states[d.statefp].abbrv}
+            selected={this.props.statefp === d.statefp}
             top={y_scale(this.state.states[d.statefp].y)}
             left={x_scale(this.state.states[d.statefp].x)}
             width={x_scale.bandwidth()}
@@ -195,6 +196,7 @@ export default class Cartogrid extends React.Component {
           <Gridtile
             key={i}
             abbrv={this.state.states[d.key].abbrv}
+            selected={this.props.statefp === d.key}
             top={y_scale(this.state.states[d.key].y)}
             left={x_scale(this.state.states[d.key].x)}
             width={x_scale.bandwidth()}
@@ -209,6 +211,7 @@ export default class Cartogrid extends React.Component {
           <Gridtile
             key={i}
             abbrv={this.state.states[d.key].abbrv}
+            selected={this.props.statefp === d.key}
             top={y_scale(this.state.states[d.key].y)}
             left={x_scale(this.state.states[d.key].x)}
             width={x_scale.bandwidth()}

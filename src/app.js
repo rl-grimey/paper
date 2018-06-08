@@ -205,6 +205,7 @@ class App extends React.Component {
                 padding={this.state.padding}
                 kernelSize={this.state.kernelSize}
                 cartoType={this.state.cartoType}
+                statefp={this.state.statefp}
                 data={data}
                 colorScale={colorScale}
                 clickCallback={e => this.setState(callback(e))}
