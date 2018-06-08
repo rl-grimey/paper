@@ -3,6 +3,7 @@
 */
 import _ from 'lodash';
 import * as d3 from 'd3';
+import states from './states';
 
 // Globals
 export const topic_columns = _.range(35);
@@ -87,7 +88,8 @@ export const clickClusterTile = (e) => {
   const click_cluster = +classes[0];
 
   return {
-    cluster: click_cluster
+    cluster: click_cluster,
+    statefp: classes[1]
   }
 }
 
@@ -222,6 +224,11 @@ export const loadData = (callback = _.noop) => {
         .entries(data[0]);
       
       // Get the max so we can scale across states
+      /* Normalizing globally drastically changes the visible portion.
+      let maxCount = d3.max(
+        data[0].filter(d => d.statefp !== '11'), 
+        d => { return d.count / states[d.statefp].pop17; }
+      );*/
       let maxCount = d3.max(data[0], d => d.count);
       
       // Create map for faster lookup when interacting
