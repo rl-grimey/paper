@@ -53,14 +53,6 @@ export default class SentimentTile extends React.Component {
     this.kernelEpanechnikov = this.kernelEpanechnikov.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // Only update component if kernel size has changed, or dimensions
-    let propsChange = ((nextProps.kernelSize !== this.state.kernelSize) &&
-      (nextProps.width !== this.state.width) && 
-      (nextProps.height !== this.state.height));
-    return propsChange;
-  }
-
   componentWillReceiveProps(nextProps) {
     // Calculculate the new densities
     const x = scaleLinear({
