@@ -42,8 +42,11 @@ export default class SentimentTile extends React.Component {
       afterPosKDE,
       afterNegKDE,
       maxKDE,
+      statefp: props.statefp,
       kernelSize: props.kernelSize,
-      showAxis: stateAxes.has(props.abbrv)
+      showAxis: stateAxes.has(props.abbrv),
+      width: this.props.width,
+      height: this.props.height
     };
 
     this.kernelDensityEstimator = this.kernelDensityEstimator.bind(this);
@@ -52,9 +55,10 @@ export default class SentimentTile extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     // Only update component if kernel size has changed, or dimensions
-    return (nextProps.kernelSize !== nextState.kernelSize) ||
-      (nextProps.width !== nextState.width) || 
-      (nextProps.height !== nextState.height);
+    let propsChange = ((nextProps.kernelSize !== this.state.kernelSize) &&
+      (nextProps.width !== this.state.width) && 
+      (nextProps.height !== this.state.height));
+    return propsChange;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -76,6 +80,8 @@ export default class SentimentTile extends React.Component {
     const maxKDE = max(flatKDE.map(d => d[1]));
 
     this.setState({
+      width: nextProps.width,
+      height: nextProps.height,
       kernelSize: nextProps.kernelSize,
       beforePosKDE,
       beforeNegKDE,
@@ -128,7 +134,7 @@ export default class SentimentTile extends React.Component {
     const groupStyles = { "isolation": "isolate" };
     const inlineStyles = { "mixBlendMode": "multiply" };
     return (
-      <Group style={groupStyles}>  
+      <Group style={groupStyles} onClick={this.props.clickCallback}>  
         <AreaClosed
           x={d => d[0]}
           y={d => d[1]}
@@ -193,6 +199,15 @@ export default class SentimentTile extends React.Component {
           tickFormat={xTicks}
           tickClassName={'grid-ticks'}
         />}
+        <rect
+          x={0}
+          y={0}
+          width={this.props.width}
+          height={this.props.height}
+          fill={'#ffffff00'}
+          stroke={'none'}
+          className={this.state.statefp}
+        />
       </Group>
     );
   }

@@ -93,6 +93,13 @@ export const clickClusterTile = (e) => {
   }
 }
 
+export const clickSentTile = (e) => {
+  const classes = d3.select(e.target)
+    .attr('class').split(' ');
+  
+  return { statefp: classes[0]};
+}
+
 export const clickClusterCloud = (cluster) => {
   return {cluster: cluster};
 }

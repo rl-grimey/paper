@@ -11,6 +11,7 @@ import {
   clickCountTile,
   clickClusterTile,
   clickClusterCloud,
+  clickSentTile,
   getStateHeirarchy,
   getStateTimeHeirarchy,
   getStateTimeCluster
@@ -54,6 +55,7 @@ class App extends React.Component {
 
     this.clickCountTile = clickCountTile.bind(this);
     this.clickClusterTile = clickClusterTile.bind(this);
+    this.clickSentTile = clickSentTile.bind(this);
     this.clickClusterCloud = clickClusterCloud.bind(this);
   }
 
@@ -113,7 +115,7 @@ class App extends React.Component {
       colorScale = d3.scaleThreshold()
         .domain([0, 1])
         .range(['#2166ac33', '#dddddd', '#b2182b33']);
-    
+      callback = this.clickSentTile;
     }
 
 

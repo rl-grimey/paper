@@ -149,7 +149,9 @@ export default class Cartogrid extends React.Component {
         height={this.state.y_scale.bandwidth()}
         kernelSize={this.props.kernelSize}
         colorScale={this.props.colorScale}
+        clickCallback={this.props.clickCallback}
         abbrv={abbrv}
+        statefp={d.key}
         beforePos={beforePos}
         beforeNeg={beforeNeg}
         afterPos={afterPos}
