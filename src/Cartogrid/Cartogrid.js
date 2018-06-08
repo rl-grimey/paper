@@ -1,10 +1,11 @@
 import React from 'react';
 import { scaleBand } from '@vx/scale';
-
 import * as d3 from 'd3';
+
 import Gridtile from './Gridtile';
 import ClusterTile from './plots/clusterTile';
 import CountTile from './plots/countPlot';
+import SentimentTile from './plots/sentimentTile';
 import states from '../states';
 
 
@@ -111,6 +112,26 @@ export default class Cartogrid extends React.Component {
     );
   }
 
+  createSentimentTile = (d, i) => {
+    let vals = d.value;
+    let beforePos = vals.before.positive;
+    let beforeNeg = vals.before.negative;
+    let afterPos = vals.after.positive;
+    let afterNeg = vals.after.negative;
+
+    return (
+      <SentimentTile
+        width={this.state.x_scale.bandwidth()}
+        height={this.state.y_scale.bandwidth()}
+        colorScale={this.props.colorScale}
+        beforePos={beforePos}
+        beforeNeg={beforeNeg}
+        afterPos={afterPos}
+        afterNeg={afterNeg}
+      />
+    );
+  }
+
 
   render() {
     // Create new scales each render
@@ -153,6 +174,19 @@ export default class Cartogrid extends React.Component {
             {this.createCountTile(d, i)}
           </Gridtile>
         )}
+        {cartoType === 'sentiment' && this.state.data && d3.entries(this.state.data).map((d, i) => 
+          <Gridtile
+            key={i}
+            abbrv={this.state.states[d.key].abbrv}
+            top={y_scale(this.state.states[d.key].y)}
+            left={x_scale(this.state.states[d.key].x)}
+            width={x_scale.bandwidth()}
+            height={y_scale.bandwidth()}
+          >
+            {this.createSentimentTile(d, i)}
+          </Gridtile>
+        )}
+        
       </svg>
     );
   } 

@@ -189,7 +189,8 @@ export const loadData = (callback = _.noop) => {
     'data/avg-state-vectors-time.csv',
     'data/topic-word-ranks.csv',
     'data/cluster-token-counts.csv',
-    'data/avg-state-vector-long.csv'
+    'data/avg-state-vector-long.csv',
+    'data/state-sent-dists.json'
   ];
 
   let countsByState, 
@@ -198,10 +199,14 @@ export const loadData = (callback = _.noop) => {
       topicVectorsLong,
       counties,
       topicTokens,
-      clusterTokens;
+      clusterTokens,
+      stateSents;
 
   // Load all the data synchronously. AKA get all of them back at once.
-  Promise.all(files.map(f => d3.csv(f)))
+  //Promise.all(files.map(f => d3.csv(f)))
+  Promise.all(files.map(f => {
+      return files.indexOf(f) !== files.length-1 ? d3.csv(f) : d3.json(f);
+    }))
     .then(data => {
       /* Do any data manipulations before passing to the app */
       data[0] = data[0].map(d => callbackCount(d));
@@ -210,7 +215,6 @@ export const loadData = (callback = _.noop) => {
       data[3] = data[3].map(d => callbackTopicTokens(d));
       data[4] = data[4].map(d => callbackClusterTokens(d));
       data[5] = data[5].map(d => callbackLong(d));
-
 
       // Format the state weekly counts, 'groupby' state fips
       countsByState = d3.nest()
@@ -236,12 +240,14 @@ export const loadData = (callback = _.noop) => {
         .key(d => d.topic)
         .object(data[5].filter(d => d.macro_period !== 0));
 
+
       // Assign them to our app by using the callback function provided to us
       callback({
         counts: countsByState,
         maxCount: maxCount,
         topicTimeVectors: topicVectorsByTime,
-        clusterTokens: clusterTokens
+        clusterTokens: clusterTokens,
+        stateSents: data[6]
       });
     });
 };

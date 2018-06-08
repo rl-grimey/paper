@@ -46,7 +46,8 @@ class App extends React.Component {
       maxCount:     undefined,
       topicVectors: undefined,
       topicTimeVectors: undefined,
-      clusterTokens:undefined
+      clusterTokens:undefined,
+      stateSents: undefined
     }
 
     this.clickCountTile = clickCountTile.bind(this);
@@ -69,14 +70,6 @@ class App extends React.Component {
     let data = [],
         colorScale = [],
         callback = null;
-
-    const org_colors = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3',
-        '#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd', '#333333'];
-
-    const clusterScaleOld = d3.scaleOrdinal()
-      .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, undefined])
-      .range(['#80b1d3', '#fdb462', '#dddddd', '#fb8072', '#ffffb3',
-        '#bc80bd', '#fccde5', '#bebada', '#d9d9d9', '#1f78b4', '#222222']);
 
     const clusterScale = d3.scaleOrdinal()
         .domain([
@@ -113,6 +106,16 @@ class App extends React.Component {
         .range(['#2166ac', '#dddddd', '#b2182b']);
       callback = this.clickCountTile;
     }
+    else if (this.state.cartoType === 'sentiment' && this.state.stateSents) {
+      data = this.state.stateSents;
+      colorScale = d3.scaleThreshold()
+        .domain([0, 1])
+        .range(['#2166ac33', '#dddddd', '#b2182b33']);
+    
+    }
+
+
+
 
     // Make sure we're updating correctly
     //console.log('-----------------------------------------------------');
@@ -127,7 +130,7 @@ class App extends React.Component {
       <div className="App">
         <Grid fluid={true}>
 
-          {/* Title */}
+          {/* Title Row*/}
           <Row>
             <Col xs={11}>
               <h3>
@@ -144,125 +147,134 @@ class App extends React.Component {
 
           <hr/>
 
-          {/* Overview */}
+          {/* Dashboard row */}
           <Row>
-          {this.state.clusterTokens && 
-            <Col xs={2}>
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'1'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(1))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'3'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(3))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'4'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(4))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'6'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(6))}
-                //onWordClick={}
+            {/* Before clusters column */}
+            {this.state.clusterTokens && 
+              <Col xs={2}>
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'1'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(1))}
+                  //onWordClick={}
+                />
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'3'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(3))}
+                  //onWordClick={}
+                />
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'4'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(4))}
+                  //onWordClick={}
+                />
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'6'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(6))}
+                  //onWordClick={}
+                />
+              </Col>
+            }
+            
+            {/* Overview columns */}
+            <Col xs={8}>
+              <Cartogrid
+                width={this.state.width}
+                height={this.state.height}
+                padding={this.state.padding}
+                cartoType={this.state.cartoType}
+                data={data}
+                colorScale={colorScale}
+                clickCallback={e => this.setState(callback(e))}
+                maxCount={this.state.maxCount}
+                cluster={this.state.cluster}
               />
             </Col>
-          }
-
-          <Col xs={8}>
-            <Cartogrid
-              width={this.state.width}
-              height={this.state.height}
-              padding={this.state.padding}
-              cartoType={this.state.cartoType}
-              data={data}
-              colorScale={colorScale}
-              clickCallback={e => this.setState(callback(e))}
-              maxCount={this.state.maxCount}
-              cluster={this.state.cluster}
-            />
-          </Col>
-
-          {this.state.clusterTokens && 
-            <Col xs={2}>
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'0'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(0))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'5'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(5))}
-                //onWordClick={}
-              />
-              <ClusterCloud
-                data={this.state.clusterTokens}
-                selectedCluster={this.state.cluster}
-                cluster={'7'}
-                width={this.state.width * 0.175}
-                height={this.state.height * 0.25}
-                colorScale={clusterScale}
-                onClick={() => this.setState(clickClusterCloud(7))}
-                //onWordClick={}
-              />
-              <div>
-                <h4>Charts</h4>
-                <button 
-                  className="btn btn-light"
-                  name={'cartoType'} 
-                  value={'cluster'}
-                  onClick={this.onChange}
-                >Clusters</button>
-                <button 
-                  className="btn btn-light"
-                  name={'cartoType'} 
-                  value={'count'}
-                  onClick={this.onChange}
-                >Counts</button>
-                {this.state.cartoType === 'cluster' && 
-                  <button
-                    className="btn btn-dark"
-                    name={'cluster'}
-                    value={undefined}
-                    onClick={() => this.setState({ cluster: undefined })}
-                  >Reset Cluster
-                  </button>
-                }
-              </div>
-            </Col>
-          }
+            
+            {/* After clusters column */}
+            {this.state.clusterTokens && 
+              <Col xs={2}>
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'0'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(0))}
+                  //onWordClick={}
+                />
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'5'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(5))}
+                  //onWordClick={}
+                />
+                <ClusterCloud
+                  data={this.state.clusterTokens}
+                  selectedCluster={this.state.cluster}
+                  cluster={'7'}
+                  width={this.state.width * 0.175}
+                  height={this.state.height * 0.25}
+                  colorScale={clusterScale}
+                  onClick={() => this.setState(clickClusterCloud(7))}
+                  //onWordClick={}
+                />
+                <div>
+                  <h4>Charts</h4>
+                  <button 
+                    className="btn btn-light"
+                    name={'cartoType'} 
+                    value={'cluster'}
+                    onClick={this.onChange}
+                  >Clusters</button>
+                  <button 
+                    className="btn btn-light"
+                    name={'cartoType'} 
+                    value={'count'}
+                    onClick={this.onChange}
+                  >Counts</button>
+                  <button 
+                    className="btn btn-light"
+                    name={'cartoType'} 
+                    value={'sentiment'}
+                    onClick={this.onChange}
+                  >Sentiments</button>
+                  {this.state.cartoType === 'cluster' && 
+                    <button
+                      className="btn btn-dark"
+                      name={'cluster'}
+                      value={undefined}
+                      onClick={() => this.setState({ cluster: undefined })}
+                    >Reset Cluster
+                    </button>
+                  }
+                </div>
+              </Col>
+            }
           </Row>
 
           <hr/>
