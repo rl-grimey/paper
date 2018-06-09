@@ -10,7 +10,17 @@ body {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 2%;
-  margin-top: 2%;
+  margin-top: 0%;
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dashboard-title h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -23,10 +33,20 @@ body {
   float: right;
 }
 
-/* Sentiment ticks */
-.sentiment-ticks {
+/* Grid ticks */
+.grid-ticks {
   font-size: 8px !important;
 }
+.distributions {
+  mix-blend-mode: difference;
+}
+
+/* Data table */
+.table-wrapper {
+  overflow: auto;
+  height: 300px;
+}
+
 
 /* Help Modal */
 .modal-backdrop {

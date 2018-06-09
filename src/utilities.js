@@ -54,13 +54,10 @@ const callbackLong = (d) => {
 }
 
 const callbackTweets = (d) => {
-  d.topic = +d.topic;
-  d.prob = +d.prob;
-  d.tweetID = +d.tweetID;
+  // message,statefp,macro_period,polarity,cluster
   d.polarity = +d.polarity;
-  d.polarity_cat = +d.polarity_cat;
-  d.period = +d.period;
   d.macro_period = +d.macro_period;
+  d.cluster = +d.cluster;
   return d;
 }
 
@@ -84,7 +81,6 @@ export const clickCountTile = (e) => {
 export const clickClusterTile = (e) => {
   const classes = d3.select(e.target)
     .attr('class').split(' ');
-
   const click_cluster = +classes[0];
 
   return {
@@ -96,7 +92,6 @@ export const clickClusterTile = (e) => {
 export const clickSentTile = (e) => {
   const classes = d3.select(e.target)
     .attr('class').split(' ');
-  
   return { statefp: classes[0]};
 }
 
@@ -190,6 +185,17 @@ export const getStateTimeCluster = (state) => {
   };
 }
 
+export const getRandomSubarray = (arr, size) => {
+  var shuffled = arr.slice(0), i = arr.length, min = i - size, temp, index;
+  while (i-- > min) {
+      index = Math.floor((i + 1) * Math.random());
+      temp = shuffled[index];
+      shuffled[index] = shuffled[i];
+      shuffled[i] = temp;
+  }
+  return shuffled.slice(min);
+}
+
 
 export const loadData = (callback = _.noop) => {
   let files = [
@@ -199,6 +205,7 @@ export const loadData = (callback = _.noop) => {
     'data/topic-word-ranks.csv',
     'data/cluster-token-counts.csv',
     'data/avg-state-vector-long.csv',
+    'data/datatable.csv',
     'data/state-sent-dists.json'
   ];
 
@@ -224,6 +231,7 @@ export const loadData = (callback = _.noop) => {
       data[3] = data[3].map(d => callbackTopicTokens(d));
       data[4] = data[4].map(d => callbackClusterTokens(d));
       data[5] = data[5].map(d => callbackLong(d));
+      data[6] = data[6].map(d => callbackTweets(d));
 
       // Format the state weekly counts, 'groupby' state fips
       countsByState = d3.nest()
@@ -261,7 +269,8 @@ export const loadData = (callback = _.noop) => {
         maxCount: maxCount,
         topicTimeVectors: topicVectorsByTime,
         clusterTokens: clusterTokens,
-        stateSents: data[6]
+        stateSents: data[7],
+        tweets: data[6]
       });
     });
 };

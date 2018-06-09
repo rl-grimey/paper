@@ -4,7 +4,8 @@ import {
   ModalBody, 
   ModalTitle, 
   Button, 
-  Glyphicon 
+  Glyphicon,
+  Table
 } from 'react-bootstrap';
 
 export class Slider extends React.Component {
@@ -78,6 +79,88 @@ export class HelpButton extends React.Component {
           </Modal.Footer>
         </Modal>
       </div>    
+    );
+  }
+}
+
+export class DataTable extends React.Component {
+  constructor(props) {
+
+    super(props);
+    this.state = {
+      state: props.abbrv,
+      cluster: props.cluster,
+      data: props.data
+    };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('update request fired: ', nextProps)
+    let sameState = nextProps.abbrv !== this.state.state;
+    let sameCluster = nextProps.cluster !== this.state.cluster;
+    return sameState || sameCluster; 
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({
+      state: props.abbrv,
+      cluster: props.cluster,
+      data: props.data
+    });
+  }
+
+  createTitle = (cluster, state) => {
+    let titleBase = 'Tweets ';
+    let titleCluster = (cluster === undefined) ? '' : 'Cluster '+cluster + ' ';
+    let titleState = (state === undefined) ? '' : 'from ' +state;
+
+    if ((cluster === undefined) && (state === undefined)) {
+      return titleBase + '(random)';
+    } else if (cluster === undefined) {
+      return titleBase + titleState;
+    } else if (state === undefined) {
+      return titleBase + titleCluster;
+    } else {
+      return titleCluster +titleBase + titleState;
+    }
+  }
+
+  createRow = (d, i) => {
+    return (
+      <tr key={i}>
+        <td>{d.message}</td>
+        <td>{d.cluster}</td>
+        <td>{d.polarity}</td>
+      </tr>
+    );
+  }
+
+  render() {
+    console.log('render', this.props, this.state);
+
+    let { cluster, abbrv, data } = this.props;
+
+    // Title creation
+    let title = this.createTitle(cluster, abbrv);
+    
+
+    return (
+      <div className="table-wrapper">
+        <h5>{title}</h5>
+        <Table condensed hover>
+          <thead>
+            <tr>
+              <th>Message</th>
+              <th>Cluster</th>
+              <th>Polarity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.data
+              .filter(d => d !== undefined)
+              .map((d, i) => this.createRow(d, i))}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }

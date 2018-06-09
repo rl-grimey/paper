@@ -14,9 +14,11 @@ import {
   clickSentTile,
   getStateHeirarchy,
   getStateTimeHeirarchy,
-  getStateTimeCluster
+  getStateTimeCluster,
+  getRandomSubarray
 } from './utilities';
-import { Slider, HelpButton } from './widgets';
+import { Slider, HelpButton, DataTable } from './widgets';
+import states from './states';
 import './style.css';
 
 
@@ -50,7 +52,8 @@ class App extends React.Component {
       topicVectors: undefined,
       topicTimeVectors: undefined,
       clusterTokens:undefined,
-      stateSents: undefined
+      stateSents: undefined,
+      tweets: []
     }
 
     this.clickCountTile = clickCountTile.bind(this);
@@ -118,7 +121,15 @@ class App extends React.Component {
       callback = this.clickSentTile;
     }
 
-
+    /* Data manipulation for the data table: filtering, etc */
+    let subset = this.state.tweets.filter(d => {
+      if (this.state.cluster === undefined) return true;
+      else return this.state.cluster === d.cluster;
+    }).filter(d => {
+      if (this.state.statefp === undefined) return true;
+      else return this.state.statefp === d.statefp;
+    });
+    let subsetSlim = getRandomSubarray(subset, 100);
 
 
     // Make sure we're updating correctly
@@ -137,7 +148,7 @@ class App extends React.Component {
           {/* Title Row*/}
           <Row>
             <Col xs={11}>
-              <h3>
+              <h3 className="dashboard-title">
                 <abbr 
                   title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
                 >CarTopicVis
@@ -287,25 +298,16 @@ class App extends React.Component {
 
           {/* UI Controls */}
           <Row>
-            <Col xs={4}>
-              <div>
-                <h4>Before Table</h4>        
-              </div>
-              <div>
-                <p>Table</p>
-              </div>
+            <Col xs={9}>
+              {this.state.tweets !== undefined && subset != [undefined] &&
+              <DataTable
+                abbrv={states[this.state.statefp].abbrv}
+                cluster={this.state.cluster}
+                data={subsetSlim}
+              />}
             </Col>
 
-            <Col xs={4}>
-              <div>
-                <h4>After Table</h4>        
-              </div>
-              <div>
-                <p>Table</p>
-              </div>
-            </Col>
-
-            <Col xs={4}>
+            <Col xs={3}>
               <div>
                 <h4>Settings</h4>        
               </div>
