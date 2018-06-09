@@ -43,7 +43,7 @@ class App extends React.Component {
       // Inputs
       cartoType:  'cluster',
       cluster:    undefined,
-      statefp:    '11',
+      statefp:    undefined,
       period:     null,
 
       // Data
@@ -299,9 +299,9 @@ class App extends React.Component {
           {/* UI Controls */}
           <Row>
             <Col xs={9}>
-              {this.state.tweets !== undefined && subset != [undefined] &&
+              {this.state.tweets !== undefined && subset !== [undefined] &&
               <DataTable
-                abbrv={states[this.state.statefp].abbrv}
+                abbrv={this.state.statefp ? states[this.state.statefp].abbrv : undefined}
                 cluster={this.state.cluster}
                 data={subsetSlim}
               />}

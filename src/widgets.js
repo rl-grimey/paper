@@ -93,12 +93,12 @@ export class DataTable extends React.Component {
       data: props.data
     };
   }
-  shouldComponentUpdate(nextProps, nextState) {
+  /*shouldComponentUpdate(nextProps, nextState) {
     console.log('update request fired: ', nextProps)
     let sameState = nextProps.abbrv !== this.state.state;
     let sameCluster = nextProps.cluster !== this.state.cluster;
     return sameState || sameCluster; 
-  }
+  }*/
 
   componentWillReceiveProps(props) {
     this.setState({
@@ -118,7 +118,7 @@ export class DataTable extends React.Component {
     } else if (cluster === undefined) {
       return titleBase + titleState;
     } else if (state === undefined) {
-      return titleBase + titleCluster;
+      return titleCluster + titleBase;
     } else {
       return titleCluster +titleBase + titleState;
     }
