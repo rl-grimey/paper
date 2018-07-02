@@ -1,0 +1,2772 @@
+{
+    "10": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 25
+            },
+            {
+                "week": 1,
+                "count": 404
+            },
+            {
+                "week": 2,
+                "count": 287
+            },
+            {
+                "week": 3,
+                "count": 79
+            },
+            {
+                "week": 4,
+                "count": 128
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 17
+            },
+            {
+                "week": 1,
+                "count": 269
+            },
+            {
+                "week": 2,
+                "count": 197
+            },
+            {
+                "week": 3,
+                "count": 59
+            },
+            {
+                "week": 4,
+                "count": 95
+            }
+        ],
+        "total": 1560
+    },
+    "11": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 238
+            },
+            {
+                "week": -3,
+                "count": 361
+            },
+            {
+                "week": -2,
+                "count": 389
+            },
+            {
+                "week": -1,
+                "count": 1296
+            },
+            {
+                "week": 1,
+                "count": 6725
+            },
+            {
+                "week": 2,
+                "count": 2312
+            },
+            {
+                "week": 3,
+                "count": 1708
+            },
+            {
+                "week": 4,
+                "count": 694
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 122
+            },
+            {
+                "week": -3,
+                "count": 253
+            },
+            {
+                "week": -2,
+                "count": 263
+            },
+            {
+                "week": -1,
+                "count": 978
+            },
+            {
+                "week": 1,
+                "count": 4791
+            },
+            {
+                "week": 2,
+                "count": 1442
+            },
+            {
+                "week": 3,
+                "count": 1039
+            },
+            {
+                "week": 4,
+                "count": 454
+            }
+        ],
+        "total": 23065
+    },
+    "12": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 171
+            },
+            {
+                "week": -3,
+                "count": 220
+            },
+            {
+                "week": -2,
+                "count": 377
+            },
+            {
+                "week": -1,
+                "count": 980
+            },
+            {
+                "week": 1,
+                "count": 6913
+            },
+            {
+                "week": 2,
+                "count": 2405
+            },
+            {
+                "week": 3,
+                "count": 1201
+            },
+            {
+                "week": 4,
+                "count": 1970
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 118
+            },
+            {
+                "week": -3,
+                "count": 156
+            },
+            {
+                "week": -2,
+                "count": 269
+            },
+            {
+                "week": -1,
+                "count": 691
+            },
+            {
+                "week": 1,
+                "count": 4592
+            },
+            {
+                "week": 2,
+                "count": 1492
+            },
+            {
+                "week": 3,
+                "count": 729
+            },
+            {
+                "week": 4,
+                "count": 1496
+            }
+        ],
+        "total": 23780
+    },
+    "13": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 236
+            },
+            {
+                "week": -3,
+                "count": 12
+            },
+            {
+                "week": -2,
+                "count": 83
+            },
+            {
+                "week": -1,
+                "count": 264
+            },
+            {
+                "week": 1,
+                "count": 714
+            },
+            {
+                "week": 2,
+                "count": 237
+            },
+            {
+                "week": 3,
+                "count": 343
+            },
+            {
+                "week": 4,
+                "count": 128
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 166
+            },
+            {
+                "week": -3,
+                "count": 8
+            },
+            {
+                "week": -2,
+                "count": 56
+            },
+            {
+                "week": -1,
+                "count": 176
+            },
+            {
+                "week": 1,
+                "count": 441
+            },
+            {
+                "week": 2,
+                "count": 141
+            },
+            {
+                "week": 3,
+                "count": 236
+            },
+            {
+                "week": 4,
+                "count": 104
+            }
+        ],
+        "total": 3345
+    },
+    "15": {
+        "positive": [
+            {
+                "week": -2,
+                "count": 12
+            },
+            {
+                "week": -1,
+                "count": 129
+            },
+            {
+                "week": 1,
+                "count": 130
+            },
+            {
+                "week": 4,
+                "count": 105
+            }
+        ],
+        "negative": [
+            {
+                "week": -2,
+                "count": 8
+            },
+            {
+                "week": -1,
+                "count": 89
+            },
+            {
+                "week": 1,
+                "count": 90
+            },
+            {
+                "week": 4,
+                "count": 77
+            }
+        ],
+        "total": 640
+    },
+    "16": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 29
+            },
+            {
+                "week": 1,
+                "count": 71
+            },
+            {
+                "week": 2,
+                "count": 13
+            },
+            {
+                "week": 4,
+                "count": 59
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 20
+            },
+            {
+                "week": 1,
+                "count": 47
+            },
+            {
+                "week": 2,
+                "count": 13
+            },
+            {
+                "week": 4,
+                "count": 58
+            }
+        ],
+        "total": 310
+    },
+    "17": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 180
+            },
+            {
+                "week": -3,
+                "count": 264
+            },
+            {
+                "week": -2,
+                "count": 309
+            },
+            {
+                "week": -1,
+                "count": 355
+            },
+            {
+                "week": 1,
+                "count": 6014
+            },
+            {
+                "week": 2,
+                "count": 863
+            },
+            {
+                "week": 3,
+                "count": 2039
+            },
+            {
+                "week": 4,
+                "count": 793
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 100
+            },
+            {
+                "week": -3,
+                "count": 186
+            },
+            {
+                "week": -2,
+                "count": 190
+            },
+            {
+                "week": -1,
+                "count": 278
+            },
+            {
+                "week": 1,
+                "count": 4078
+            },
+            {
+                "week": 2,
+                "count": 588
+            },
+            {
+                "week": 3,
+                "count": 1282
+            },
+            {
+                "week": 4,
+                "count": 670
+            }
+        ],
+        "total": 18189
+    },
+    "18": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 34
+            },
+            {
+                "week": -3,
+                "count": 20
+            },
+            {
+                "week": -1,
+                "count": 393
+            },
+            {
+                "week": 1,
+                "count": 2386
+            },
+            {
+                "week": 2,
+                "count": 528
+            },
+            {
+                "week": 3,
+                "count": 726
+            },
+            {
+                "week": 4,
+                "count": 447
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 26
+            },
+            {
+                "week": -3,
+                "count": 23
+            },
+            {
+                "week": -1,
+                "count": 267
+            },
+            {
+                "week": 1,
+                "count": 1531
+            },
+            {
+                "week": 2,
+                "count": 359
+            },
+            {
+                "week": 3,
+                "count": 484
+            },
+            {
+                "week": 4,
+                "count": 395
+            }
+        ],
+        "total": 7619
+    },
+    "19": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 88
+            },
+            {
+                "week": -3,
+                "count": 6
+            },
+            {
+                "week": -2,
+                "count": 90
+            },
+            {
+                "week": 1,
+                "count": 419
+            },
+            {
+                "week": 2,
+                "count": 109
+            },
+            {
+                "week": 3,
+                "count": 215
+            },
+            {
+                "week": 4,
+                "count": 280
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 56
+            },
+            {
+                "week": -3,
+                "count": 3
+            },
+            {
+                "week": -2,
+                "count": 72
+            },
+            {
+                "week": 1,
+                "count": 267
+            },
+            {
+                "week": 2,
+                "count": 61
+            },
+            {
+                "week": 3,
+                "count": 146
+            },
+            {
+                "week": 4,
+                "count": 217
+            }
+        ],
+        "total": 2029
+    },
+    "20": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 95
+            },
+            {
+                "week": -3,
+                "count": 84
+            },
+            {
+                "week": -2,
+                "count": 24
+            },
+            {
+                "week": -1,
+                "count": 119
+            },
+            {
+                "week": 1,
+                "count": 1460
+            },
+            {
+                "week": 2,
+                "count": 145
+            },
+            {
+                "week": 3,
+                "count": 101
+            },
+            {
+                "week": 4,
+                "count": 65
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 48
+            },
+            {
+                "week": -3,
+                "count": 80
+            },
+            {
+                "week": -2,
+                "count": 14
+            },
+            {
+                "week": -1,
+                "count": 87
+            },
+            {
+                "week": 1,
+                "count": 1026
+            },
+            {
+                "week": 2,
+                "count": 106
+            },
+            {
+                "week": 3,
+                "count": 85
+            },
+            {
+                "week": 4,
+                "count": 48
+            }
+        ],
+        "total": 3587
+    },
+    "21": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 193
+            },
+            {
+                "week": 1,
+                "count": 485
+            },
+            {
+                "week": 2,
+                "count": 591
+            },
+            {
+                "week": 3,
+                "count": 224
+            },
+            {
+                "week": 4,
+                "count": 421
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 155
+            },
+            {
+                "week": 1,
+                "count": 330
+            },
+            {
+                "week": 2,
+                "count": 358
+            },
+            {
+                "week": 3,
+                "count": 119
+            },
+            {
+                "week": 4,
+                "count": 295
+            }
+        ],
+        "total": 3171
+    },
+    "22": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 90
+            },
+            {
+                "week": -2,
+                "count": 16
+            },
+            {
+                "week": -1,
+                "count": 59
+            },
+            {
+                "week": 1,
+                "count": 770
+            },
+            {
+                "week": 2,
+                "count": 509
+            },
+            {
+                "week": 3,
+                "count": 183
+            },
+            {
+                "week": 4,
+                "count": 73
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 67
+            },
+            {
+                "week": -2,
+                "count": 9
+            },
+            {
+                "week": -1,
+                "count": 30
+            },
+            {
+                "week": 1,
+                "count": 518
+            },
+            {
+                "week": 2,
+                "count": 333
+            },
+            {
+                "week": 3,
+                "count": 112
+            },
+            {
+                "week": 4,
+                "count": 56
+            }
+        ],
+        "total": 2825
+    },
+    "23": {
+        "positive": [
+            {
+                "week": 1,
+                "count": 73
+            }
+        ],
+        "negative": [
+            {
+                "week": 1,
+                "count": 63
+            }
+        ],
+        "total": 136
+    },
+    "24": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 47
+            },
+            {
+                "week": -3,
+                "count": 148
+            },
+            {
+                "week": -2,
+                "count": 122
+            },
+            {
+                "week": -1,
+                "count": 655
+            },
+            {
+                "week": 1,
+                "count": 1929
+            },
+            {
+                "week": 2,
+                "count": 1174
+            },
+            {
+                "week": 3,
+                "count": 1015
+            },
+            {
+                "week": 4,
+                "count": 448
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 21
+            },
+            {
+                "week": -3,
+                "count": 98
+            },
+            {
+                "week": -2,
+                "count": 91
+            },
+            {
+                "week": -1,
+                "count": 566
+            },
+            {
+                "week": 1,
+                "count": 1289
+            },
+            {
+                "week": 2,
+                "count": 727
+            },
+            {
+                "week": 3,
+                "count": 627
+            },
+            {
+                "week": 4,
+                "count": 341
+            }
+        ],
+        "total": 9298
+    },
+    "25": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 72
+            },
+            {
+                "week": -3,
+                "count": 141
+            },
+            {
+                "week": -2,
+                "count": 133
+            },
+            {
+                "week": -1,
+                "count": 589
+            },
+            {
+                "week": 1,
+                "count": 5909
+            },
+            {
+                "week": 2,
+                "count": 1317
+            },
+            {
+                "week": 3,
+                "count": 574
+            },
+            {
+                "week": 4,
+                "count": 789
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 52
+            },
+            {
+                "week": -3,
+                "count": 106
+            },
+            {
+                "week": -2,
+                "count": 83
+            },
+            {
+                "week": -1,
+                "count": 522
+            },
+            {
+                "week": 1,
+                "count": 3900
+            },
+            {
+                "week": 2,
+                "count": 834
+            },
+            {
+                "week": 3,
+                "count": 403
+            },
+            {
+                "week": 4,
+                "count": 566
+            }
+        ],
+        "total": 15990
+    },
+    "26": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 155
+            },
+            {
+                "week": -3,
+                "count": 220
+            },
+            {
+                "week": -2,
+                "count": 57
+            },
+            {
+                "week": -1,
+                "count": 606
+            },
+            {
+                "week": 1,
+                "count": 2789
+            },
+            {
+                "week": 2,
+                "count": 491
+            },
+            {
+                "week": 3,
+                "count": 1062
+            },
+            {
+                "week": 4,
+                "count": 411
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 91
+            },
+            {
+                "week": -3,
+                "count": 157
+            },
+            {
+                "week": -2,
+                "count": 34
+            },
+            {
+                "week": -1,
+                "count": 441
+            },
+            {
+                "week": 1,
+                "count": 1861
+            },
+            {
+                "week": 2,
+                "count": 345
+            },
+            {
+                "week": 3,
+                "count": 659
+            },
+            {
+                "week": 4,
+                "count": 270
+            }
+        ],
+        "total": 9649
+    },
+    "27": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 28
+            },
+            {
+                "week": -3,
+                "count": 19
+            },
+            {
+                "week": -1,
+                "count": 127
+            },
+            {
+                "week": 1,
+                "count": 690
+            },
+            {
+                "week": 2,
+                "count": 7
+            },
+            {
+                "week": 3,
+                "count": 264
+            },
+            {
+                "week": 4,
+                "count": 191
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 15
+            },
+            {
+                "week": -3,
+                "count": 18
+            },
+            {
+                "week": -1,
+                "count": 90
+            },
+            {
+                "week": 1,
+                "count": 451
+            },
+            {
+                "week": 3,
+                "count": 158
+            },
+            {
+                "week": 4,
+                "count": 167
+            }
+        ],
+        "total": 2225
+    },
+    "28": {
+        "positive": [
+            {
+                "week": -2,
+                "count": 20
+            },
+            {
+                "week": -1,
+                "count": 29
+            },
+            {
+                "week": 1,
+                "count": 136
+            },
+            {
+                "week": 2,
+                "count": 123
+            },
+            {
+                "week": 4,
+                "count": 81
+            }
+        ],
+        "negative": [
+            {
+                "week": -2,
+                "count": 12
+            },
+            {
+                "week": -1,
+                "count": 24
+            },
+            {
+                "week": 1,
+                "count": 100
+            },
+            {
+                "week": 2,
+                "count": 65
+            },
+            {
+                "week": 4,
+                "count": 45
+            }
+        ],
+        "total": 635
+    },
+    "29": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 31
+            },
+            {
+                "week": -2,
+                "count": 48
+            },
+            {
+                "week": -1,
+                "count": 15
+            },
+            {
+                "week": 1,
+                "count": 647
+            },
+            {
+                "week": 2,
+                "count": 144
+            },
+            {
+                "week": 3,
+                "count": 2
+            },
+            {
+                "week": 4,
+                "count": 203
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 19
+            },
+            {
+                "week": -2,
+                "count": 23
+            },
+            {
+                "week": -1,
+                "count": 13
+            },
+            {
+                "week": 1,
+                "count": 374
+            },
+            {
+                "week": 2,
+                "count": 82
+            },
+            {
+                "week": 3,
+                "count": 6
+            },
+            {
+                "week": 4,
+                "count": 134
+            }
+        ],
+        "total": 1741
+    },
+    "31": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 3
+            },
+            {
+                "week": -3,
+                "count": 41
+            },
+            {
+                "week": -2,
+                "count": 11
+            },
+            {
+                "week": 1,
+                "count": 188
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 3
+            },
+            {
+                "week": -3,
+                "count": 29
+            },
+            {
+                "week": -2,
+                "count": 10
+            },
+            {
+                "week": 1,
+                "count": 136
+            }
+        ],
+        "total": 421
+    },
+    "32": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 44
+            },
+            {
+                "week": -2,
+                "count": 55
+            },
+            {
+                "week": -1,
+                "count": 254
+            },
+            {
+                "week": 1,
+                "count": 1199
+            },
+            {
+                "week": 2,
+                "count": 611
+            },
+            {
+                "week": 3,
+                "count": 305
+            },
+            {
+                "week": 4,
+                "count": 609
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 32
+            },
+            {
+                "week": -2,
+                "count": 32
+            },
+            {
+                "week": -1,
+                "count": 206
+            },
+            {
+                "week": 1,
+                "count": 797
+            },
+            {
+                "week": 2,
+                "count": 399
+            },
+            {
+                "week": 3,
+                "count": 235
+            },
+            {
+                "week": 4,
+                "count": 457
+            }
+        ],
+        "total": 5235
+    },
+    "33": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 13
+            },
+            {
+                "week": -2,
+                "count": 47
+            },
+            {
+                "week": 1,
+                "count": 34
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 7
+            },
+            {
+                "week": -2,
+                "count": 35
+            },
+            {
+                "week": 1,
+                "count": 20
+            }
+        ],
+        "total": 156
+    },
+    "34": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 169
+            },
+            {
+                "week": -3,
+                "count": 79
+            },
+            {
+                "week": -2,
+                "count": 148
+            },
+            {
+                "week": -1,
+                "count": 248
+            },
+            {
+                "week": 1,
+                "count": 1343
+            },
+            {
+                "week": 2,
+                "count": 747
+            },
+            {
+                "week": 3,
+                "count": 522
+            },
+            {
+                "week": 4,
+                "count": 378
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 100
+            },
+            {
+                "week": -3,
+                "count": 54
+            },
+            {
+                "week": -2,
+                "count": 113
+            },
+            {
+                "week": -1,
+                "count": 195
+            },
+            {
+                "week": 1,
+                "count": 888
+            },
+            {
+                "week": 2,
+                "count": 516
+            },
+            {
+                "week": 3,
+                "count": 324
+            },
+            {
+                "week": 4,
+                "count": 312
+            }
+        ],
+        "total": 6136
+    },
+    "35": {
+        "positive": [
+            {
+                "week": -2,
+                "count": 11
+            },
+            {
+                "week": 1,
+                "count": 325
+            },
+            {
+                "week": 2,
+                "count": 69
+            },
+            {
+                "week": 4,
+                "count": 55
+            }
+        ],
+        "negative": [
+            {
+                "week": -2,
+                "count": 7
+            },
+            {
+                "week": 1,
+                "count": 217
+            },
+            {
+                "week": 2,
+                "count": 52
+            },
+            {
+                "week": 4,
+                "count": 33
+            }
+        ],
+        "total": 769
+    },
+    "36": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 485
+            },
+            {
+                "week": -3,
+                "count": 558
+            },
+            {
+                "week": -2,
+                "count": 706
+            },
+            {
+                "week": -1,
+                "count": 3289
+            },
+            {
+                "week": 1,
+                "count": 17801
+            },
+            {
+                "week": 2,
+                "count": 4251
+            },
+            {
+                "week": 3,
+                "count": 5096
+            },
+            {
+                "week": 4,
+                "count": 4213
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 361
+            },
+            {
+                "week": -3,
+                "count": 371
+            },
+            {
+                "week": -2,
+                "count": 449
+            },
+            {
+                "week": -1,
+                "count": 2584
+            },
+            {
+                "week": 1,
+                "count": 11767
+            },
+            {
+                "week": 2,
+                "count": 2777
+            },
+            {
+                "week": 3,
+                "count": 3453
+            },
+            {
+                "week": 4,
+                "count": 3281
+            }
+        ],
+        "total": 61442
+    },
+    "37": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 252
+            },
+            {
+                "week": 1,
+                "count": 2501
+            },
+            {
+                "week": 2,
+                "count": 514
+            },
+            {
+                "week": 3,
+                "count": 1866
+            },
+            {
+                "week": 4,
+                "count": 499
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 219
+            },
+            {
+                "week": 1,
+                "count": 1679
+            },
+            {
+                "week": 2,
+                "count": 336
+            },
+            {
+                "week": 3,
+                "count": 1141
+            },
+            {
+                "week": 4,
+                "count": 354
+            }
+        ],
+        "total": 9361
+    },
+    "38": {
+        "positive": [
+            {
+                "week": -2,
+                "count": 11
+            },
+            {
+                "week": -1,
+                "count": 30
+            },
+            {
+                "week": 1,
+                "count": 20
+            },
+            {
+                "week": 4,
+                "count": 41
+            }
+        ],
+        "negative": [
+            {
+                "week": -2,
+                "count": 11
+            },
+            {
+                "week": -1,
+                "count": 33
+            },
+            {
+                "week": 1,
+                "count": 19
+            },
+            {
+                "week": 4,
+                "count": 34
+            }
+        ],
+        "total": 199
+    },
+    "39": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 124
+            },
+            {
+                "week": -3,
+                "count": 201
+            },
+            {
+                "week": -2,
+                "count": 180
+            },
+            {
+                "week": -1,
+                "count": 267
+            },
+            {
+                "week": 1,
+                "count": 2690
+            },
+            {
+                "week": 2,
+                "count": 716
+            },
+            {
+                "week": 3,
+                "count": 541
+            },
+            {
+                "week": 4,
+                "count": 512
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 79
+            },
+            {
+                "week": -3,
+                "count": 103
+            },
+            {
+                "week": -2,
+                "count": 113
+            },
+            {
+                "week": -1,
+                "count": 223
+            },
+            {
+                "week": 1,
+                "count": 1833
+            },
+            {
+                "week": 2,
+                "count": 504
+            },
+            {
+                "week": 3,
+                "count": 358
+            },
+            {
+                "week": 4,
+                "count": 426
+            }
+        ],
+        "total": 8870
+    },
+    "40": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 70
+            },
+            {
+                "week": -3,
+                "count": 53
+            },
+            {
+                "week": -2,
+                "count": 255
+            },
+            {
+                "week": -1,
+                "count": 69
+            },
+            {
+                "week": 1,
+                "count": 200
+            },
+            {
+                "week": 2,
+                "count": 91
+            },
+            {
+                "week": 3,
+                "count": 115
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 52
+            },
+            {
+                "week": -3,
+                "count": 33
+            },
+            {
+                "week": -2,
+                "count": 160
+            },
+            {
+                "week": -1,
+                "count": 45
+            },
+            {
+                "week": 1,
+                "count": 156
+            },
+            {
+                "week": 2,
+                "count": 66
+            },
+            {
+                "week": 3,
+                "count": 78
+            }
+        ],
+        "total": 1443
+    },
+    "41": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 155
+            },
+            {
+                "week": -2,
+                "count": 18
+            },
+            {
+                "week": -1,
+                "count": 30
+            },
+            {
+                "week": 1,
+                "count": 846
+            },
+            {
+                "week": 2,
+                "count": 1066
+            },
+            {
+                "week": 3,
+                "count": 560
+            },
+            {
+                "week": 4,
+                "count": 300
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 97
+            },
+            {
+                "week": -2,
+                "count": 6
+            },
+            {
+                "week": -1,
+                "count": 26
+            },
+            {
+                "week": 1,
+                "count": 551
+            },
+            {
+                "week": 2,
+                "count": 701
+            },
+            {
+                "week": 3,
+                "count": 333
+            },
+            {
+                "week": 4,
+                "count": 213
+            }
+        ],
+        "total": 4902
+    },
+    "42": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 204
+            },
+            {
+                "week": -3,
+                "count": 122
+            },
+            {
+                "week": -2,
+                "count": 44
+            },
+            {
+                "week": -1,
+                "count": 564
+            },
+            {
+                "week": 1,
+                "count": 3781
+            },
+            {
+                "week": 2,
+                "count": 1002
+            },
+            {
+                "week": 3,
+                "count": 580
+            },
+            {
+                "week": 4,
+                "count": 728
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 136
+            },
+            {
+                "week": -3,
+                "count": 68
+            },
+            {
+                "week": -2,
+                "count": 30
+            },
+            {
+                "week": -1,
+                "count": 480
+            },
+            {
+                "week": 1,
+                "count": 2558
+            },
+            {
+                "week": 2,
+                "count": 623
+            },
+            {
+                "week": 3,
+                "count": 392
+            },
+            {
+                "week": 4,
+                "count": 562
+            }
+        ],
+        "total": 11874
+    },
+    "44": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 48
+            },
+            {
+                "week": -3,
+                "count": 136
+            },
+            {
+                "week": -2,
+                "count": 65
+            },
+            {
+                "week": -1,
+                "count": 156
+            },
+            {
+                "week": 1,
+                "count": 156
+            },
+            {
+                "week": 3,
+                "count": 59
+            },
+            {
+                "week": 4,
+                "count": 44
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 25
+            },
+            {
+                "week": -3,
+                "count": 76
+            },
+            {
+                "week": -2,
+                "count": 46
+            },
+            {
+                "week": -1,
+                "count": 121
+            },
+            {
+                "week": 1,
+                "count": 92
+            },
+            {
+                "week": 3,
+                "count": 64
+            },
+            {
+                "week": 4,
+                "count": 30
+            }
+        ],
+        "total": 1118
+    },
+    "45": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 164
+            },
+            {
+                "week": 1,
+                "count": 1011
+            },
+            {
+                "week": 2,
+                "count": 316
+            },
+            {
+                "week": 3,
+                "count": 7
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 137
+            },
+            {
+                "week": 1,
+                "count": 690
+            },
+            {
+                "week": 2,
+                "count": 208
+            },
+            {
+                "week": 3,
+                "count": 4
+            }
+        ],
+        "total": 2537
+    },
+    "46": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 72
+            },
+            {
+                "week": 4,
+                "count": 15
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 63
+            },
+            {
+                "week": 4,
+                "count": 22
+            }
+        ],
+        "total": 172
+    },
+    "47": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 9
+            },
+            {
+                "week": -3,
+                "count": 68
+            },
+            {
+                "week": -2,
+                "count": 144
+            },
+            {
+                "week": -1,
+                "count": 90
+            },
+            {
+                "week": 1,
+                "count": 826
+            },
+            {
+                "week": 2,
+                "count": 733
+            },
+            {
+                "week": 3,
+                "count": 113
+            },
+            {
+                "week": 4,
+                "count": 129
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 7
+            },
+            {
+                "week": -3,
+                "count": 50
+            },
+            {
+                "week": -2,
+                "count": 101
+            },
+            {
+                "week": -1,
+                "count": 72
+            },
+            {
+                "week": 1,
+                "count": 524
+            },
+            {
+                "week": 2,
+                "count": 488
+            },
+            {
+                "week": 3,
+                "count": 54
+            },
+            {
+                "week": 4,
+                "count": 102
+            }
+        ],
+        "total": 3510
+    },
+    "48": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 44
+            },
+            {
+                "week": -3,
+                "count": 202
+            },
+            {
+                "week": -2,
+                "count": 258
+            },
+            {
+                "week": -1,
+                "count": 2128
+            },
+            {
+                "week": 1,
+                "count": 16225
+            },
+            {
+                "week": 2,
+                "count": 4866
+            },
+            {
+                "week": 3,
+                "count": 2522
+            },
+            {
+                "week": 4,
+                "count": 3521
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 54
+            },
+            {
+                "week": -3,
+                "count": 141
+            },
+            {
+                "week": -2,
+                "count": 173
+            },
+            {
+                "week": -1,
+                "count": 1653
+            },
+            {
+                "week": 1,
+                "count": 10825
+            },
+            {
+                "week": 2,
+                "count": 3253
+            },
+            {
+                "week": 3,
+                "count": 1771
+            },
+            {
+                "week": 4,
+                "count": 2587
+            }
+        ],
+        "total": 50223
+    },
+    "49": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 33
+            },
+            {
+                "week": -3,
+                "count": 30
+            },
+            {
+                "week": 1,
+                "count": 299
+            },
+            {
+                "week": 2,
+                "count": 319
+            },
+            {
+                "week": 3,
+                "count": 8
+            },
+            {
+                "week": 4,
+                "count": 45
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 27
+            },
+            {
+                "week": -3,
+                "count": 22
+            },
+            {
+                "week": 1,
+                "count": 243
+            },
+            {
+                "week": 2,
+                "count": 226
+            },
+            {
+                "week": 3,
+                "count": 4
+            },
+            {
+                "week": 4,
+                "count": 29
+            }
+        ],
+        "total": 1285
+    },
+    "50": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 11
+            },
+            {
+                "week": -2,
+                "count": 37
+            },
+            {
+                "week": -1,
+                "count": 38
+            },
+            {
+                "week": 1,
+                "count": 303
+            },
+            {
+                "week": 2,
+                "count": 104
+            },
+            {
+                "week": 3,
+                "count": 4
+            },
+            {
+                "week": 4,
+                "count": 152
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 4
+            },
+            {
+                "week": -2,
+                "count": 23
+            },
+            {
+                "week": -1,
+                "count": 38
+            },
+            {
+                "week": 1,
+                "count": 198
+            },
+            {
+                "week": 2,
+                "count": 63
+            },
+            {
+                "week": 3,
+                "count": 1
+            },
+            {
+                "week": 4,
+                "count": 91
+            }
+        ],
+        "total": 1067
+    },
+    "51": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 54
+            },
+            {
+                "week": -3,
+                "count": 382
+            },
+            {
+                "week": -2,
+                "count": 548
+            },
+            {
+                "week": -1,
+                "count": 842
+            },
+            {
+                "week": 1,
+                "count": 2626
+            },
+            {
+                "week": 2,
+                "count": 838
+            },
+            {
+                "week": 3,
+                "count": 234
+            },
+            {
+                "week": 4,
+                "count": 178
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 31
+            },
+            {
+                "week": -3,
+                "count": 237
+            },
+            {
+                "week": -2,
+                "count": 365
+            },
+            {
+                "week": -1,
+                "count": 586
+            },
+            {
+                "week": 1,
+                "count": 1875
+            },
+            {
+                "week": 2,
+                "count": 563
+            },
+            {
+                "week": 3,
+                "count": 173
+            },
+            {
+                "week": 4,
+                "count": 127
+            }
+        ],
+        "total": 9659
+    },
+    "53": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 64
+            },
+            {
+                "week": -3,
+                "count": 76
+            },
+            {
+                "week": -2,
+                "count": 64
+            },
+            {
+                "week": -1,
+                "count": 442
+            },
+            {
+                "week": 1,
+                "count": 4066
+            },
+            {
+                "week": 2,
+                "count": 1303
+            },
+            {
+                "week": 3,
+                "count": 1144
+            },
+            {
+                "week": 4,
+                "count": 1295
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 36
+            },
+            {
+                "week": -3,
+                "count": 55
+            },
+            {
+                "week": -2,
+                "count": 28
+            },
+            {
+                "week": -1,
+                "count": 346
+            },
+            {
+                "week": 1,
+                "count": 2723
+            },
+            {
+                "week": 2,
+                "count": 945
+            },
+            {
+                "week": 3,
+                "count": 690
+            },
+            {
+                "week": 4,
+                "count": 890
+            }
+        ],
+        "total": 14167
+    },
+    "54": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 58
+            },
+            {
+                "week": 1,
+                "count": 49
+            },
+            {
+                "week": 3,
+                "count": 6
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 59
+            },
+            {
+                "week": 1,
+                "count": 33
+            },
+            {
+                "week": 3,
+                "count": 6
+            }
+        ],
+        "total": 211
+    },
+    "55": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 49
+            },
+            {
+                "week": -2,
+                "count": 6
+            },
+            {
+                "week": -1,
+                "count": 134
+            },
+            {
+                "week": 1,
+                "count": 2316
+            },
+            {
+                "week": 2,
+                "count": 834
+            },
+            {
+                "week": 3,
+                "count": 431
+            },
+            {
+                "week": 4,
+                "count": 689
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 26
+            },
+            {
+                "week": -2,
+                "count": 1
+            },
+            {
+                "week": -1,
+                "count": 99
+            },
+            {
+                "week": 1,
+                "count": 1410
+            },
+            {
+                "week": 2,
+                "count": 550
+            },
+            {
+                "week": 3,
+                "count": 281
+            },
+            {
+                "week": 4,
+                "count": 560
+            }
+        ],
+        "total": 7386
+    },
+    "56": {
+        "positive": [
+            {
+                "week": 1,
+                "count": 40
+            }
+        ],
+        "negative": [
+            {
+                "week": 1,
+                "count": 28
+            }
+        ],
+        "total": 68
+    },
+    "01": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 14
+            },
+            {
+                "week": 1,
+                "count": 989
+            },
+            {
+                "week": 2,
+                "count": 387
+            },
+            {
+                "week": 4,
+                "count": 97
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 19
+            },
+            {
+                "week": 1,
+                "count": 712
+            },
+            {
+                "week": 2,
+                "count": 256
+            },
+            {
+                "week": 4,
+                "count": 89
+            }
+        ],
+        "total": 2563
+    },
+    "02": {
+        "positive": [
+            {
+                "week": -3,
+                "count": 16
+            },
+            {
+                "week": 2,
+                "count": 114
+            }
+        ],
+        "negative": [
+            {
+                "week": -3,
+                "count": 11
+            },
+            {
+                "week": 2,
+                "count": 72
+            }
+        ],
+        "total": 213
+    },
+    "04": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 101
+            },
+            {
+                "week": -3,
+                "count": 51
+            },
+            {
+                "week": -2,
+                "count": 31
+            },
+            {
+                "week": -1,
+                "count": 456
+            },
+            {
+                "week": 1,
+                "count": 3097
+            },
+            {
+                "week": 2,
+                "count": 777
+            },
+            {
+                "week": 3,
+                "count": 385
+            },
+            {
+                "week": 4,
+                "count": 259
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 59
+            },
+            {
+                "week": -3,
+                "count": 49
+            },
+            {
+                "week": -2,
+                "count": 21
+            },
+            {
+                "week": -1,
+                "count": 361
+            },
+            {
+                "week": 1,
+                "count": 2152
+            },
+            {
+                "week": 2,
+                "count": 532
+            },
+            {
+                "week": 3,
+                "count": 281
+            },
+            {
+                "week": 4,
+                "count": 223
+            }
+        ],
+        "total": 8835
+    },
+    "05": {
+        "positive": [
+            {
+                "week": -1,
+                "count": 31
+            },
+            {
+                "week": 1,
+                "count": 10
+            }
+        ],
+        "negative": [
+            {
+                "week": -1,
+                "count": 35
+            },
+            {
+                "week": 1,
+                "count": 9
+            }
+        ],
+        "total": 85
+    },
+    "06": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 410
+            },
+            {
+                "week": -3,
+                "count": 699
+            },
+            {
+                "week": -2,
+                "count": 487
+            },
+            {
+                "week": -1,
+                "count": 3961
+            },
+            {
+                "week": 1,
+                "count": 21793
+            },
+            {
+                "week": 2,
+                "count": 6734
+            },
+            {
+                "week": 3,
+                "count": 5255
+            },
+            {
+                "week": 4,
+                "count": 7645
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 287
+            },
+            {
+                "week": -3,
+                "count": 465
+            },
+            {
+                "week": -2,
+                "count": 353
+            },
+            {
+                "week": -1,
+                "count": 3097
+            },
+            {
+                "week": 1,
+                "count": 14522
+            },
+            {
+                "week": 2,
+                "count": 4343
+            },
+            {
+                "week": 3,
+                "count": 3575
+            },
+            {
+                "week": 4,
+                "count": 5774
+            }
+        ],
+        "total": 79400
+    },
+    "08": {
+        "positive": [
+            {
+                "week": -2,
+                "count": 273
+            },
+            {
+                "week": -1,
+                "count": 249
+            },
+            {
+                "week": 1,
+                "count": 3414
+            },
+            {
+                "week": 2,
+                "count": 1158
+            },
+            {
+                "week": 3,
+                "count": 724
+            },
+            {
+                "week": 4,
+                "count": 692
+            }
+        ],
+        "negative": [
+            {
+                "week": -2,
+                "count": 179
+            },
+            {
+                "week": -1,
+                "count": 189
+            },
+            {
+                "week": 1,
+                "count": 2318
+            },
+            {
+                "week": 2,
+                "count": 725
+            },
+            {
+                "week": 3,
+                "count": 554
+            },
+            {
+                "week": 4,
+                "count": 487
+            }
+        ],
+        "total": 10962
+    },
+    "09": {
+        "positive": [
+            {
+                "week": -4,
+                "count": 45
+            },
+            {
+                "week": -3,
+                "count": 42
+            },
+            {
+                "week": -2,
+                "count": 4
+            },
+            {
+                "week": -1,
+                "count": 98
+            },
+            {
+                "week": 1,
+                "count": 307
+            },
+            {
+                "week": 2,
+                "count": 42
+            },
+            {
+                "week": 3,
+                "count": 113
+            },
+            {
+                "week": 4,
+                "count": 64
+            }
+        ],
+        "negative": [
+            {
+                "week": -4,
+                "count": 40
+            },
+            {
+                "week": -3,
+                "count": 25
+            },
+            {
+                "week": -2,
+                "count": 1
+            },
+            {
+                "week": -1,
+                "count": 85
+            },
+            {
+                "week": 1,
+                "count": 184
+            },
+            {
+                "week": 2,
+                "count": 27
+            },
+            {
+                "week": 3,
+                "count": 71
+            },
+            {
+                "week": 4,
+                "count": 55
+            }
+        ],
+        "total": 1203
+    }
+}

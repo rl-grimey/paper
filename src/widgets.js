@@ -135,7 +135,6 @@ export class DataTable extends React.Component {
   }
 
   render() {
-    console.log('render', this.props, this.state);
 
     let { cluster, abbrv, data } = this.props;
 

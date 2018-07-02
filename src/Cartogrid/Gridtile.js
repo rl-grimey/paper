@@ -20,7 +20,7 @@ export default class Gridtile extends React.Component {
           className={'tile-bg'}
           fill={'none'}
           stroke={strokeHighlight}
-          strokeWidth={2}
+          strokeWidth={1}
           width={this.props.width}
           height={this.props.height}
         />

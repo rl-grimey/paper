@@ -206,7 +206,7 @@ export const loadData = (callback = _.noop) => {
     'data/cluster-token-counts.csv',
     'data/avg-state-vector-long.csv',
     'data/datatable.csv',
-    'data/state-sent-dists.json'
+    'data/revisions/state-weekly-sent-counts.json'
   ];
 
   let countsByState, 
@@ -262,6 +262,21 @@ export const loadData = (callback = _.noop) => {
         .key(d => d.topic)
         .object(data[5].filter(d => d.macro_period !== 0));
 
+      // assign a size to the state sentiment data
+      stateSents = data[7];
+    
+      // Get max of all the count values
+      let totalTweetExtent = d3.extent(d3.entries(stateSents), d => d.value.total);
+      let tileScale = d3.scaleSqrt()
+        .domain(totalTweetExtent)
+        .range([0.5, 1]);
+
+      // Assign scaling factor based on total extreme sent tweets
+      for (var statefp in stateSents) {
+        let state = stateSents[statefp];
+        state.scale = tileScale(state.total);
+      }
+
 
       // Assign them to our app by using the callback function provided to us
       callback({
@@ -269,7 +284,7 @@ export const loadData = (callback = _.noop) => {
         maxCount: maxCount,
         topicTimeVectors: topicVectorsByTime,
         clusterTokens: clusterTokens,
-        stateSents: data[7],
+        stateSents: stateSents,
         tweets: data[6]
       });
     });

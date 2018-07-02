@@ -7,6 +7,7 @@ import Gridtile from './Gridtile';
 import ClusterTile from './plots/clusterTile';
 import CountTile from './plots/countPlot';
 import SentimentTile from './plots/sentimentTile';
+import SentimentBar from './plots/sentimentBars';
 import states from '../states';
 
 
@@ -138,24 +139,23 @@ export default class Cartogrid extends React.Component {
     let abbrv = this.state.states[d.key].abbrv;
 
     // Data
-    let beforePos = vals.before.positive;
-    let beforeNeg = vals.before.negative;
-    let afterPos = vals.after.positive;
-    let afterNeg = vals.after.negative;
+    let positive = d.value.positive;
+    let negative = d.value.negative;
+    let total    = d.value.total;
+    let scale    = d.value.scale;
 
     return (
-      <SentimentTile
+      <SentimentBar
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
-        kernelSize={this.props.kernelSize}
         colorScale={this.props.colorScale}
         clickCallback={this.props.clickCallback}
         abbrv={abbrv}
         statefp={d.key}
-        beforePos={beforePos}
-        beforeNeg={beforeNeg}
-        afterPos={afterPos}
-        afterNeg={afterNeg}
+        positive={positive}
+        negative={negative}
+        total={total}
+        scale={scale}
       />
     );
   }
@@ -209,8 +209,9 @@ export default class Cartogrid extends React.Component {
             {this.create_label(d.key)}
           </Gridtile>
         )}
-        {cartoType === 'sentiment' && this.state.data && d3.entries(this.state.data).map((d, i) => 
-          <Gridtile
+        {cartoType === 'sentiment' && this.state.data && d3.entries(this.state.data).map((d, i) => {
+
+          return (<Gridtile
             key={i}
             abbrv={this.state.states[d.key].abbrv}
             selected={this.props.statefp === d.key}
@@ -222,8 +223,8 @@ export default class Cartogrid extends React.Component {
           >
             {this.createSentimentTile(d, i)}
             {this.create_label(d.key)}
-          </Gridtile>
-        )}
+          </Gridtile>)
+        })}
         
       </svg>
     );

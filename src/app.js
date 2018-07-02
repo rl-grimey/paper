@@ -41,7 +41,7 @@ class App extends React.Component {
       kernelSize: 0.075,
 
       // Inputs
-      cartoType:  'cluster',
+      cartoType:  'sentiment',
       cluster:    undefined,
       statefp:    undefined,
       period:     null,
@@ -115,9 +115,9 @@ class App extends React.Component {
     }
     else if (this.state.cartoType === 'sentiment' && this.state.stateSents) {
       data = this.state.stateSents;
-      colorScale = d3.scaleThreshold()
-        .domain([0, 1])
-        .range(['#2166ac33', '#dddddd', '#b2182b33']);
+      colorScale = d3.scaleOrdinal()
+        .domain(['negative', 'positive'])
+        .range(['#b2182b', '#2166ac']);
       callback = this.clickSentTile;
     }
 
@@ -140,6 +140,7 @@ class App extends React.Component {
     //console.log('period', this.state.period);
     //console.log('Num topics', this.state.num_topics);
     //console.log(this.state);
+    console.log(this.state.stateSents);
 
     return (
       <div className="App">
