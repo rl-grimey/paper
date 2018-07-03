@@ -5,7 +5,8 @@ import * as d3 from 'd3';
 import { Text } from '@vx/text';
 
 /* Components */
-import Gridtile from './Gridtile';
+import Gridtile from './tiles/Gridtile';
+import CommunityTile from './tiles/CommunityTile';
 
 /* Util */
 const get_scales = (width, height, padding) => {
@@ -74,6 +75,11 @@ export default class Cartogrid extends React.Component {
         width={tile_width}
         height={tile_height} 
       >
+        <CommunityTile
+          width={tile_width}
+          height={tile_height}
+          data={state.communities}
+        />
         {this.create_label(state.info.abbrv)}
       </Gridtile>
     );
