@@ -36,62 +36,57 @@ export default class Cartogrid extends React.Component {
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
-      width: width,
-      height: height,
+      width  : width,
+      height : height,
       padding: padding,
       x_scale: x_scale,
       y_scale: y_scale,
-      data: {}
+      data   : {}
     };
   }
 
-  componentWillMount() {
+  componentWillMount() { 
     this.setState({ data: require('../visualization.json') });
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  componentWillReceiveProps(nextProps) {
     // Create new scales
     let width   = nextProps.width
     let height  = nextProps.height
     let padding = nextProps.padding
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
-    return {
-      ...prevState,
-      ...nextProps,
-      x_scale,
-      y_scale
-    };
+    this.setState({ ...nextProps, x_scale, y_scale });
   }
 
-  create_tile(st, i) {
-    let top = this.state.y_scale(st.y);
-    let left = this.state.x_scale(st.x);
+  create_tile(state, i) {
+    let top = this.state.y_scale(state.info.y);
+    let left = this.state.x_scale(state.info.x);
     let tile_width = this.state.x_scale.bandwidth();
     let tile_height = this.state.y_scale.bandwidth();
 
     return (
       <Gridtile
         key={i}
-        abbrv={st.abbrv}
+        abbrv={state.info.abbrv}
         top={top}
         left={left}
         width={tile_width}
         height={tile_height} 
-      />
+      >
+        {this.create_label(state.info.abbrv)}
+      </Gridtile>
     );
   }
 
-  create_label = (statefp) => {
-    const abbrv = this.state.states[statefp].abbrv;
-
+  create_label = (abbrv) => {
     return (
       <Text
         fontSize={10}
-        fontWeight={'bold'}
+        fontWeight={'400'}
         fontFamily={'sans-serif'}
         textAnchor={'end'}
-        style={{"opacity": 0.75}}
+        style={{'opacity': 0.75}}
         x={this.state.x_scale.bandwidth() * 0.9}
         y={this.state.y_scale.bandwidth() * 0.2}
       >{abbrv}
@@ -104,10 +99,6 @@ export default class Cartogrid extends React.Component {
     console.log('-------\nCartogrid --------------------------------------------');
     console.log(this.state, this.props);
 
-    // Create new scales each render
-    const x_scale = this.state.x_scale;
-    const y_scale = this.state.y_scale;
-
     
     return (
       <svg 
@@ -115,6 +106,9 @@ export default class Cartogrid extends React.Component {
         width={this.state.width}
         height={this.state.height}
       >
+        {this.state.data && 
+          d3.values(this.state.data).map((d, i) => this.create_tile(d, i))
+        }
       </svg>
     );
   } 
