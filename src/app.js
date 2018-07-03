@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 /* Components */
 //import { loadData } from './utilities';
-import { Slider, HelpButton, DataTable } from './widgets';
+import { Slider, HelpButton, DataTable } from './components/widgets';
 import Cartogrid from './components/Cartogrid';
 
 
@@ -24,7 +24,7 @@ class App extends React.Component {
       chart  : 'sentiment',
       cluster: null,
       statefp: null,
-      period : null
+      week   : null
     }
   }
 
@@ -33,12 +33,7 @@ class App extends React.Component {
 
 
     // Make sure we're updating correctly
-    //console.log('-----------------------------------------------------');
-    //console.log('statefp', this.state.statefp);
-    //console.log('topic', this.state.topic);
-    //console.log('cluster', this.state.cluster);
-    //console.log('period', this.state.period);
-    //console.log('Num topics', this.state.num_topics);
+    console.log('/* App ---------------------------------------------------*/');
     console.log(this.state);
 
     return (
@@ -64,7 +59,11 @@ class App extends React.Component {
 
           {/* Dashboard row */}
           <Row>
-            <Cartogrid/>
+            <Cartogrid
+              width={this.state.width}
+              height={this.state.height}
+              padding={this.state.padding}
+            />
           </Row>
         </Grid>
       </div>

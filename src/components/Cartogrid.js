@@ -7,59 +7,60 @@ import { Text } from '@vx/text';
 /* Components */
 import Gridtile from './Gridtile';
 
+/* Util */
+const get_scales = (width, height, padding) => {
+  /* Sets scales for us. */
+  let x_scale = scaleBand({
+    domain : [...Array(12).keys()],
+    range  : [0, width],
+    padding: padding
+  });
+
+  let y_scale = scaleBand({
+    domain : [...Array(8).keys()],
+    range  : [0, height],
+    padding: padding
+  });
+
+  return { x_scale, y_scale };
+}
+
 export default class Cartogrid extends React.Component {
   constructor(props) {
     super();
 
-    // Optional params and their defaults
-    const width   = props.width;
-    const height  = props.height;
-    const padding = props.padding;
+    // Create the chart scales
+    let width   = props.width;
+    let height  = props.height;
+    let padding = props.padding;
+    let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
-      margin: {top: 10, right: 10, bottom: 20, left: 20},
-      width:    width,
-      height:   height,
-      padding:  padding,
-      x_scale:  scaleBand({
-        domain: [...Array(12).keys()],
-        range:  [0, width],
-        padding: padding
-      }),
-      y_scale: scaleBand({
-        domain: [...Array(8).keys()],
-        range: [0, height],
-        padding: padding
-      }),
-      data: []
+      width: width,
+      height: height,
+      padding: padding,
+      x_scale: x_scale,
+      y_scale: y_scale,
+      data: {}
     };
   }
 
   componentWillMount() {
-    console.log('loading!');
-    this.setState({ 
-      data: require('../visualization.json') 
-    });
+    this.setState({ data: require('../visualization.json') });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     // Create new scales
-    const new_x = new scaleBand({
-      domain: [...Array(12).keys()],
-      range:  [0, nextProps.width],
-      padding: nextProps.padding
-    });
-    const new_y = new scaleBand({
-      domain: [...Array(8).keys()],
-      range: [0, nextProps.height],
-      padding: nextProps.padding
-    });
+    let width   = nextProps.width
+    let height  = nextProps.height
+    let padding = nextProps.padding
+    let {x_scale, y_scale} = get_scales(width, height, padding);
 
     return {
       ...prevState,
       ...nextProps,
-      x_scale:  new_x,
-      y_scale: new_y
+      x_scale,
+      y_scale
     };
   }
 
@@ -99,17 +100,15 @@ export default class Cartogrid extends React.Component {
   }
 
   render() {
+    // How are we looking?
+    console.log('-------\nCartogrid --------------------------------------------');
+    console.log(this.state, this.props);
+
     // Create new scales each render
     const x_scale = this.state.x_scale;
     const y_scale = this.state.y_scale;
 
-    // Grab current view's data
-    const data = this.props.data;
-    const cartoType = this.props.cartoType;
-
-    console.log('-------\nCartogrid --------------------------------------------');
-    console.log(this.state, this.props);
-
+    
     return (
       <svg 
         className={'cartogrid'}
