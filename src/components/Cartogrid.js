@@ -33,9 +33,7 @@ export default class Cartogrid extends React.Component {
     super();
 
     // Create the chart scales
-    let width   = props.width;
-    let height  = props.height;
-    let padding = props.padding;
+    let { width, height, padding } = props;
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
@@ -56,7 +54,7 @@ export default class Cartogrid extends React.Component {
   }
 
   componentWillMount() { 
-    this.setState({ data: require('../visualization.json') });
+    this.setState({ data: require('../data/visualization.json') });
   }
 
   componentWillReceiveProps(nextProps) {
