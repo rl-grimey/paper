@@ -8,9 +8,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 //import './style.css';
 
 /* Components */
-//import { loadData } from './utilities';
 import { Slider, HelpButton, DataTable } from './components/widgets';
 import Cartogrid from './components/Cartogrid';
+import Toolbar from './components/widgets/Toolbar';
 
 
 class App extends React.Component {
@@ -21,17 +21,28 @@ class App extends React.Component {
       height : 600,
       padding: 0.15,
 
-      chart  : 'sents',
+      chart  : 'topics',
+      view   : 'absolute',
       cluster: null,
       statefp: null,
       week   : null
     }
+
+    this.handleChartBtn = this.handleChartBtn.bind(this);
+    this.handleViewBtn  = this.handleViewBtn.bind(this);
+  }
+
+  handleChartBtn(chart) {
+    /* Sets our chart state based on the currently selected toolbar button. */
+    this.setState({ chart });
+  }
+
+  handleViewBtn(view) {
+    /* Changes our data view (either absolute or relative) */
+    this.setState({ view });
   }
 
   render() {
-    
-
-
     // Make sure we're updating correctly
     console.log('/* App ---------------------------------------------------*/');
     console.log(this.state);
@@ -55,6 +66,11 @@ class App extends React.Component {
             </Col>
           </Row>
 
+          <Toolbar
+            handleChart={this.handleChartBtn}
+            handleView={this.handleViewBtn}
+          />
+
           <hr/>
 
           {/* Dashboard row */}
@@ -64,6 +80,7 @@ class App extends React.Component {
               height={this.state.height}
               padding={this.state.padding}
               chart={this.state.chart}
+              view={this.state.view}
             />
           </Row>
         </Grid>
