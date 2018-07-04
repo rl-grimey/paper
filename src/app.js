@@ -1,15 +1,15 @@
 /* Dependencies */
 import React from 'react';
 import { Grid, Col, Row } from 'react-bootstrap';
-import * as d3 from 'd3';
 
 /* Styles */
 import 'bootstrap/dist/css/bootstrap.css';
-//import './style.css';
+import './style.css';
 
 /* Components */
 import { Slider, HelpButton, DataTable } from './components/widgets';
 import Cartogrid from './components/Cartogrid';
+import CommunityGrid from './components/Communitygrid';
 import Toolbar from './components/widgets/Toolbar';
 
 
@@ -21,11 +21,11 @@ class App extends React.Component {
       height : 600,
       padding: 0.15,
 
-      chart  : 'topics',
-      view   : 'absolute',
-      cluster: null,
-      statefp: null,
-      week   : null
+      chart    : 'topics',
+      view     : 'absolute',
+      community: null,
+      statefp  : null,
+      week     : null
     }
 
     this.handleChartBtn = this.handleChartBtn.bind(this);
@@ -74,6 +74,13 @@ class App extends React.Component {
           <hr/>
 
           {/* Dashboard row */}
+          <CommunityGrid
+            width={this.state.width}
+            height={this.state.height / 4}
+            community={this.state.community}
+            view={this.state.view}
+          />
+
           <Row>
             <Cartogrid
               width={this.state.width}
