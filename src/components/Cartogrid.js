@@ -45,7 +45,8 @@ export default class Cartogrid extends React.Component {
       x_scale: x_scale,
       y_scale: y_scale,
       data   : {},
-      chart  : props.chart
+      chart  : props.chart,
+      view   : props.view
     };
 
     // Functions to create state plots
@@ -115,6 +116,7 @@ export default class Cartogrid extends React.Component {
           height={height}
           data={data.communities}
           weekly_max={weekly_max}
+          view={this.state.view}
           />);
       case 'counts':
         return(<CountTile
