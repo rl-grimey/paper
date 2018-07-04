@@ -124,6 +124,7 @@ export default class Cartogrid extends React.Component {
           height={height}
           data={data.counts}
           weekly_max={weekly_max}
+          view={this.state.view}
         />);
       case 'sents':
         return (<SentTile
