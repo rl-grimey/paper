@@ -131,7 +131,7 @@ export default class Cartogrid extends React.Component {
           width={width}
           height={height}
           data={data.sentiments}
-          
+          view={this.state.view}
         />);
       default:
           return null;
