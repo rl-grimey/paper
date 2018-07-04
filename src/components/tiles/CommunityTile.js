@@ -7,7 +7,6 @@ import { BarStack } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
-import * as d3 from 'd3';
 
 /* Scale utility */
 const keys = [-1, 0, 1, 2, 3, 4];

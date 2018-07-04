@@ -7,6 +7,7 @@ import { Text } from '@vx/text';
 /* Components */
 import Gridtile from './tiles/Gridtile';
 import CommunityTile from './tiles/CommunityTile';
+import CountTile from './tiles/Counttile';
 
 /* Util */
 const get_scales = (width, height, padding) => {
@@ -42,8 +43,13 @@ export default class Cartogrid extends React.Component {
       padding: padding,
       x_scale: x_scale,
       y_scale: y_scale,
-      data   : {}
+      data   : {},
+      chart  : props.chart
     };
+
+    this.create_tile  = this.create_tile.bind(this);
+    this.create_label = this.create_label.bind(this);
+    this.create_chart = this.create_chart.bind(this);
   }
 
   componentWillMount() { 
@@ -75,11 +81,7 @@ export default class Cartogrid extends React.Component {
         width={tile_width}
         height={tile_height} 
       >
-        <CommunityTile
-          width={tile_width}
-          height={tile_height}
-          data={state.communities}
-        />
+        {this.create_chart(tile_width, tile_height, state)}
         {this.create_label(state.info.abbrv)}
       </Gridtile>
     );
@@ -98,6 +100,26 @@ export default class Cartogrid extends React.Component {
       >{abbrv}
       </Text>
     );
+  }
+
+  create_chart = (width, height, data) => {
+    /* Creates a chart on our state tile, depends on current chart selected. */
+    switch(this.state.chart) {
+      case 'topics':
+        return(<CommunityTile
+          width={width}
+          height={height}
+          data={data.communities}
+          />);
+      case 'counts':
+          return(<CountTile
+            width={width}
+            height={height}
+            data={data.counts}
+          />);
+      default:
+          return null;
+    }
   }
 
   render() {

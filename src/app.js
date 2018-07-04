@@ -21,7 +21,7 @@ class App extends React.Component {
       height : 600,
       padding: 0.2,
 
-      chart  : 'sentiment',
+      chart  : 'counts',
       cluster: null,
       statefp: null,
       week   : null
@@ -63,6 +63,7 @@ class App extends React.Component {
               width={this.state.width}
               height={this.state.height}
               padding={this.state.padding}
+              chart={this.state.chart}
             />
           </Row>
         </Grid>
