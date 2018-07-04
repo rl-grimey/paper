@@ -7,6 +7,7 @@ import { BarStack } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
+import { max, sum } from 'd3';
 
 /* Scale utility */
 const keys = [-1, 0, 1, 2, 3, 4];
@@ -14,9 +15,11 @@ const get_scales = (width, height) => {
   let x_scale = scaleBand({
     domain    : [-4, -3, -2, -1, 1, 2, 3, 4],
     rangeRound: [1, width-1],
-    padding   : 0.05
+    padding   : 0.00
     // TickFormatting
   })
+
+  // Need total tweets by week, max is max of sums
 
   let y_scale = scaleLinear({
     domain: [0, 1],
@@ -86,6 +89,7 @@ export default class CommunityTile extends React.Component {
           xScale={this.state.x_scale}
           yScale={this.state.y_scale}
           zScale={this.state.color}
+          stroke={'1px #ffffff'}
         />
       </Group>
     );
