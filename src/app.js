@@ -19,9 +19,9 @@ class App extends React.Component {
     this.state = {
       width  : 1000,
       height : 600,
-      padding: 0.2,
+      padding: 0.15,
 
-      chart  : 'counts',
+      chart  : 'sents',
       cluster: null,
       statefp: null,
       week   : null

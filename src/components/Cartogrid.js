@@ -8,6 +8,7 @@ import { Text } from '@vx/text';
 import Gridtile from './tiles/Gridtile';
 import CommunityTile from './tiles/CommunityTile';
 import CountTile from './tiles/Counttile';
+import SentTile from './tiles/Senttile';
 
 /* Util */
 const get_scales = (width, height, padding) => {
@@ -47,6 +48,7 @@ export default class Cartogrid extends React.Component {
       chart  : props.chart
     };
 
+    // Functions to create state plots
     this.create_tile  = this.create_tile.bind(this);
     this.create_label = this.create_label.bind(this);
     this.create_chart = this.create_chart.bind(this);
@@ -104,19 +106,30 @@ export default class Cartogrid extends React.Component {
 
   create_chart = (width, height, data) => {
     /* Creates a chart on our state tile, depends on current chart selected. */
+    let weekly_max = d3.max(data.counts, d => d.count);
+
     switch(this.state.chart) {
       case 'topics':
         return(<CommunityTile
           width={width}
           height={height}
           data={data.communities}
+          weekly_max={weekly_max}
           />);
       case 'counts':
-          return(<CountTile
-            width={width}
-            height={height}
-            data={data.counts}
-          />);
+        return(<CountTile
+          width={width}
+          height={height}
+          data={data.counts}
+          weekly_max={weekly_max}
+        />);
+      case 'sents':
+        return (<SentTile
+          width={width}
+          height={height}
+          data={data.sentiments}
+          
+        />);
       default:
           return null;
     }
