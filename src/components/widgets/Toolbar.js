@@ -34,7 +34,7 @@ export default class Toolbar extends React.Component {
   render() {
     return (
       <Row>
-        <Col xs={3}>
+        <Col xs={9}>
           <ButtonToolbar>
             <ToggleButtonGroup 
               type="radio" 
@@ -50,7 +50,7 @@ export default class Toolbar extends React.Component {
           </ButtonToolbar>
         </Col>
 
-        <Col xsOffset={9}>
+        <Col xsPush={9}>
           <ButtonToolbar>
             <ToggleButtonGroup 
               type="radio" 
