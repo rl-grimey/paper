@@ -60,7 +60,7 @@ export default class SentTile extends React.Component {
 
     // Conditionally set the view of our data
     let view_attr = (view === 'absolute') ? 'count' : 'perc';
-    
+
     // Get largest value of either positive or negative
     // Use that as our max, so we can 'double' it and
     // mirror the bars over the horizontal middle of chart
@@ -83,7 +83,6 @@ export default class SentTile extends React.Component {
     // Conditionally set the data attribute we'll use
     let view_attr = (this.state.view === 'absolute') ? 'count' : 'perc';
 
-    console.log(this.state);
     return (
       <Group>
         {this.state.data.positive.map((d, i) => {

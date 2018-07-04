@@ -7,7 +7,9 @@ import { BarStack } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
-import { max, sum } from 'd3';
+import { max } from 'd3';
+
+import { Tooltip } from '@vx/tooltip';
 
 /* Scale utility */
 const keys = [-1, 0, 1, 2, 3, 4];
@@ -17,9 +19,7 @@ export default class CommunityTile extends React.Component {
     super();
 
     // Set up dimensions and scales
-    let width = props.width;
-    let height = props.height;
-    let view = props.view;
+    let { width, height, view } = props;
     let {x_scale, y_scale} = this.create_chart_scales(width, height, view, props.weekly_max);
     
     let color = scaleOrdinal({
@@ -98,6 +98,7 @@ export default class CommunityTile extends React.Component {
   }
 
   render() {
+
     return (
       <Group>
         <BarStack
@@ -110,6 +111,10 @@ export default class CommunityTile extends React.Component {
           yScale={this.state.y_scale}
           zScale={this.state.color}
           stroke={'1px #ffffff'}
+          onMouseOver={(d) => event => {
+            console.log(d, +d.x, event.target);
+            console.log(event.pageX, event.pageY);
+          }}
         />
       </Group>
     );
