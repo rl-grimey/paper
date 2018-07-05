@@ -10,6 +10,6 @@ export const community_scale = scaleOrdinal()
 
 
 export const center_styles = {
-  'align-items': 'center',
-  'justify-content': 'center'
+  'alignItems': 'center',
+  'justifyContent': 'center'
 };
