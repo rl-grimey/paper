@@ -14,7 +14,7 @@ import SentTile from './tiles/Senttile';
 const get_scales = (width, height, padding) => {
   /* Sets scales for us. */
   let x_scale = scaleBand({
-    domain : [...Array(12).keys()],
+    domain : [...Array(11).keys()],
     range  : [0, width],
     padding: padding
   });
@@ -34,6 +34,7 @@ export default class Cartogrid extends React.Component {
 
     // Create the chart scales
     let { width, height, padding } = props;
+    width = width * 0.9;
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
@@ -59,12 +60,17 @@ export default class Cartogrid extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Create new scales
-    let width   = nextProps.width
+    let width   = nextProps.width * 0.9;
     let height  = nextProps.height
     let padding = nextProps.padding
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
-    this.setState({ ...nextProps, x_scale, y_scale });
+    this.setState({ 
+      ...nextProps, 
+      x_scale, 
+      y_scale,
+      width 
+    });
   }
 
   create_tile(state, i) {
@@ -141,7 +147,6 @@ export default class Cartogrid extends React.Component {
     console.log('-------\nCartogrid --------------------------------------------');
     console.log(this.state, this.props);
 
-    
     return (
       <svg 
         className={'cartogrid'}

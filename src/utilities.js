@@ -8,3 +8,8 @@ export const community_scale = scaleOrdinal()
   .range(['#666666', '#7fc97f','#beaed4','#fdc086','#ffff99','#386cb0','#f0027f']);
 
 
+
+export const center_styles = {
+  'align-items': 'center',
+  'justify-content': 'center'
+};

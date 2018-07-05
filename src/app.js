@@ -8,6 +8,7 @@ import './style.css';
 
 /* Components */
 import { Slider, HelpButton, DataTable } from './components/widgets';
+import { center_styles } from './utilities';
 import Cartogrid from './components/Cartogrid';
 import CommunityGrid from './components/Communitygrid';
 import Toolbar from './components/widgets/Toolbar';
@@ -32,6 +33,13 @@ class App extends React.Component {
     this.handleViewBtn  = this.handleViewBtn.bind(this);
   }
 
+  componentDidMount() {
+    /* Adjust width to maximum possible after the component mounts. */
+    let app_div = document.querySelector('#app_ref');
+    let width = app_div.clientWidth;
+    this.setState({ width: width });
+  }
+
   handleChartBtn(chart) {
     /* Sets our chart state based on the currently selected toolbar button. */
     this.setState({ chart });
@@ -49,7 +57,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Grid fluid={true}>
+        <Grid fluid={true} id="app_ref">
 
           {/* Title Row*/}
           <Row>
@@ -81,7 +89,7 @@ class App extends React.Component {
             view={this.state.view}
           />
 
-          <Row>
+          <Row style={center_styles}>
             <Cartogrid
               width={this.state.width}
               height={this.state.height}
