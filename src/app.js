@@ -19,7 +19,7 @@ class App extends React.Component {
     this.state = {
       width  : 1000,
       height : 600,
-      padding: 0.15,
+      padding: 0.05,
 
       chart    : 'topics',
       view     : 'absolute',
@@ -64,8 +64,8 @@ class App extends React.Component {
 
   render() {
     // Make sure we're updating correctly
-    console.log('/* App ---------------------------------------------------*/');
-    console.log(this.state);
+    //console.log('/* App ---------------------------------------------------*/');
+    //console.log(this.state);
 
     return (
       <div className="App">
@@ -95,6 +95,7 @@ class App extends React.Component {
               padding={this.state.padding}
               chart={this.state.chart}
               view={this.state.view}
+              community={this.state.community}
               onClickState={this.handleClickTile}
               selected_state={this.state.statefp}
             />
