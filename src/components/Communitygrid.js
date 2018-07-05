@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import { scaleBand } from '@vx/scale';
 import { entries } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
-import { center_styles } from '../utilities';
+import { communities, center_styles } from '../utilities';
 
 export default class CommunityGrid extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class CommunityGrid extends React.Component {
       height     : props.height,
       scale      : this.create_clouds_scale(props.width),
       community  : props.community,
-      communities: [-1, 0, 1, 2, 3, 4, 5],
+      communities: communities,
       view       : props.view,
       data       : {}
     }
@@ -49,7 +49,7 @@ export default class CommunityGrid extends React.Component {
   create_clouds_scale(width) {
     /* Creates a scale to fit our 6 communities reasonably. */
     return scaleBand({
-      domain: [-1, 0, 1, 2, 3, 4 ,5],
+      domain: communities,
       range: [0, width],
       padding: 0.1
     });
@@ -74,7 +74,9 @@ export default class CommunityGrid extends React.Component {
   render() {
     return (
       <Row style={center_styles}>{this.state.data && 
-        entries(this.state.data).map((d, i) => this.create_cloud(d, i))
+        entries(this.state.data)
+          .filter(d => +d.key !== 5) // Filter out protests
+          .map((d, i) => this.create_cloud(d, i))
       }</Row>
     );
   }
