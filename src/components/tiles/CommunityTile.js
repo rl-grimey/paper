@@ -3,11 +3,12 @@
  */
 
 import React from 'react';
-import { BarStack } from '@vx/shape';
+import { Bar, BarStack } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import { community_scale } from '../../utilities';
+import { stack, entries, color } from 'd3';
+import { community_scale, community_highlight_scale } from '../../utilities';
 
 /* Scale utility */
 const keys = [-1, 0, 1, 2, 3, 4, 5];
@@ -21,19 +22,21 @@ export default class CommunityTile extends React.Component {
     let {x_scale, y_scale} = this.create_chart_scales(width, height, view, props.weekly_max);
     
     this.state = {
-      width: width, 
-      height: height, 
-      x_scale: x_scale, 
-      y_scale: y_scale,
-      keys: keys,
-      color: community_scale,
-      data: props.data,
-      view: view,
+      width     : width,
+      height    : height,
+      x_scale   : x_scale,
+      y_scale   : y_scale,
+      keys      : keys,
+      color     : community_scale,
+      data      : props.data,
+      view      : view,
+      community : props.community,
       weekly_max: props.weekly_max
     }
 
     this.create_stack_data = this.create_stack_data.bind(this);
     this.create_chart_scales = this.create_chart_scales.bind(this);
+    this.render_bars = this.render_bars.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -90,24 +93,52 @@ export default class CommunityTile extends React.Component {
    return reshaped;
   }
 
+  render_bars(week_dist, key) {
+    /* Render's our stacked bars for a given week*/
+
+    // Highlight selected community if a community is selected
+    // Fill should only be opaque when community is selected
+    // Stroke should only be present when community is selected
+    let highlight = community => this.state.community !== null;
+    let highlight_fill = community => highlight(community) ? (community === +this.state.community ? 1.0 : 0.5) : 1.0;
+    let highlight_stroke = community => highlight(community) ? (community === +this.state.community ? 0.8 : 0) : 0;
+
+    // Assign the fill and strokes
+    let comm_color = color(community_scale(week_dist.key))
+    comm_color.opacity = highlight_fill(week_dist.key);
+    let comm_stroke = highlight_stroke(week_dist.key);
+
+    return (
+      <Group key={key}>
+        {week_dist
+          .filter(topic => (this.state.y_scale(topic[0]) - this.state.y_scale(topic[1]) > 0))
+          .map((topic, i) => {
+            return (
+              <Bar
+                key={i}
+                x={this.state.x_scale(topic.data.week)}
+                y={this.state.y_scale(topic[1])}
+                width={this.state.x_scale.bandwidth()}
+                height={this.state.y_scale(topic[0]) - this.state.y_scale(topic[1])}
+                fill={comm_color}
+                stroke={'#999999'}
+                strokeWidth={comm_stroke}
+                onClick={data => event => console.log(data, event, event.target)}
+              />
+            );
+          })}
+      </Group>
+    );
+  }
+
   render() {
+    // Create the data
+    let stack_data = this.create_stack_data();
+    let stacked_data = stack().keys(community_scale.domain())(stack_data);
+    
     return (
       <Group>
-        <BarStack
-          top={0}
-          data={this.create_stack_data()}
-          keys={this.state.keys}
-          height={this.state.height}
-          x={d => d.week}
-          xScale={this.state.x_scale}
-          yScale={this.state.y_scale}
-          zScale={this.state.color}
-          stroke={'1px #ffffff'}
-          onMouseOver={(d) => event => {
-            //console.log(d, +d.x, event.target);
-            //console.log(event.pageX, event.pageY);
-          }}
-        />
+        {stacked_data.map((week, i) => this.render_bars(week, i))}
       </Group>
     );
   }

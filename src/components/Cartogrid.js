@@ -39,16 +39,17 @@ export default class Cartogrid extends React.Component {
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
-      width         : width,
-      height        : height,
-      padding       : padding,
-      x_scale       : x_scale,
-      y_scale       : y_scale,
-      tile_scale    : d3.scaleLinear,
-      data          : {},
-      chart         : props.chart,
-      view          : props.view,
-      selected_state: props.selected_state
+      width             : width,
+      height            : height,
+      padding           : padding,
+      x_scale           : x_scale,
+      y_scale           : y_scale,
+      tile_scale        : d3.scaleLinear,
+      data              : {},
+      chart             : props.chart,
+      view              : props.view,
+      community: props.community,
+      selected_state    : props.selected_state
     };
 
     // Functions to create state plots
