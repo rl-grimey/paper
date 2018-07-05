@@ -8,10 +8,8 @@ import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
 import { stack, entries, color } from 'd3';
-import { community_scale, community_highlight_scale } from '../../utilities';
+import { communities, community_scale, community_highlight_scale, community_labels } from '../../utilities';
 
-/* Scale utility */
-const keys = [-1, 0, 1, 2, 3, 4, 5];
 
 export default class CommunityTile extends React.Component {
   constructor(props) {
@@ -26,7 +24,7 @@ export default class CommunityTile extends React.Component {
       height    : height,
       x_scale   : x_scale,
       y_scale   : y_scale,
-      keys      : keys,
+      communities      : communities,
       color     : community_scale,
       data      : props.data,
       view      : view,
@@ -86,7 +84,7 @@ export default class CommunityTile extends React.Component {
       this.state.data[week].forEach(d => week_data[d.community] = d[view_attr]);
 
       // Add any missing communities
-      this.state.keys.forEach(comm => { if (!week_data.hasOwnProperty(comm)) week_data[comm] = 0; });
+      this.state.communities.forEach(comm => { if (!week_data.hasOwnProperty(comm)) week_data[comm] = 0; });
       reshaped.push(week_data);
     }
 
