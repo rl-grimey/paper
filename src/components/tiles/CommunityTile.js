@@ -39,7 +39,7 @@ export default class CommunityTile extends React.Component {
   componentWillReceiveProps(nextProps) {
     let { width, height, view } = nextProps;
     let { x_scale, y_scale } = this.create_chart_scales(width, height, view, this.state.weekly_max);
-    this.setState({ width, height, view, x_scale, y_scale });
+    this.setState({ ...nextProps, width, height, view, x_scale, y_scale });
   }
 
   create_chart_scales(width, height, view, weekly_max) {
@@ -91,7 +91,6 @@ export default class CommunityTile extends React.Component {
   }
 
   render() {
-
     return (
       <Group>
         <BarStack
@@ -105,8 +104,8 @@ export default class CommunityTile extends React.Component {
           zScale={this.state.color}
           stroke={'1px #ffffff'}
           onMouseOver={(d) => event => {
-            console.log(d, +d.x, event.target);
-            console.log(event.pageX, event.pageY);
+            //console.log(d, +d.x, event.target);
+            //console.log(event.pageX, event.pageY);
           }}
         />
       </Group>

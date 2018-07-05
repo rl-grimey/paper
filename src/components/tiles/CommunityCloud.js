@@ -92,7 +92,8 @@ export default class CommunityCloud extends React.Component {
 
     let styles = { 
       'background': community_scale(this.state.community),
-      'border': (selected) ? '1px solid black' : 'none'
+      'border': (selected) ? '1px solid black' : 'none',
+      'margin': '1px'
      };
 
     return (
