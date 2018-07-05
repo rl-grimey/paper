@@ -106,7 +106,6 @@ export default class Cartogrid extends React.Component {
     // Size the tile first
     let view_attr = (this.state.view === 'absolute') ? 'total_tweets' : 'total_tweet_rate';
     let scale = this.state.tile_scale(state.info[view_attr]);
-    console.log(scale);
     
     // Shift to center the tiles due to scaling
     let tile_width_offset = this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth());
@@ -132,6 +131,7 @@ export default class Cartogrid extends React.Component {
         width={tile_width}
         height={tile_height}
         selected_state={this.state.selected_state}
+        view={this.state.view}
         onClick={this.props.onClickState}
       >
         {this.create_chart(tile_width, tile_height, state)}
