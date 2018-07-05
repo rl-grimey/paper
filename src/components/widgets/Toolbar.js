@@ -5,7 +5,6 @@
 import React from 'react';
 import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton, Label } from 'react-bootstrap';
 import HelpButton from './HelpButton';
-import SettingsButton from './SettingsButton';
 
 export default class Toolbar extends React.Component {
   constructor(props) {
@@ -60,9 +59,9 @@ export default class Toolbar extends React.Component {
               defaultValue={'topics'}
               onChange={(evt) => this.handleChartBtn(evt)}
             >
-              <ToggleButton value={'topics'}>Topic Model Clusters</ToggleButton>
-              <ToggleButton value={'counts'}>Weekly Tweet Counts</ToggleButton>
-              <ToggleButton value={'sents'}>Extreme Sentiments</ToggleButton>
+              <ToggleButton value={'topics'}>Topic View</ToggleButton>
+              <ToggleButton value={'sents'}>Sentiment View</ToggleButton>
+              <ToggleButton value={'counts'}>Distribution View</ToggleButton>
             </ToggleButtonGroup>
           </ButtonToolbar>
         </Col>
@@ -87,7 +86,6 @@ export default class Toolbar extends React.Component {
           <Row>
             <Label bsStyle="default">Help</Label>{' '}
             <HelpButton/>
-            <SettingsButton/>
           </Row>
         </Col>
       </Row>
