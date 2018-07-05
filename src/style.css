@@ -38,12 +38,8 @@ hr {
 
 /* Chart Modals */
 .chart-modal .modal-dialog {
-  width: 60vw !important;
-  max-width: 60vw !important;
-}
-.chart-modal .modal-content {
-  height: auto;
-  min-height: 60vh;
+  width: 90% !important;
+  max-width: 90% !important;
 }
 
 .chart-modal svg {

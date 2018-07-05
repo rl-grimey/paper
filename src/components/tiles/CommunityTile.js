@@ -52,10 +52,13 @@ export default class CommunityTile extends React.Component {
   }
 
   create_chart_scales(width, height, view, weekly_max) {
+    /* Creates scales based on DOM + data dimensions */
+    let padding = (width > 200) ? 0.4 : 0.0;
+
     let x_scale = scaleBand({
       domain    : [-4, -3, -2, -1, 1, 2, 3, 4],
       rangeRound: [1, width-1],
-      padding   : 0.0
+      padding   : padding
       // TickFormatting
     })
 
@@ -159,21 +162,25 @@ export default class CommunityTile extends React.Component {
     let stacked_data = this.create_stack_data();
 
     // Get tile dimensions
-    let { width, height } = this.state;
+    let tile_width = this.state.width;
+    let tile_height = this.state.height;
+
+    // Get screen dimensions for modal chart
+    let screen_width = window.innerWidth * 0.7;
+    let screen_height = window.innerHeight * 0.7;
 
     return (
       <Group onClick={this.render_modal} >
-        {/*stacked_data.map((week, i) => this.render_bars(week, i))*/}
-        {this.render_chart(width, height)}
+        {this.render_chart(tile_width, tile_height)}
 
         <ModalChart
           open={this.state.modal_open}
           callback={this.render_modal}
-          width={1000}
-          height={600}
+          width={screen_width}
+          height={screen_height}
           abbrv={this.state.abbrv}
           ref={this.modalRef}
-        >{this.render_chart(900, 600)}
+        >{this.render_chart(screen_width, screen_height)}
         </ModalChart>
       </Group>
     );
