@@ -42,7 +42,7 @@ export default class Gridtile extends React.Component {
 
   render() {
     // Some double ternary logic for highlighting
-    let selected = this.props.selected_state === this.props.abbrv;
+    let selected = this.props.selected_state === this.state.abbrv;
     let strokeHighlight = selected ? '#333333' : '#33333333';
 
     return (
@@ -50,7 +50,7 @@ export default class Gridtile extends React.Component {
         top={this.state.top}
         left={this.state.left}
         id={"tile-" + this.state.abbrv}
-        onClick={() => this.props.onClick(this.props.abbrv)}
+        onClick={() => this.props.onClick(this.state.abbrv)}
       >
         <Bar
           className={'tile-bg'}
