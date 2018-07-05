@@ -92,6 +92,7 @@ class App extends React.Component {
               chart={this.state.chart}
               view={this.state.view}
               onClickState={this.handleClickTile}
+              selected_state={this.state.statefp}
             />
           </Row>
         </Grid>

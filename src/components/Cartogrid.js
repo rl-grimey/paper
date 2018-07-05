@@ -45,7 +45,8 @@ export default class Cartogrid extends React.Component {
       y_scale: y_scale,
       data   : {},
       chart  : props.chart,
-      view   : props.view
+      view   : props.view,
+      selected_state: props.selected_state
     };
 
     // Functions to create state plots
@@ -86,7 +87,9 @@ export default class Cartogrid extends React.Component {
         top={top}
         left={left}
         width={tile_width}
-        height={tile_height} 
+        height={tile_height}
+        selected_state={this.state.selected_state}
+        onClick={this.props.onClickState}
       >
         {this.create_chart(tile_width, tile_height, state)}
         {this.create_label(state.info.abbrv)}
@@ -95,13 +98,16 @@ export default class Cartogrid extends React.Component {
   }
 
   create_label = (abbrv) => {
+    let selected = abbrv === this.state.selected_state;
+    let font_weight = (selected) ? 'bold' : '500';
+
     return (
       <Text
         fontSize={11}
-        fontWeight={'500'}
+        fontWeight={font_weight}
         fontFamily={'sans-serif'}
         textAnchor={'end'}
-        style={{'opacity': 0.75}}
+        style={{'opacity': 0.8}}
         x={this.state.x_scale.bandwidth() * 0.9}
         y={this.state.y_scale.bandwidth() * 0.2}
       >{abbrv}
@@ -144,8 +150,8 @@ export default class Cartogrid extends React.Component {
 
   render() {
     // How are we looking?
-    console.log('-------\nCartogrid --------------------------------------------');
-    console.log(this.state, this.props);
+    //console.log('-------\nCartogrid --------------------------------------------');
+    //console.log(this.state, this.props);
 
     return (
       <svg 
