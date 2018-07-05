@@ -6,7 +6,7 @@ import React from 'react';
 import { BarStack } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
-import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
+import { scaleBand, scaleLinear } from '@vx/scale';
 import { max } from 'd3';
 import { community_scale } from '../../utilities';
 
