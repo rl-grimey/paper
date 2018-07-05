@@ -28,9 +28,10 @@ class App extends React.Component {
       week     : null
     }
 
-    this.handleBtnChart = this.handleBtnChart.bind(this);
-    this.handleBtnView  = this.handleBtnView.bind(this);
-    this.handleClickTile = this.handleClickTile.bind(this);
+    this.handleBtnChart   = this.handleBtnChart.bind(this);
+    this.handleBtnView    = this.handleBtnView.bind(this);
+    this.handleClickTile  = this.handleClickTile.bind(this);
+    this.handleClickCloud = this.handleClickCloud.bind(this);
   }
 
   componentDidMount() {
@@ -53,6 +54,12 @@ class App extends React.Component {
   handleClickTile(state) {
     /* Assigns the clicked state Gridtile as app statefp */
     this.setState({ statefp: state });
+  }
+
+  handleClickCloud(community) {
+    /* Assigns the clicked community cloud. */
+    //console.log(community);
+    this.setState({ community });
   }
 
   render() {
@@ -78,6 +85,7 @@ class App extends React.Component {
             height={this.state.height / 4}
             community={this.state.community}
             view={this.state.view}
+            onClickCloud={this.handleClickCloud}
           />
 
           <Row style={center_styles}>

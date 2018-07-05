@@ -35,7 +35,8 @@ export default class CommunityGrid extends React.Component {
 
     // Update if view has changed
     if ((nextProps.view !== this.state.view) || 
-        (nextProps.width !== this.state.width)) return true;
+        (nextProps.width !== this.state.width) ||
+        (nextProps.community !== this.state.community)) return true;
     else return false;
   }
 
@@ -66,6 +67,7 @@ export default class CommunityGrid extends React.Component {
       community={this_community}
       selected_community={this.state.community}
       data={data}
+      onClick={this.props.onClickCloud}
     />);
   }
 

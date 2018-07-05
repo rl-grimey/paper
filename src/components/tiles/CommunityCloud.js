@@ -26,6 +26,28 @@ export default class CommunityCloud extends React.Component {
     this.create_cloud_scale = this.create_cloud_scale.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    /* Only update if width has changed, view has changed, 
+      or community selection is different. */
+
+    let selected = this.state.selected_community === this.state.community;
+
+    return (
+      (nextProps.width !== this.state.width) ||
+      (nextProps.view !== this.state.view) ||
+        // Handle newly selected communities
+        (
+          (selected === false) &&          
+          (nextProps.selected_community === this.state.community)
+        ) ||
+        // Handle deselected communities
+        (
+          (selected === true) &&
+          (nextProps.selected_community !== this.state.community)
+        )
+    );
+  }
+
   componentWillReceiveProps(nextProps) {
     this.setState({ ...nextProps });
   }
@@ -66,10 +88,15 @@ export default class CommunityCloud extends React.Component {
   render() {
     let format_data = this.create_cloud_data()
     let font_scale = this.create_cloud_scale(format_data);
-    let styles = { 'background': community_scale(this.state.community) };
+    let selected = this.state.selected_community === this.state.community;
+
+    let styles = { 
+      'background': community_scale(this.state.community),
+      'border': (selected) ? '1px solid black' : 'none'
+     };
 
     return (
-      <div style={styles}>
+      <div style={styles} onClick={() => this.props.onClick(this.state.community)}>
         <p className='text-center'><b>{this.state.community}</b></p>
         <WordCloud
           data={format_data}
