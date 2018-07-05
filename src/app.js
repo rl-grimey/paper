@@ -1,14 +1,16 @@
 /* Dependencies */
 import React from 'react';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
 
 /* Styles */
 import 'bootstrap/dist/css/bootstrap.css';
 import './style.css';
+import { center_styles } from './utilities';
 
 /* Components */
-import { Slider, HelpButton, DataTable } from './components/widgets';
-import { center_styles } from './utilities';
+import HelpButton from './components/widgets/HelpButton';
+import SettingsButton from './components/widgets/SettingsButton';
+
 import Cartogrid from './components/Cartogrid';
 import CommunityGrid from './components/Communitygrid';
 import Toolbar from './components/widgets/Toolbar';
@@ -70,7 +72,10 @@ class App extends React.Component {
               </h3>
             </Col>
             <Col xs={1}>
-              <h3><HelpButton/></h3>
+              <Row>
+                <HelpButton/>
+                <SettingsButton/>
+              </Row>
             </Col>
           </Row>
 
