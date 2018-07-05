@@ -26,7 +26,8 @@ export default class Gridtile extends React.Component {
 
     return (
       (nextProps.width !== this.state.width) ||
-      ((nextProps.view !== this.state.view)) ||
+      (nextProps.view !== this.state.view) ||
+      (nextProps.children !== this.state.children) || 
       ((selected === false) && (nextProps.selected_state === this.state.abbrv)) ||
       ((selected === true) && (nextProps.selected_state !== this.state.abbrv))
     );

@@ -8,7 +8,6 @@ import './style.css';
 import { center_styles } from './utilities';
 
 /* Components */
-import TitleRow from './components/TitleRow';
 import Toolbar from './components/widgets/Toolbar';
 import CommunityGrid from './components/Communitygrid';
 import Cartogrid from './components/Cartogrid';
@@ -70,7 +69,6 @@ class App extends React.Component {
     return (
       <div className="App">
         <Grid fluid={true} id="app_ref">
-          <TitleRow/>
 
           <Toolbar
             handleChart={this.handleBtnChart}

@@ -3,7 +3,9 @@
  */
 
 import React from 'react';
-import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton} from 'react-bootstrap';
+import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton, Label } from 'react-bootstrap';
+import HelpButton from './HelpButton';
+import SettingsButton from './SettingsButton';
 
 export default class Toolbar extends React.Component {
   constructor(props) {
@@ -34,8 +36,23 @@ export default class Toolbar extends React.Component {
   render() {
     return (
       <Row className={'justify-content-between'}>
-        <Col xs={9}>
+
+        <Col>
+          <h2 className="dashboard-title align-middle">
+            <abbr 
+              title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
+            >CarTopicVis
+            </abbr>
+          </h2>
+        </Col>
+
+        <Col>
           <ButtonToolbar>
+            <Label 
+              bsStyle="default"
+              className="align-text-bottom"
+            >Charts
+            </Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
               name="charts"
@@ -50,8 +67,9 @@ export default class Toolbar extends React.Component {
           </ButtonToolbar>
         </Col>
 
-        <Col xsPush={11}>
+        <Col>
           <ButtonToolbar>
+            <Label bsStyle="default">Data View</Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
               name="views"
@@ -63,6 +81,14 @@ export default class Toolbar extends React.Component {
               <ToggleButton value={'relative'}>Relative</ToggleButton>
             </ToggleButtonGroup>
           </ButtonToolbar>
+        </Col>
+
+        <Col>
+          <Row>
+            <Label bsStyle="default">Help</Label>{' '}
+            <HelpButton/>
+            <SettingsButton/>
+          </Row>
         </Col>
       </Row>
     );
