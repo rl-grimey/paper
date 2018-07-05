@@ -1,9 +1,10 @@
 /* Dependencies */
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { scaleBand } from '@vx/scale';
 import { entries } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
+import { center_styles } from '../utilities';
 
 export default class CommunityGrid extends React.Component {
   constructor(props) {
@@ -33,8 +34,8 @@ export default class CommunityGrid extends React.Component {
     if (nextState.data !== this.state.data) return true;
 
     // Update if view has changed
-    if (nextProps.view !== this.state.view) return true;
-    else if (nextProps.width !== this.state.width) return true;
+    if ((nextProps.view !== this.state.view) || 
+        (nextProps.width !== this.state.width)) return true;
     else return false;
   }
 
@@ -70,7 +71,7 @@ export default class CommunityGrid extends React.Component {
 
   render() {
     return (
-      <Row>{this.state.data && 
+      <Row style={center_styles}>{this.state.data && 
         entries(this.state.data).map((d, i) => this.create_cloud(d, i))
       }</Row>
     );
