@@ -20,8 +20,6 @@ export default class Gridtile extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     /* Only update if width/view/state selection has changed. */
-    console.log(nextProps, nextState, this.state);
-    
     let selected = this.state.selected;
 
     return (
