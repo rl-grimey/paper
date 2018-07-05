@@ -10,6 +10,9 @@ import { scaleBand, scaleLinear } from '@vx/scale';
 import { stack, entries, color } from 'd3';
 import { communities, community_scale, community_highlight_scale, community_labels } from '../../utilities';
 
+// TESTING
+import ModalChart from '../widgets/ModalChart';
+
 
 export default class CommunityTile extends React.Component {
   constructor(props) {
@@ -20,21 +23,26 @@ export default class CommunityTile extends React.Component {
     let {x_scale, y_scale} = this.create_chart_scales(width, height, view, props.weekly_max);
     
     this.state = {
-      width     : width,
-      height    : height,
-      x_scale   : x_scale,
-      y_scale   : y_scale,
-      communities      : communities,
-      color     : community_scale,
-      data      : props.data,
-      view      : view,
-      community : props.community,
-      weekly_max: props.weekly_max
+      width      : width,
+      height     : height,
+      x_scale    : x_scale,
+      y_scale    : y_scale,
+      communities: communities,
+      color      : community_scale,
+      data       : props.data,
+      view       : view,
+      community  : props.community,
+      weekly_max : props.weekly_max,
+      modal_open : false
     }
 
-    this.create_stack_data = this.create_stack_data.bind(this);
+    this.modalRef = React.createRef();
+
+    this.create_stack_data   = this.create_stack_data.bind(this);
     this.create_chart_scales = this.create_chart_scales.bind(this);
-    this.render_bars = this.render_bars.bind(this);
+    this.render_bars         = this.render_bars.bind(this);
+    this.render_modal        = this.render_modal.bind(this);
+    this.render_chart        = this.render_chart.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -47,7 +55,7 @@ export default class CommunityTile extends React.Component {
     let x_scale = scaleBand({
       domain    : [-4, -3, -2, -1, 1, 2, 3, 4],
       rangeRound: [1, width-1],
-      padding   : 0.00
+      padding   : 0.0
       // TickFormatting
     })
 
@@ -88,10 +96,10 @@ export default class CommunityTile extends React.Component {
       reshaped.push(week_data);
     }
 
-   return reshaped;
+   return stack().keys(community_scale.domain())(reshaped);
   }
 
-  render_bars(week_dist, key) {
+  render_bars(week_dist, key, x_scale, y_scale) {
     /* Render's our stacked bars for a given week*/
 
     // Highlight selected community if a community is selected
@@ -109,15 +117,15 @@ export default class CommunityTile extends React.Component {
     return (
       <Group key={key}>
         {week_dist
-          .filter(topic => (this.state.y_scale(topic[0]) - this.state.y_scale(topic[1]) > 0))
+          .filter(topic => (y_scale(topic[0]) - y_scale(topic[1]) > 0))
           .map((topic, i) => {
             return (
               <Bar
                 key={i}
-                x={this.state.x_scale(topic.data.week)}
-                y={this.state.y_scale(topic[1])}
-                width={this.state.x_scale.bandwidth()}
-                height={this.state.y_scale(topic[0]) - this.state.y_scale(topic[1])}
+                x={x_scale(topic.data.week)}
+                y={y_scale(topic[1])}
+                width={x_scale.bandwidth()}
+                height={y_scale(topic[0]) - y_scale(topic[1])}
                 fill={comm_color}
                 stroke={'#999999'}
                 strokeWidth={comm_stroke}
@@ -129,14 +137,44 @@ export default class CommunityTile extends React.Component {
     );
   }
 
+  render_chart(width, height) {
+    /* Renders our chart with dynamic dimensions. */
+    let stacked_data = this.create_stack_data();
+
+    // Create our scales
+    let { x_scale, y_scale } = this.create_chart_scales(width, height, this.state.view, this.state.weekly_max);
+
+    return (
+      stacked_data.map((week, i) => this.render_bars(week, i, x_scale, y_scale))
+    );
+  }
+
+  render_modal() {
+    /* Creates a modal chart with the normal size graph. */
+    this.setState({ modal_open: !this.state.modal_open });
+  }
+
   render() {
     // Create the data
-    let stack_data = this.create_stack_data();
-    let stacked_data = stack().keys(community_scale.domain())(stack_data);
-    
+    let stacked_data = this.create_stack_data();
+
+    // Get tile dimensions
+    let { width, height } = this.state;
+
     return (
-      <Group>
-        {stacked_data.map((week, i) => this.render_bars(week, i))}
+      <Group onClick={this.render_modal} >
+        {/*stacked_data.map((week, i) => this.render_bars(week, i))*/}
+        {this.render_chart(width, height)}
+
+        <ModalChart
+          open={this.state.modal_open}
+          callback={this.render_modal}
+          width={1000}
+          height={600}
+          abbrv={this.state.abbrv}
+          ref={this.modalRef}
+        >{this.render_chart(900, 600)}
+        </ModalChart>
       </Group>
     );
   }

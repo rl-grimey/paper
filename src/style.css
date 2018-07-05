@@ -35,3 +35,18 @@ hr {
 .modal-backdrop {
   background-color: #00000094;
 }
+
+/* Chart Modals */
+.chart-modal .modal-dialog {
+  width: 60vw !important;
+  max-width: 60vw !important;
+}
+.chart-modal .modal-content {
+  height: auto;
+  min-height: 60vh;
+}
+
+.chart-modal svg {
+  display: block;
+  margin: auto;
+}
