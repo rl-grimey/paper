@@ -8,6 +8,7 @@ import './style.css';
 import { center_styles } from './utilities';
 
 /* Components */
+import TitleRow from './components/TitleRow';
 import HelpButton from './components/widgets/HelpButton';
 import SettingsButton from './components/widgets/SettingsButton';
 
@@ -31,8 +32,9 @@ class App extends React.Component {
       week     : null
     }
 
-    this.handleChartBtn = this.handleChartBtn.bind(this);
-    this.handleViewBtn  = this.handleViewBtn.bind(this);
+    this.handleBtnChart = this.handleBtnChart.bind(this);
+    this.handleBtnView  = this.handleBtnView.bind(this);
+    this.handleClickTile = this.handleClickTile.bind(this);
   }
 
   componentDidMount() {
@@ -42,14 +44,19 @@ class App extends React.Component {
     this.setState({ width: width });
   }
 
-  handleChartBtn(chart) {
+  handleBtnChart(chart) {
     /* Sets our chart state based on the currently selected toolbar button. */
     this.setState({ chart });
   }
 
-  handleViewBtn(view) {
+  handleBtnView(view) {
     /* Changes our data view (either absolute or relative) */
     this.setState({ view });
+  }
+
+  handleClickTile(state) {
+    /* Assigns the clicked state Gridtile as app statefp */
+    this.setState({ statefp: state });
   }
 
   render() {
@@ -60,28 +67,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Grid fluid={true} id="app_ref">
-
-          {/* Title Row*/}
-          <Row>
-            <Col xs={11}>
-              <h3 className="dashboard-title">
-                <abbr 
-                  title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
-                >CarTopicVis
-                </abbr>
-              </h3>
-            </Col>
-            <Col xs={1}>
-              <Row>
-                <HelpButton/>
-                <SettingsButton/>
-              </Row>
-            </Col>
-          </Row>
+          <TitleRow/>
 
           <Toolbar
-            handleChart={this.handleChartBtn}
-            handleView={this.handleViewBtn}
+            handleChart={this.handleBtnChart}
+            handleView={this.handleBtnView}
           />
 
           <hr/>
@@ -101,6 +91,7 @@ class App extends React.Component {
               padding={this.state.padding}
               chart={this.state.chart}
               view={this.state.view}
+              onClickState={this.handleClickTile}
             />
           </Row>
         </Grid>
