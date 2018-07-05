@@ -7,7 +7,7 @@ import {
   scalePow 
 } from 'd3-scale';
 import { extent } from 'd3-array';
-import { community_scale } from '../../utilities';
+import { community_scale, community_labels } from '../../utilities';
 
 export default class CommunityCloud extends React.Component {
   constructor(props) {
@@ -98,7 +98,7 @@ export default class CommunityCloud extends React.Component {
 
     return (
       <div style={styles} onClick={() => this.props.onClick(this.state.community)}>
-        <p className='text-center'><b>{this.state.community}</b></p>
+        <p className='text-center'><b>{community_labels(this.state.community)}</b></p>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
