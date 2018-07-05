@@ -33,7 +33,7 @@ export default class Toolbar extends React.Component {
 
   render() {
     return (
-      <Row>
+      <Row className={'justify-content-between'}>
         <Col xs={9}>
           <ButtonToolbar>
             <ToggleButtonGroup 
@@ -50,7 +50,7 @@ export default class Toolbar extends React.Component {
           </ButtonToolbar>
         </Col>
 
-        <Col xsPush={9}>
+        <Col xsPush={11}>
           <ButtonToolbar>
             <ToggleButtonGroup 
               type="radio" 
