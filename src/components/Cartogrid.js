@@ -97,8 +97,8 @@ export default class Cartogrid extends React.Component {
   create_label = (abbrv) => {
     return (
       <Text
-        fontSize={10}
-        fontWeight={'400'}
+        fontSize={11}
+        fontWeight={'500'}
         fontFamily={'sans-serif'}
         textAnchor={'end'}
         style={{'opacity': 0.75}}
