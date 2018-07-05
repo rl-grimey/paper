@@ -1,6 +1,6 @@
 /* Dependencies */
 import React from 'react';
-import { Grid, Col, Row, ButtonGroup } from 'react-bootstrap';
+import { Grid, Row } from 'react-bootstrap';
 
 /* Styles */
 import 'bootstrap/dist/css/bootstrap.css';
@@ -9,13 +9,9 @@ import { center_styles } from './utilities';
 
 /* Components */
 import TitleRow from './components/TitleRow';
-import HelpButton from './components/widgets/HelpButton';
-import SettingsButton from './components/widgets/SettingsButton';
-
-import Cartogrid from './components/Cartogrid';
-import CommunityGrid from './components/Communitygrid';
 import Toolbar from './components/widgets/Toolbar';
-
+import CommunityGrid from './components/Communitygrid';
+import Cartogrid from './components/Cartogrid';
 
 class App extends React.Component {
   constructor() {

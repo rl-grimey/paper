@@ -1,11 +1,5 @@
 import React from 'react';
-import { 
-  Modal, 
-  ModalBody, 
-  ModalTitle, 
-  Button, 
-  Glyphicon
-} from 'react-bootstrap';
+import { Modal, Button, Glyphicon } from 'react-bootstrap';
 
 export default class HelpButton extends React.Component {
   constructor(props, context) {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Group } from '@vx/group';
 import { Bar } from '@vx/shape';
-import { Text } from '@vx/text';
 
 export default class Gridtile extends React.Component {
   render() {

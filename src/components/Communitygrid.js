@@ -1,6 +1,6 @@
 /* Dependencies */
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { scaleBand } from '@vx/scale';
 import { entries } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';

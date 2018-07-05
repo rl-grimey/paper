@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import { Text } from '@vx/text';
 
 /* Components */
+import CartoLegend from './widgets/CartoLegend';
 import Gridtile from './tiles/Gridtile';
 import CommunityTile from './tiles/CommunityTile';
 import CountTile from './tiles/Counttile';
@@ -160,8 +161,7 @@ export default class Cartogrid extends React.Component {
         height={this.state.height}
       >
         {this.state.data && 
-          d3.values(this.state.data).map((d, i) => this.create_tile(d, i))
-        }
+          d3.values(this.state.data).map((d, i) => this.create_tile(d, i))}
       </svg>
     );
   } 
