@@ -7,6 +7,7 @@ import {
   scalePow 
 } from 'd3-scale';
 import { extent } from 'd3-array';
+import { community_scale } from '../../utilities';
 
 export default class CommunityCloud extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ export default class CommunityCloud extends React.Component {
       height: props.height,
       view: props.view,
       community: props.community,
+      selected_community: props.selected_community,
       data: props.data
     };
 
@@ -64,16 +66,20 @@ export default class CommunityCloud extends React.Component {
   render() {
     let format_data = this.create_cloud_data()
     let font_scale = this.create_cloud_scale(format_data);
-    
+    let styles = { 'background': community_scale(this.state.community) };
+
     return (
-      <WordCloud
-        data={format_data}
-        fontSizeMapper={font_scale}
-        width={this.state.width}
-        height={this.state.height}
-        padding={2}
-        font={'sans-serif'}
-      />
+      <div style={styles}>
+        <p><b>{this.state.community}</b></p>
+        <WordCloud
+          data={format_data}
+          fontSizeMapper={font_scale}
+          width={this.state.width}
+          height={this.state.height}
+          padding={2}
+          font={'sans-serif'}
+        />
+      </div>      
     );
   }
 }

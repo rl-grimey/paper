@@ -2,7 +2,7 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
 import { scaleBand } from '@vx/scale';
-import { values } from 'd3';
+import { entries } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
 
 export default class CommunityGrid extends React.Component {
@@ -41,7 +41,6 @@ export default class CommunityGrid extends React.Component {
   componentWillReceiveProps(nextProps) {
     /* Update the community, view, and dimensions */
     let scale = this.create_clouds_scale(nextProps.width);
-    
     this.setState({ ...nextProps, scale });
   }
 
@@ -54,13 +53,17 @@ export default class CommunityGrid extends React.Component {
     });
   }
 
-  create_cloud(data, i) {
+  create_cloud(community, i) {
+    let data = community.value;
+    let this_community = community.key;
+
     return (<CommunityCloud
       key={i}
       width={this.state.scale.bandwidth()}
       height={this.state.height}
       view={this.state.view}
-      community={this.state.community}
+      community={this_community}
+      selected_community={this.state.community}
       data={data}
     />);
   }
@@ -68,7 +71,7 @@ export default class CommunityGrid extends React.Component {
   render() {
     return (
       <Row>{this.state.data && 
-        values(this.state.data).map((d, i) => this.create_cloud(d, i))
+        entries(this.state.data).map((d, i) => this.create_cloud(d, i))
       }</Row>
     );
   }

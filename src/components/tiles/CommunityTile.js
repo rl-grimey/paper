@@ -8,11 +8,10 @@ import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
 import { max } from 'd3';
-
-import { Tooltip } from '@vx/tooltip';
+import { community_scale } from '../../utilities';
 
 /* Scale utility */
-const keys = [-1, 0, 1, 2, 3, 4];
+const keys = [-1, 0, 1, 2, 3, 4, 5];
 
 export default class CommunityTile extends React.Component {
   constructor(props) {
@@ -22,18 +21,13 @@ export default class CommunityTile extends React.Component {
     let { width, height, view } = props;
     let {x_scale, y_scale} = this.create_chart_scales(width, height, view, props.weekly_max);
     
-    let color = scaleOrdinal({
-      domain: keys,
-      range: ['#7fc97f','#beaed4','#fdc086','#ffff99','#386cb0','#f0027f']
-    });
-    
     this.state = {
       width: width, 
       height: height, 
       x_scale: x_scale, 
       y_scale: y_scale,
       keys: keys,
-      color: color,
+      color: community_scale,
       data: props.data,
       view: view,
       weekly_max: props.weekly_max
