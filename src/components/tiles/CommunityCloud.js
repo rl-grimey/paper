@@ -70,7 +70,7 @@ export default class CommunityCloud extends React.Component {
 
     return (
       <div style={styles}>
-        <p><b>{this.state.community}</b></p>
+        <p className='text-center'><b>{this.state.community}</b></p>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
