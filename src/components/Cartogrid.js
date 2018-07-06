@@ -35,20 +35,21 @@ export default class Cartogrid extends React.Component {
 
     // Create the chart scales
     let { width, height, padding } = props;
-    width = width * 0.9;
+    width = width * 0.675;
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
-      width         : width,
-      height        : height,
-      padding       : padding,
-      x_scale       : x_scale,
-      y_scale       : y_scale,
-      tile_scale    : d3.scaleLinear,
-      data          : {},
-      chart         : props.chart,
-      view          : props.view,
-      selected_state: props.selected_state
+      width             : width,
+      height            : height,
+      padding           : padding,
+      x_scale           : x_scale,
+      y_scale           : y_scale,
+      tile_scale        : d3.scaleLinear,
+      data              : {},
+      chart             : props.chart,
+      view              : props.view,
+      community: props.community,
+      selected_state    : props.selected_state
     };
 
     // Functions to create state plots
@@ -69,7 +70,7 @@ export default class Cartogrid extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Scale dimensions
-    let width   = nextProps.width * 0.9;
+    let width   = nextProps.width * 0.675;
     let height  = nextProps.height
     let padding = nextProps.padding
 
@@ -108,8 +109,8 @@ export default class Cartogrid extends React.Component {
     let scale = this.state.tile_scale(state.info[view_attr]);
     
     // Shift to center the tiles due to scaling
-    let tile_width_offset = this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth());
-    let tile_height_offset = this.state.y_scale.bandwidth() - (scale * this.state.y_scale.bandwidth());
+    let tile_width_offset = (this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth())) / 2;
+    let tile_height_offset = (this.state.y_scale.bandwidth() - (scale * this.state.y_scale.bandwidth())) / 2;
 
     let top = this.state.y_scale(state.info.y) + tile_height_offset;
     let left = this.state.x_scale(state.info.x) + tile_width_offset;
@@ -162,6 +163,7 @@ export default class Cartogrid extends React.Component {
           weekly_max={weekly_max}
           view={this.state.view}
           community={this.state.community}
+          info={data.info}
           />);
       case 'counts':
         return(<CountTile

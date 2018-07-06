@@ -17,8 +17,8 @@ class App extends React.Component {
     super();
     this.state = {
       width  : 1000,
-      height : 600,
-      padding: 0.05,
+      height : 700,
+      padding: 0.01,
 
       chart    : 'topics',
       view     : 'absolute',
@@ -27,6 +27,8 @@ class App extends React.Component {
       week     : null
     }
 
+    this.handleResize     = this.handleResize.bind(this);
+    this.handleEscape     = this.handleEscape.bind(this);
     this.handleBtnChart   = this.handleBtnChart.bind(this);
     this.handleBtnView    = this.handleBtnView.bind(this);
     this.handleClickTile  = this.handleClickTile.bind(this);
@@ -34,10 +36,32 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    /* Adds resize and escape handling */
+    this.handleResize();
+
+    document.addEventListener('keydown', this.handleEscape);
+  }
+
+  handleResize() {
     /* Adjust width to maximum possible after the component mounts. */
     let app_div = document.querySelector('#app_ref');
-    let width = app_div.clientWidth;
-    this.setState({ width: width });
+    let app_width = app_div.clientWidth;
+
+    // Height
+
+
+    this.setState({ width: app_width });
+  }
+
+  handleEscape(event) {
+    /* Clears our selected state/topic if escape is pressed */
+    switch(event.keyCode) {
+      case 27:
+        this.setState({ statefp: null, community: null, week: null });
+        break;
+      default:
+        break;
+    };
   }
 
   handleBtnChart(chart) {
@@ -57,7 +81,6 @@ class App extends React.Component {
 
   handleClickCloud(community) {
     /* Assigns the clicked community cloud. */
-    //console.log(community);
     this.setState({ community });
   }
 
@@ -80,7 +103,7 @@ class App extends React.Component {
           {/* Dashboard row */}
           <CommunityGrid
             width={this.state.width}
-            height={this.state.height / 4}
+            height={this.state.height / 3}
             community={this.state.community}
             view={this.state.view}
             onClickCloud={this.handleClickCloud}

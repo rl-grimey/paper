@@ -6,7 +6,8 @@ svg text {
   fill: #222222 !important;
 }
 
-/*body {
+/*
+body {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 2%;
@@ -34,4 +35,15 @@ hr {
 /* Help Modal */
 .modal-backdrop {
   background-color: #00000094;
+}
+
+/* Chart Modals */
+.chart-modal .modal-dialog {
+  width: 90% !important;
+  max-width: 90% !important;
+}
+
+.chart-modal svg {
+  display: block;
+  margin: auto;
 }

@@ -5,7 +5,6 @@
 import React from 'react';
 import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton, Label } from 'react-bootstrap';
 import HelpButton from './HelpButton';
-import SettingsButton from './SettingsButton';
 
 export default class Toolbar extends React.Component {
   constructor(props) {
@@ -47,10 +46,10 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar>
+          <ButtonToolbar style={{'marginTop': '20px'}}>
             <Label 
               bsStyle="default"
-              className="align-text-bottom"
+              style={{'lineHeight': '3'}}
             >Charts
             </Label>{' '}
             <ToggleButtonGroup 
@@ -60,16 +59,16 @@ export default class Toolbar extends React.Component {
               defaultValue={'topics'}
               onChange={(evt) => this.handleChartBtn(evt)}
             >
-              <ToggleButton value={'topics'}>Topic Model Clusters</ToggleButton>
-              <ToggleButton value={'counts'}>Weekly Tweet Counts</ToggleButton>
-              <ToggleButton value={'sents'}>Extreme Sentiments</ToggleButton>
+              <ToggleButton value={'topics'}>Topic View</ToggleButton>
+              <ToggleButton value={'sents'}>Sentiment View</ToggleButton>
+              <ToggleButton value={'counts'}>Distribution View</ToggleButton>
             </ToggleButtonGroup>
           </ButtonToolbar>
         </Col>
 
         <Col>
-          <ButtonToolbar>
-            <Label bsStyle="default">Data View</Label>{' '}
+          <ButtonToolbar style={{'marginTop': '20px'}}>
+            <Label bsStyle="default" style={{'lineHeight': '3'}}>Data View</Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
               name="views"
@@ -84,11 +83,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <Row>
-            <Label bsStyle="default">Help</Label>{' '}
-            <HelpButton/>
-            <SettingsButton/>
-          </Row>
+          <HelpButton />
         </Col>
       </Row>
     );
