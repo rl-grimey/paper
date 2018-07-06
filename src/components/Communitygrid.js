@@ -81,7 +81,7 @@ export default class CommunityGrid extends React.Component {
     //let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
     /* COULD CREATE SCALE BASED ON RANK OCCURENCES ACROSS CLOUDS */
 
-    let intercloud_scale = scaleSqrt().range([8, 28]);
+    let intercloud_scale = scaleSqrt().range([10, 36]);
     
     if (this.state.data === {}) return intercloud_scale;
     else {
