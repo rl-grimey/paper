@@ -21,7 +21,8 @@ export default class Gridtile extends React.Component {
     }
 
     this.click = this.click.bind(this);    
-    this.hover = this.hover.bind(this);
+    this.mouseOver = this.mouseOver.bind(this);
+    this.mouseOut = this.mouseOut.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -46,13 +47,20 @@ export default class Gridtile extends React.Component {
 
   click() {
     /* Handles our hovering/clicking interactions for tile */
+
+    // Clear tile highlighting
     this.setState({ hover: false });
-    this.props.onClick(this.state.abbrv);
+
+    // Unselect the state so we're fresh on the next
+    this.props.escape();
   }
 
-  hover() {
-    /* Conditional logic to render border on hover. */
-    this.setState({ hover: false });
+  mouseOver() { 
+    this.setState({ hover: true }); 
+  }
+
+  mouseOut() {
+    this.setState({ hover: false }); 
   }
 
   render() {
@@ -65,7 +73,11 @@ export default class Gridtile extends React.Component {
 
     // Add the hover clearing callback to the children
     const childrenWithProps = React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {hover: this.hover });
+      return React.cloneElement(child, {
+        click: this.click,
+        mouseOver: this.mouseOver,
+        mouseOut: this.mouseOut
+      });
     });
 
     return (
@@ -73,9 +85,6 @@ export default class Gridtile extends React.Component {
         top={this.state.top}
         left={this.state.left}
         id={"tile-" + this.state.abbrv}
-        onClick={this.click}
-        onMouseOver={() => this.setState({ hover: true })}
-        onMouseOut={this.hover}
       >
         <Bar
           className={'tile-bg'}
@@ -85,13 +94,13 @@ export default class Gridtile extends React.Component {
           width={this.state.width}
           height={this.state.height}
         />
-        {childrenWithProps}
         <Line
           from={new Point({ x: mid_width, y: this.state.height - 1})}
           to={new Point({ x: mid_width, y: 1})}
           stroke={'#5b5b5b'}
           strokeDasharray={'2 2'}
         />
+        {childrenWithProps}
         <Text
           fontSize={11}
           fontWeight={hover ? '700' : '500'}
@@ -102,13 +111,6 @@ export default class Gridtile extends React.Component {
           y={this.state.height * 0.2}
         >{this.state.abbrv}
         </Text>
-        <rect
-          width={this.state.width}
-          height={this.state.height}
-          fill={'#ffffff00'}
-          stroke={'none'}
-          onClick={() => console.log(this.state.abbrv + ' clicked')}
-        />
       </Group>
     );
   }

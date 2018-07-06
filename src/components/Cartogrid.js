@@ -135,7 +135,6 @@ export default class Cartogrid extends React.Component {
         height={tile_height}
         selected_state={this.state.selected_state}
         view={this.state.view}
-        onClick={this.props.onClickState}
         escape={this.props.escape}
       >
         {this.create_chart(tile_width, tile_height, state)}
@@ -157,7 +156,6 @@ export default class Cartogrid extends React.Component {
           view={this.state.view}
           community={this.state.community}
           info={data.info}
-          escape={this.props.escape}
           />);
       case 'counts':
         return(<CountTile

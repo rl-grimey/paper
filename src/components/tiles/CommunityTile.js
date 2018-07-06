@@ -208,14 +208,12 @@ export default class CommunityTile extends React.Component {
 
   render_modal() {
     /* Creates a modal chart with the normal size graph. */
+
     // Open or close the modal
     this.setState({ modal_open: !this.state.modal_open });
     
-    // Clear the hover from parent tile
-    this.props.hover();
-    
     // Clear selected states
-    this.props.escape();
+    this.props.click();
   }
 
   render() {
@@ -241,6 +239,8 @@ export default class CommunityTile extends React.Component {
           fill={'#ffffff00'}
           stroke={'none'}
           onClick={this.render_modal}
+          onMouseOver={this.props.mouseOver}
+          onMouseOut={this.props.mouseOut}
         />
         <ModalChart
           open={this.state.modal_open}
