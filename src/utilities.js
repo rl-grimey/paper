@@ -12,12 +12,11 @@ export const community_labels = scaleOrdinal()
   .domain(communities)
   .range([
     'Unclassified',
-    'Religions',
-    '???',
-    "Trump's Executive Order",
-    'Refugee Crisis',
-    'Immigration Policies',
-    'Protests'
+    'Muslim Immigrants',
+    'Islam and Religion',
+    "Trump's Order",
+    'Refugee Crises',
+    'Immigration Policies'
   ]);
 
 
