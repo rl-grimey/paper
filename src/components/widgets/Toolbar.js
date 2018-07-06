@@ -39,8 +39,8 @@ export default class Toolbar extends React.Component {
         <Col>
           <h2 className="dashboard-title align-middle">
             <abbr 
-              title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
-            >CarTopicVis
+              title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the 2017 Muslim Travel Ban."
+            >CarSentToGram
             </abbr>
           </h2>
         </Col>
