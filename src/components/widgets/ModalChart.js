@@ -33,7 +33,7 @@ export default class ModalChart extends React.Component {
         keyboard={true}
         className={'chart-modal'}
       >
-        <Modal.Header>This is a test title</Modal.Header>
+        <Modal.Header><h3>{this.props.abbrv}</h3></Modal.Header>
         <Modal.Body>
           <svg width={this.state.width} height={this.state.height}>
             {this.props.children}

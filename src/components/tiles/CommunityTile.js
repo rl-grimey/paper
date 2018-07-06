@@ -37,6 +37,7 @@ export default class CommunityTile extends React.Component {
       view       : view,
       community  : props.community,
       weekly_max : props.weekly_max,
+      info       : props.info,
       modal_open : false
     }
 
@@ -183,7 +184,7 @@ export default class CommunityTile extends React.Component {
           callback={this.render_modal}
           width={screen_width}
           height={screen_height}
-          abbrv={this.state.abbrv}
+          info={this.state.info}
           ref={this.modalRef}
         >{this.render_chart(screen_width, screen_height)}
         </ModalChart>

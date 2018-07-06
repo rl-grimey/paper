@@ -163,6 +163,7 @@ export default class Cartogrid extends React.Component {
           weekly_max={weekly_max}
           view={this.state.view}
           community={this.state.community}
+          info={data.info}
           />);
       case 'counts':
         return(<CountTile
