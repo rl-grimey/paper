@@ -30,13 +30,11 @@ export default class CommunityCloud extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     /* Only update if width has changed, view has changed, 
       or community selection is different. */
-
     let selected = this.state.selected_community === this.state.community;
 
     return (
       (nextProps.width !== this.state.width) ||
       (nextProps.view !== this.state.view) ||
-      (nextProps.scale !== this.state.scale) ||
         // Handle newly selected communities
         (
           (selected === false) &&          
@@ -80,11 +78,10 @@ export default class CommunityCloud extends React.Component {
       .range([28, 8])
       .nice();
 
-    let font_size_mapper2 = (this.state.view === 'absolute') ?
+    let font_size_mapper = (this.state.view === 'absolute') ?
       word => absolute_scale(word.value) :
       word => relative_scale(word.value);
-    
-    let font_size_mapper = word => this.props.scale(word.value);
+
     return font_size_mapper;
   }
 
@@ -94,10 +91,13 @@ export default class CommunityCloud extends React.Component {
     let font_scale = word => this.props.scale(word.value);
     let selected = this.state.selected_community === this.state.community;
 
+    // Dynamically set text color
+    let text_color = ((this.state.community === -1) ? 'white' : 'black') + ' !important';
+
     let styles = { 
       'background': community_scale(this.state.community),
-      'border': (selected) ? '1px solid black' : 'none',
-      'margin': '1px'
+      'outline': (selected) ? '2px solid black' : 'none',
+      'margin': '3px'
      };
 
     return (
@@ -108,7 +108,7 @@ export default class CommunityCloud extends React.Component {
           fontSizeMapper={font_scale}
           width={this.state.width}
           height={this.state.height}
-          padding={2}
+          padding={3}
           font={'sans-serif'}
         />
       </div>      

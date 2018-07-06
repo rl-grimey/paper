@@ -1,7 +1,7 @@
 /* Dependencies */
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { scaleLinear, scaleSqrt, scaleQuantile, scaleBand } from 'd3';
+import { scaleSqrt, scaleBand } from 'd3';
 import { entries, extent } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
 import { communities, center_styles } from '../utilities';
@@ -64,7 +64,7 @@ export default class CommunityGrid extends React.Component {
   create_cloud_data(community) {
     /* Extracts the top 20 keywords for each topic community */
     // Conditionally set the view, based on absolute (count) or relative (rank)
-    let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
+    let view_attr = (this.state.view === 'absolute') ? 'docs' : 'docs';
 
     // Select top 20 and format
     let top_20 = community.slice(0, 20).map(d => {
@@ -76,9 +76,12 @@ export default class CommunityGrid extends React.Component {
 
   create_intercloud_scale() {
     /* Creates a size scale based on values from all community tokens. */
-    //let intercloud_scale = scaleLinear().range([8, 28]);
+
+    // Conditionally set the view, based on absolute (count) or relative (rank)
+    //let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
+    /* COULD CREATE SCALE BASED ON RANK OCCURENCES ACROSS CLOUDS */
+
     let intercloud_scale = scaleSqrt().range([8, 28]);
-    //let intercloud_scale = scaleQuantile().range([10, 14, 18, 22, 28]);
     
     if (this.state.data === {}) return intercloud_scale;
     else {
