@@ -19,6 +19,7 @@
     "@vx/tooltip": "0.0.161",
     "bootstrap": "^4.1.1",
     "d3": "^5.4.0",
+    "d3-color": "^1.2.0",
     "d3-scale-chromatic": "^1.3.0",
     "express": "^4.16.3",
     "lodash": "^4.17.10",
@@ -28,7 +29,6 @@
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
-    "redux": "^3.7.2",
     "topojson-client": "^3.0.0"
   },
   "scripts": {
@@ -39,7 +39,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://ryan-p-larson.github.io/paper",
+  "homepage": "http://ryan-p-larson.github.io/paper",
   "devDependencies": {
     "gh-pages": "^1.1.0"
   }

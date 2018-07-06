@@ -17,7 +17,6 @@ export default class CountTile extends React.Component {
 
     // Set up dimensions and scales
     let { width, height, view, data } = props;
-    //let { x_scale, y_scale } = get_scales(width, height, props.data);
     let { x_scale, y_scale } = this.create_chart_scales(width, height, view, data);
     let color = scaleThreshold({
       domain: [0],
@@ -49,6 +48,7 @@ export default class CountTile extends React.Component {
 
     // Create padding based on chart size
     let padding = (width > 200) ? 0.4 : 0.075;
+    
     let x_scale = scaleBand({
       domain    : weeks,
       rangeRound: [1, width-1],
