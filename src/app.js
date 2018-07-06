@@ -22,6 +22,7 @@ class App extends React.Component {
 
       chart    : 'topics',
       view     : 'absolute',
+      tile     : 'total_tweets',
       community: null,
       statefp  : null,
       week     : null
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.handleEscape     = this.handleEscape.bind(this);
     this.handleBtnChart   = this.handleBtnChart.bind(this);
     this.handleBtnView    = this.handleBtnView.bind(this);
+    this.handleBtnTile    = this.handleBtnTile.bind(this);
     this.handleClickTile  = this.handleClickTile.bind(this);
     this.handleClickCloud = this.handleClickCloud.bind(this);
   }
@@ -48,8 +50,6 @@ class App extends React.Component {
     let app_width = app_div.clientWidth;
 
     // Height
-
-
     this.setState({ width: app_width });
   }
 
@@ -74,6 +74,11 @@ class App extends React.Component {
     this.setState({ view });
   }
 
+  handleBtnTile(tile) {
+    /* Sets our tile sizing */
+    this.setState({ tile });
+  }
+
   handleClickTile(state) {
     /* Assigns the clicked state Gridtile as app statefp */
     this.setState({ statefp: state });
@@ -96,6 +101,7 @@ class App extends React.Component {
           <Toolbar
             handleChart={this.handleBtnChart}
             handleView={this.handleBtnView}
+            handleTile={this.handleBtnTile}
           />
 
           <hr/>
@@ -116,6 +122,7 @@ class App extends React.Component {
               padding={this.state.padding}
               chart={this.state.chart}
               view={this.state.view}
+              tile={this.state.tile}
               community={this.state.community}
               onClickState={this.handleClickTile}
               selected_state={this.state.statefp}

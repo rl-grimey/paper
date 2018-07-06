@@ -48,7 +48,8 @@ export default class Cartogrid extends React.Component {
       data              : {},
       chart             : props.chart,
       view              : props.view,
-      community: props.community,
+      tile              : props.tile,
+      community         : props.community,
       selected_state    : props.selected_state
     };
 
@@ -63,7 +64,7 @@ export default class Cartogrid extends React.Component {
     let data = require('../data/visualization.json');
 
     // Compute scales
-    let tile_scale = this.create_tile_scale(data, this.state.view);
+    let tile_scale = this.create_tile_scale(data, this.state.tile);
 
     this.setState({ data, tile_scale });
   }
@@ -76,7 +77,7 @@ export default class Cartogrid extends React.Component {
 
     // Create new scales
     let {x_scale, y_scale} = get_scales(width, height, padding);
-    let tile_scale = this.create_tile_scale(this.state.data, nextProps.view);
+    let tile_scale = this.create_tile_scale(this.state.data, nextProps.tile);
 
     this.setState({ 
       ...nextProps, 
@@ -87,13 +88,16 @@ export default class Cartogrid extends React.Component {
     });
   }
 
-  create_tile_scale(data, view) {
+  create_tile_scale(data, tile_attr) {
     /* Creates a scale sizing the tile based on our data view. */
-    let view_attr = (view === 'absolute') ? 'total_tweets' : 'pop17';
+    //let view_attr = (view === 'absolute') ? 'total_tweets' : 'pop17';
 
     // Map the state's view attr from the info
-    let state_attrs = d3.values(data).map(d => d.info[view_attr]);
+    let state_attrs = d3.values(data).map(d => d.info[tile_attr]);
     let domain = d3.extent(state_attrs);
+
+    console.log(tile_attr, state_attrs);
+    
 
     // Create two scales
     let absolute_scale = d3.scaleLog()
@@ -105,13 +109,13 @@ export default class Cartogrid extends React.Component {
       .domain(domain)
       .range([0.5, 0.675, 0.85, 1.0]);
 
-    return (view === 'absolute') ? absolute_scale : relative_scale;
+    return (tile_attr === 'total_tweets') ? absolute_scale : relative_scale;
   }
 
   create_tile(state, i) {
     // Size the tile first
-    let view_attr = (this.state.view === 'absolute') ? 'total_tweets' : 'pop17';
-    let scale = this.state.tile_scale(state.info[view_attr]);
+    //let view_attr = (this.state.view === 'absolute') ? 'total_tweets' : 'pop17';
+    let scale = this.state.tile_scale(state.info[this.state.tile]);
     
     // Shift to center the tiles due to scaling
     let tile_width_offset = (this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth())) / 2;
