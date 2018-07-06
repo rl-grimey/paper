@@ -7,9 +7,7 @@ import { scaleOrdinal, scaleLinear } from 'd3';
 export const communities =  [-1, 0, 1, 2, 3, 4];
 export const community_scale = scaleOrdinal()
   .domain(communities)
-  .range(['#666666', '#7fc97f','#ffff99','#fdc086', '#beaed4','#386cb0']);
-
-
+  .range(['#bdbdbd', '#7fc97f','#ffff99','#fdc086', '#beaed4', '#e31a1c']);
 export const community_labels = scaleOrdinal()
   .domain(communities)
   .range([
@@ -22,7 +20,20 @@ export const community_labels = scaleOrdinal()
     'Protests'
   ]);
 
+
+
+
+
+
+
+
+
+
+  /* Styles */
 export const center_styles = {
   'alignItems': 'center',
   'justifyContent': 'center'
 };
+
+
+//export const aspect_ratio = (width, height) => {}
