@@ -44,11 +44,12 @@ export default class Cartogrid extends React.Component {
       padding           : padding,
       x_scale           : x_scale,
       y_scale           : y_scale,
-      tile_scale        : d3.scaleLinear,
+      tile_scale        : undefined,
       data              : {},
       chart             : props.chart,
       view              : props.view,
-      community: props.community,
+      tile              : props.tile,
+      community         : props.community,
       selected_state    : props.selected_state
     };
 
@@ -63,7 +64,7 @@ export default class Cartogrid extends React.Component {
     let data = require('../data/visualization.json');
 
     // Compute scales
-    let tile_scale = this.create_tile_scale(data, this.state.view);
+    let tile_scale = this.create_tile_scale(data, this.state.tile);
 
     this.setState({ data, tile_scale });
   }
@@ -76,7 +77,7 @@ export default class Cartogrid extends React.Component {
 
     // Create new scales
     let {x_scale, y_scale} = get_scales(width, height, padding);
-    let tile_scale = this.create_tile_scale(this.state.data, nextProps.view);
+    let tile_scale = this.create_tile_scale(this.state.data, nextProps.tile);
 
     this.setState({ 
       ...nextProps, 
@@ -87,26 +88,29 @@ export default class Cartogrid extends React.Component {
     });
   }
 
-  create_tile_scale(data, view) {
+  create_tile_scale(data, tile_attr) {
     /* Creates a scale sizing the tile based on our data view. */
-    let view_attr = (view === 'absolute') ? 'total_tweets' : 'total_tweet_rate';
 
-    // Map the state's view attr from the info
-    let state_attrs = d3.values(data).map(d => d.info[view_attr]);
+    // Map the state's tile attr from the info
+    let state_attrs = d3.values(data).map(d => d.info[tile_attr]);
+    let domain = d3.extent(state_attrs);
 
-    // Create two scales
-    let tile_scale = d3.scaleLog()
+    // Create two scales for data views
+    let tweet_scale = d3.scaleLog()
       .base(2)
-      .domain(d3.extent(state_attrs))
+      .domain(domain)
       .range([0.5, 1.0]);
 
-    return tile_scale;
+    let population_scale = d3.scaleQuantile()
+      .domain(domain)
+      .range([0.5, 0.675, 0.85, 1.0]);
+
+    return (tile_attr === 'total_tweets') ? tweet_scale : population_scale;
   }
 
   create_tile(state, i) {
     // Size the tile first
-    let view_attr = (this.state.view === 'absolute') ? 'total_tweets' : 'total_tweet_rate';
-    let scale = this.state.tile_scale(state.info[view_attr]);
+    let scale = this.state.tile_scale(state.info[this.state.tile]);
     
     // Shift to center the tiles due to scaling
     let tile_width_offset = (this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth())) / 2;

@@ -8,8 +8,9 @@ export default class ModalChart extends React.Component {
       ...props
     };
 
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleOpen   = this.handleOpen.bind(this);
+    this.handleClose  = this.handleClose.bind(this);
+    this.render_title = this.render_title.bind(this);
   }
 
   componentWillReceiveProps(nextProps) { 
@@ -23,6 +24,14 @@ export default class ModalChart extends React.Component {
     this.setState({ open: false }); 
   }
 
+  render_title() {
+    /* Creates a title depending on our chart and view. */
+    let { info, view } = this.state;
+    let state = info.name;
+
+    return state + "'s Weekly Tweet Topics (Count)";
+  }
+
   render() {
     return (
       <Modal
@@ -33,7 +42,9 @@ export default class ModalChart extends React.Component {
         keyboard={true}
         className={'chart-modal'}
       >
-        <Modal.Header><h3>{this.props.abbrv}</h3></Modal.Header>
+        <Modal.Header>
+          <h3>{this.render_title()}</h3>
+        </Modal.Header>
         <Modal.Body>
           <svg width={this.state.width} height={this.state.height}>
             {this.props.children}
@@ -45,6 +56,4 @@ export default class ModalChart extends React.Component {
       </Modal>
     );
   }
-
-
 }

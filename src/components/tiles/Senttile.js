@@ -20,7 +20,7 @@ export default class SentTile extends React.Component {
     let { x_scale, y_scale } = this.create_chart_scales(width, height, view, data);
     let color = scaleOrdinal({
       domain: ['negative', 'positive'],
-      range : ['#b2182b', '#2166ac']
+      range : ['#ef8a62', '#67a9cf']
     })
     
     this.state = {

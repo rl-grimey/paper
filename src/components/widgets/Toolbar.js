@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton, Label } from 'react-bootstrap';
+import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import HelpButton from './HelpButton';
 
 export default class Toolbar extends React.Component {
@@ -11,11 +11,13 @@ export default class Toolbar extends React.Component {
     super();
     this.state = {
       chart: props.chart,
-      view: props.view
+      view : props.view,
+      tile : props.tile
     }
 
     this.handleChartBtn = this.handleChartBtn.bind(this);
     this.handleViewBtn  = this.handleViewBtn.bind(this);
+    this.handleTileBtn  = this.handleTileBtn.bind(this);
   }
 
   handleChartBtn(evt) {
@@ -32,6 +34,12 @@ export default class Toolbar extends React.Component {
     this.props.handleView(evt);
   }
 
+  handleTileBtn(evt) {
+    /* Sets our tile sizing button. */
+    this.setState({ tile: evt });
+    this.props.handleTile(evt);
+  }
+
   render() {
     return (
       <Row className={'justify-content-between'}>
@@ -39,19 +47,14 @@ export default class Toolbar extends React.Component {
         <Col>
           <h2 className="dashboard-title align-middle">
             <abbr 
-              title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the Travel Ban."
-            >CarTopicVis
+              title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the 2017 Muslim Travel Ban."
+            >CarSentToGram
             </abbr>
           </h2>
         </Col>
 
         <Col>
           <ButtonToolbar style={{'marginTop': '20px'}}>
-            <Label 
-              bsStyle="default"
-              style={{'lineHeight': '3'}}
-            >Charts
-            </Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
               name="charts"
@@ -59,6 +62,7 @@ export default class Toolbar extends React.Component {
               defaultValue={'topics'}
               onChange={(evt) => this.handleChartBtn(evt)}
             >
+              <ToggleButton disabled value={''}><b>Charts</b></ToggleButton>
               <ToggleButton value={'topics'}>Topic View</ToggleButton>
               <ToggleButton value={'sents'}>Sentiment View</ToggleButton>
               <ToggleButton value={'counts'}>Distribution View</ToggleButton>
@@ -68,7 +72,6 @@ export default class Toolbar extends React.Component {
 
         <Col>
           <ButtonToolbar style={{'marginTop': '20px'}}>
-            <Label bsStyle="default" style={{'lineHeight': '3'}}>Data View</Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
               name="views"
@@ -76,8 +79,25 @@ export default class Toolbar extends React.Component {
               defaultValue={'absolute'}
               onChange={(evt) => this.handleViewBtn(evt)}
             >
+              <ToggleButton disabled value={''}><b>Data View</b></ToggleButton>
               <ToggleButton value={'absolute'}>Absolute</ToggleButton>
               <ToggleButton value={'relative'}>Relative</ToggleButton>
+            </ToggleButtonGroup>
+          </ButtonToolbar>
+        </Col>
+
+        <Col>
+          <ButtonToolbar style={{'marginTop': '20px'}}>
+            <ToggleButtonGroup 
+              type="radio" 
+              name="tiles"
+              value={this.state.tile}
+              defaultValue={'total_tweets'}
+              onChange={(evt) => this.handleTileBtn(evt)}
+            >
+              <ToggleButton disabled value={''}><b>Tile Sizing</b></ToggleButton>
+              <ToggleButton value={'total_tweets'}>Tweets</ToggleButton>
+              <ToggleButton value={'pop17'}>Population</ToggleButton>
             </ToggleButtonGroup>
           </ButtonToolbar>
         </Col>

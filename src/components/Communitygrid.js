@@ -1,7 +1,7 @@
 /* Dependencies */
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { scaleSqrt, scaleBand } from 'd3';
+import { scaleSqrt, scaleBand, scaleQuantile } from 'd3';
 import { entries, extent } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
 import { communities, center_styles } from '../utilities';
@@ -78,20 +78,22 @@ export default class CommunityGrid extends React.Component {
     /* Creates a size scale based on values from all community tokens. */
 
     // Conditionally set the view, based on absolute (count) or relative (rank)
-    //let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
-    /* COULD CREATE SCALE BASED ON RANK OCCURENCES ACROSS CLOUDS */
-
-    let intercloud_scale = scaleSqrt().range([10, 36]);
+    let absolute_scale = scaleSqrt().range([10, 36]);
+    let relative_scale = scaleQuantile()
+      .domain([1, 20])
+      .range([10, 14, 18, 24, 36].reverse());
     
-    if (this.state.data === {}) return intercloud_scale;
-    else {
+    if (this.state.data === {}) return null;
+    else if (this.state.view === 'absolute') {
       // Concatentate the top 20 tokens for each community
       let top_20s = [].concat.apply([], entries(this.state.data)
         .map(d => this.create_cloud_data(d.value)))
         .map(d => d.value);
 
-      intercloud_scale.domain(extent(top_20s));
-      return intercloud_scale;
+      absolute_scale.domain(extent(top_20s));
+      return absolute_scale;
+    } else {
+      return relative_scale;
     }
   }
 
