@@ -20,7 +20,7 @@ export default class CountTile extends React.Component {
     let { x_scale, y_scale } = this.create_chart_scales(width, height, view, data);
     let color = scaleThreshold({
       domain: [0],
-      range : ['#2166ac', '#b2182b']
+      range : ['#ef8a62', '#67a9cf']
     })
     
     this.state = {
