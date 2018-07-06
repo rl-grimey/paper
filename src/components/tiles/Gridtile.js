@@ -85,6 +85,7 @@ export default class Gridtile extends React.Component {
           width={this.state.width}
           height={this.state.height}
         />
+        {childrenWithProps}
         <Line
           from={new Point({ x: mid_width, y: this.state.height - 1})}
           to={new Point({ x: mid_width, y: 1})}
@@ -108,7 +109,6 @@ export default class Gridtile extends React.Component {
           stroke={'none'}
           onClick={() => console.log(this.state.abbrv + ' clicked')}
         />
-        {childrenWithProps}
       </Group>
     );
   }
