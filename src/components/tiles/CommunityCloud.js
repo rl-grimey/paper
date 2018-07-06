@@ -25,7 +25,6 @@ export default class CommunityCloud extends React.Component {
     };
 
     this.create_cloud_data = this.create_cloud_data.bind(this);
-    this.create_cloud_scale = this.create_cloud_scale.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -58,44 +57,22 @@ export default class CommunityCloud extends React.Component {
     return top_20;
   }
 
-  create_cloud_scale(sliced_data) {
-    /* Creates a font scale depending on our view. */
-    let absolute_scale = scaleLinear()
-      .domain(extent(sliced_data.map(d => d.value)))
-      .range([8, 28])
-      .nice();
-
-    let relative_scale = scaleLinear()
-      .domain([1, 20])
-      .range([28, 8])
-      .nice();
-
-    let font_size_mapper = (this.state.view === 'absolute') ?
-      word => absolute_scale(word.value) :
-      word => relative_scale(word.value);
-
-    return font_size_mapper;
-  }
-
   render() {
     let { community, selected_community } = this.state;
 
+    // Create data and scale for wordcloud
     let format_data = this.create_cloud_data()
-    let font_scale = word => this.props.scale(word.value);  //let font_scale = this.create_cloud_scale(format_data);
-    
+    let font_scale = word => this.props.scale(word.value);
 
     // Dont highlight + add borders if nothing is selected
     let valid_selection = selected_community !== null;
     let highlight = selected_community === community;
 
-
-    // Dynamically set text color
-    //let text_color = ((this.state.community === -1) ? 'white' : 'black') + ' !important';
-
-    // Dynamically set cloud color
+    // Dynamically set cloud color and opacity
     let topic_color = color(community_scale(community));
     if (valid_selection && !highlight) topic_color.opacity = 0.5
 
+    // Inline JSX styles
     let styles = { 
       'background': topic_color,
       'outline': (highlight) ? '2px solid black' : 'none',
@@ -103,8 +80,13 @@ export default class CommunityCloud extends React.Component {
      };
 
     return (
-      <div style={styles} onClick={() => this.props.onClick(community)}>
-        <p className='text-center'><strong>{community_labels(community)}</strong></p>
+      <div 
+        style={styles} 
+        onClick={() => this.props.onClick(community)}
+      >
+        <p className='text-center'>
+          <h5><strong>{community_labels(community)}</strong></h5>
+        </p>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
