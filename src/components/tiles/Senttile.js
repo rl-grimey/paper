@@ -8,9 +8,8 @@ import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
 import { max } from 'd3';
+import { weeks } from '../../utilities';
 
-/* Scale utility */
-const weeks = [-4, -3, -2, -1, 1, 2, 3, 4];
 
 export default class SentTile extends React.Component {
   constructor(props) {
@@ -51,10 +50,14 @@ export default class SentTile extends React.Component {
      *  negative: [...]
      * }
      */
+
+    // Create padding based on chart size
+    let padding = (width > 200) ? 0.4 : 0.075;
+
     let x_scale = scaleBand({
       domain    : weeks,
       rangeRound: [1, width-1],
-      padding   : 0.05
+      padding   : padding
       // TickFormatting
     })
 

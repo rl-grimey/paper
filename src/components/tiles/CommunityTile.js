@@ -53,7 +53,7 @@ export default class CommunityTile extends React.Component {
 
   create_chart_scales(width, height, view, weekly_max) {
     /* Creates scales based on DOM + data dimensions */
-    let padding = (width > 200) ? 0.4 : 0.1;
+    let padding = (width > 200) ? 0.4 : 0.075;
 
     let x_scale = scaleBand({
       domain    : [-4, -3, -2, -1, 0, 1, 2, 3, 4],
