@@ -138,18 +138,9 @@ export default class Cartogrid extends React.Component {
         selected_state={this.state.selected_state}
         view={this.state.view}
         onClick={this.props.onClickState}
+        escape={this.props.escape}
       >
         {this.create_chart(tile_width, tile_height, state)}
-        <Text
-          fontSize={11}
-          fontWeight={font_weight}
-          fontFamily={'sans-serif'}
-          textAnchor={'end'}
-          style={{'opacity': 0.8}}
-          x={tile_width * 0.9}
-          y={tile_height * 0.2}
-        >{state.info.abbrv}
-        </Text>
       </Gridtile>
     );
   }
@@ -168,6 +159,7 @@ export default class Cartogrid extends React.Component {
           view={this.state.view}
           community={this.state.community}
           info={data.info}
+          escape={this.props.escape}
           />);
       case 'counts':
         return(<CountTile

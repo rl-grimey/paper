@@ -41,7 +41,16 @@ class App extends React.Component {
     /* Adds resize and escape handling */
     this.handleResize();
 
-    document.addEventListener('keydown', this.handleEscape);
+    /* Clears our selected state/topic if escape is pressed */
+    document.addEventListener('keydown', (evt) => {
+      switch(evt.keyCode) {
+        case 27:
+          this.handleEscape();
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   handleResize() {
@@ -55,13 +64,7 @@ class App extends React.Component {
 
   handleEscape(event) {
     /* Clears our selected state/topic if escape is pressed */
-    switch(event.keyCode) {
-      case 27:
-        this.setState({ statefp: null, community: null, week: null });
-        break;
-      default:
-        break;
-    };
+    this.setState({ statefp: null, community: null, week: null });
   }
 
   handleBtnChart(chart) {
@@ -126,6 +129,7 @@ class App extends React.Component {
               community={this.state.community}
               onClickState={this.handleClickTile}
               selected_state={this.state.statefp}
+              escape={this.handleEscape}
             />
           </Row>
         </Grid>

@@ -55,6 +55,8 @@ export default class CommunityTile extends React.Component {
   componentWillReceiveProps(nextProps) {
     let { width, height, view } = nextProps;
     let { x_scale, y_scale } = this.create_scales(width, height, view, this.state.weekly_max);
+
+    let modal_open = 
     this.setState({ ...nextProps, width, height, view, x_scale, y_scale });
   }
 
@@ -64,8 +66,9 @@ export default class CommunityTile extends React.Component {
 
     let x_scale = scaleBand({
       domain    : weeks,
-      rangeRound: [1, width-1],
-      padding   : padding
+      rangeRound: [0, width],
+      padding   : padding,
+      paddingOuter: 0
     })
 
     /* Get the max value of our data.
@@ -206,7 +209,14 @@ export default class CommunityTile extends React.Component {
 
   render_modal() {
     /* Creates a modal chart with the normal size graph. */
+    // Open or close the modal
     this.setState({ modal_open: !this.state.modal_open });
+    
+    // Clear the hover from parent tile
+    this.props.hover();
+    
+    // Clear selected states
+    this.props.escape();
   }
 
   render() {
@@ -222,9 +232,17 @@ export default class CommunityTile extends React.Component {
     let screen_height = window.innerHeight * 0.7;
 
     return (
-      <Group onClick={this.render_modal} >
+      <Group>
         {this.render_chart(tile_width, tile_height, margin_grid)}
-
+        <rect
+          top={0}
+          left={0}
+          width={tile_width}
+          height={tile_height}
+          fill={'#ffffff00'}
+          stroke={'none'}
+          onClick={this.render_modal}
+        />
         <ModalChart
           open={this.state.modal_open}
           callback={this.render_modal}
