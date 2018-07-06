@@ -35,7 +35,7 @@ export default class Cartogrid extends React.Component {
 
     // Create the chart scales
     let { width, height, padding } = props;
-    width = width * 0.7;
+    width = width * 0.6;
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
@@ -70,7 +70,7 @@ export default class Cartogrid extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Scale dimensions
-    let width   = nextProps.width * 0.7;
+    let width   = nextProps.width * 0.6;
     let height  = nextProps.height
     let padding = nextProps.padding
 
@@ -109,8 +109,8 @@ export default class Cartogrid extends React.Component {
     let scale = this.state.tile_scale(state.info[view_attr]);
     
     // Shift to center the tiles due to scaling
-    let tile_width_offset = this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth());
-    let tile_height_offset = this.state.y_scale.bandwidth() - (scale * this.state.y_scale.bandwidth());
+    let tile_width_offset = (this.state.x_scale.bandwidth() - (scale * this.state.x_scale.bandwidth())) / 2;
+    let tile_height_offset = (this.state.y_scale.bandwidth() - (scale * this.state.y_scale.bandwidth())) / 2;
 
     let top = this.state.y_scale(state.info.y) + tile_height_offset;
     let left = this.state.x_scale(state.info.x) + tile_width_offset;

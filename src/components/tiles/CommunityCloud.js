@@ -14,12 +14,13 @@ export default class CommunityCloud extends React.Component {
     super();
 
     this.state = {
-      width: props.width,
-      height: props.height,
-      view: props.view,
-      community: props.community,
+      width             : props.width,
+      height            : props.height,
+      view              : props.view,
+      community         : props.community,
       selected_community: props.selected_community,
-      data: props.data
+      data              : props.data,
+      scale             : props.scale
     };
 
     this.create_cloud_data = this.create_cloud_data.bind(this);
@@ -35,6 +36,7 @@ export default class CommunityCloud extends React.Component {
     return (
       (nextProps.width !== this.state.width) ||
       (nextProps.view !== this.state.view) ||
+      (nextProps.scale !== this.state.scale) ||
         // Handle newly selected communities
         (
           (selected === false) &&          
@@ -78,16 +80,18 @@ export default class CommunityCloud extends React.Component {
       .range([28, 8])
       .nice();
 
-    let font_size_mapper = (this.state.view === 'absolute') ?
+    let font_size_mapper2 = (this.state.view === 'absolute') ?
       word => absolute_scale(word.value) :
       word => relative_scale(word.value);
-
+    
+    let font_size_mapper = word => this.props.scale(word.value);
     return font_size_mapper;
   }
 
   render() {
     let format_data = this.create_cloud_data()
-    let font_scale = this.create_cloud_scale(format_data);
+    //let font_scale = this.create_cloud_scale(format_data);
+    let font_scale = word => this.props.scale(word.value);
     let selected = this.state.selected_community === this.state.community;
 
     let styles = { 
