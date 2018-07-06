@@ -3,18 +3,16 @@
  */
 
 import React from 'react';
-import { Bar, BarStack } from '@vx/shape';
+import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import { stack, entries, color } from 'd3';
+import { stack, color } from 'd3';
 import { 
   weeks,
   week_labels,
   communities, 
   community_scale, 
-  community_highlight_scale, 
-  community_labels,
   margin_grid,
   margin_modal
 } from '../../utilities';

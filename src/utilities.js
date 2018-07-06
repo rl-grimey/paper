@@ -1,7 +1,7 @@
 /**
  * Helper functions used by more than one component.
  */
-import { scaleOrdinal, scaleLinear } from 'd3';
+import { scaleOrdinal } from 'd3';
 
 /* Community Globals */
 export const communities =  [-1, 0, 1, 2, 3, 4];

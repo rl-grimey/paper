@@ -90,31 +90,26 @@ export default class Cartogrid extends React.Component {
 
   create_tile_scale(data, tile_attr) {
     /* Creates a scale sizing the tile based on our data view. */
-    //let view_attr = (view === 'absolute') ? 'total_tweets' : 'pop17';
 
-    // Map the state's view attr from the info
+    // Map the state's tile attr from the info
     let state_attrs = d3.values(data).map(d => d.info[tile_attr]);
     let domain = d3.extent(state_attrs);
 
-    console.log(tile_attr, state_attrs);
-    
-
-    // Create two scales
-    let absolute_scale = d3.scaleLog()
+    // Create two scales for data views
+    let tweet_scale = d3.scaleLog()
       .base(2)
       .domain(domain)
       .range([0.5, 1.0]);
 
-    let relative_scale = d3.scaleQuantile()
+    let population_scale = d3.scaleQuantile()
       .domain(domain)
       .range([0.5, 0.675, 0.85, 1.0]);
 
-    return (tile_attr === 'total_tweets') ? absolute_scale : relative_scale;
+    return (tile_attr === 'total_tweets') ? tweet_scale : population_scale;
   }
 
   create_tile(state, i) {
     // Size the tile first
-    //let view_attr = (this.state.view === 'absolute') ? 'total_tweets' : 'pop17';
     let scale = this.state.tile_scale(state.info[this.state.tile]);
     
     // Shift to center the tiles due to scaling

@@ -1,12 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import WordCloud from 'react-d3-cloud';
-import { 
-  scaleLinear, 
-  scaleLog, 
-  scalePow 
-} from 'd3-scale';
-import { extent } from 'd3-array';
 import { color } from 'd3-color';
 import { community_scale, community_labels } from '../../utilities';
 
@@ -30,8 +24,6 @@ export default class CommunityCloud extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     /* Only update if width has changed, view has changed, 
       or community selection is different. */
-    let selected = this.state.selected_community === this.state.community;
-
     return (
       (nextProps.width !== this.state.width) ||
       (nextProps.view !== this.state.view) ||
@@ -84,9 +76,7 @@ export default class CommunityCloud extends React.Component {
         style={styles} 
         onClick={() => this.props.onClick(community)}
       >
-        <p className='text-center'>
-          <h5><strong>{community_labels(community)}</strong></h5>
-        </p>
+        <h5 className='text-center'><strong>{community_labels(community)}</strong></h5>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
@@ -101,6 +91,7 @@ export default class CommunityCloud extends React.Component {
 }
 
 /*
+let selected = this.state.selected_community === this.state.community;
 // Handle newly selected communities
         (
           (selected === false) &&          

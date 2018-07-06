@@ -1,7 +1,7 @@
 /* Dependencies */
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { scaleSqrt, scaleBand, scaleLinear, scaleQuantile } from 'd3';
+import { scaleSqrt, scaleBand, scaleQuantile } from 'd3';
 import { entries, extent } from 'd3';
 import CommunityCloud from './tiles/CommunityCloud';
 import { communities, center_styles } from '../utilities';
@@ -78,11 +78,7 @@ export default class CommunityGrid extends React.Component {
     /* Creates a size scale based on values from all community tokens. */
 
     // Conditionally set the view, based on absolute (count) or relative (rank)
-    let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
-
-    
     let absolute_scale = scaleSqrt().range([10, 36]);
-    //let relative_scale = scaleLinear().domain([20, 1]).range([10, 36]);
     let relative_scale = scaleQuantile()
       .domain([1, 20])
       .range([10, 14, 18, 24, 36].reverse());
