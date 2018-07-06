@@ -2,7 +2,6 @@
 import React from 'react';
 import { scaleBand } from '@vx/scale';
 import * as d3 from 'd3';
-import { Text } from '@vx/text';
 
 /* Components */
 import CartoLegend from './widgets/CartoLegend';
@@ -125,7 +124,6 @@ export default class Cartogrid extends React.Component {
 
     // Font styles
     let selected = state.info.abbrv === this.state.selected_state;
-    let font_weight = (selected) ? 'bold' : '500';
 
     return (
       <Gridtile

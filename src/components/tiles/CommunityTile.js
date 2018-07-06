@@ -56,7 +56,6 @@ export default class CommunityTile extends React.Component {
     let { width, height, view } = nextProps;
     let { x_scale, y_scale } = this.create_scales(width, height, view, this.state.weekly_max);
 
-    let modal_open = 
     this.setState({ ...nextProps, width, height, view, x_scale, y_scale });
   }
 
