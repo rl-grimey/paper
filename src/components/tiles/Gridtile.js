@@ -1,6 +1,7 @@
 import React from 'react';
 import { Group } from '@vx/group';
-import { Bar } from '@vx/shape';
+import { Bar, Line } from '@vx/shape';
+import { Point } from '@vx/point';
 
 export default class Gridtile extends React.Component {
   constructor(props) {
@@ -34,7 +35,6 @@ export default class Gridtile extends React.Component {
   componentWillReceiveProps(nextProps) {
     /* Check to see if state has been selected */
     let selected = nextProps.selected_state === this.state.abbrv;
-
     this.setState({ ...nextProps, selected });
   }
 
@@ -44,6 +44,9 @@ export default class Gridtile extends React.Component {
     // Some double ternary logic for highlighting
     let selected = this.props.selected_state === this.state.abbrv;
     let strokeHighlight = selected ? '#333333' : '#33333333';
+
+    // Dimensions to denote the travel ban date
+    let mid_width = (this.state.width / 2) - 0;
 
     return (
       <Group
@@ -59,6 +62,12 @@ export default class Gridtile extends React.Component {
           strokeWidth={1}
           width={this.state.width}
           height={this.state.height}
+        />
+        <Line
+          from={new Point({ x: mid_width, y: this.state.height - 1})}
+          to={new Point({ x: mid_width, y: 1})}
+          stroke={'#5b5b5b'}
+          strokeDasharray={'2 2'}
         />
         <rect
           width={this.state.width}
