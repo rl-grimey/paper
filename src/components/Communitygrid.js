@@ -77,8 +77,8 @@ export default class CommunityGrid extends React.Component {
   create_intercloud_scale() {
     /* Creates a size scale based on values from all community tokens. */
     //let intercloud_scale = scaleLinear().range([8, 28]);
-    //let intercloud_scale = scaleSqrt().range([8, 28]);
-    let intercloud_scale = scaleQuantile().range([10, 14, 18, 22, 28]);
+    let intercloud_scale = scaleSqrt().range([8, 28]);
+    //let intercloud_scale = scaleQuantile().range([10, 14, 18, 22, 28]);
     
     if (this.state.data === {}) return intercloud_scale;
     else {
