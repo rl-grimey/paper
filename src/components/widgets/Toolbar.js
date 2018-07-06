@@ -46,7 +46,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar>
+          <ButtonToolbar style={{'margin-top': '20px'}}>
             <Label 
               bsStyle="default"
               className="align-text-bottom"
@@ -67,7 +67,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar>
+          <ButtonToolbar style={{'margin-top': '20px'}}>
             <Label bsStyle="default">Data View</Label>{' '}
             <ToggleButtonGroup 
               type="radio" 
@@ -83,7 +83,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <HelpButton/>
+          <HelpButton />
         </Col>
       </Row>
     );

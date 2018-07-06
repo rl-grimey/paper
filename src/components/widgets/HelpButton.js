@@ -24,6 +24,7 @@ export default class HelpButton extends React.Component {
         <Button
           onClick={this.handleOpen}
           bsStyle="info"
+          style={{'margin-top': '20px'}}
         >
           <Glyphicon glyph="info-sign" />
           {' '}Help
