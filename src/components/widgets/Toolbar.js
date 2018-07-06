@@ -83,10 +83,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <Row>
-            <Label bsStyle="default">Help</Label>{' '}
-            <HelpButton/>
-          </Row>
+          <HelpButton/>
         </Col>
       </Row>
     );

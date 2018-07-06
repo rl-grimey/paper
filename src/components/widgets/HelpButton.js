@@ -26,6 +26,7 @@ export default class HelpButton extends React.Component {
           bsStyle="info"
         >
           <Glyphicon glyph="info-sign" />
+          {' '}Help
         </Button>
 
         <Modal 
