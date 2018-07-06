@@ -17,7 +17,7 @@ class App extends React.Component {
     super();
     this.state = {
       width  : 1000,
-      height : 600,
+      height : 700,
       padding: 0.01,
 
       chart    : 'topics',
@@ -46,6 +46,10 @@ class App extends React.Component {
     /* Adjust width to maximum possible after the component mounts. */
     let app_div = document.querySelector('#app_ref');
     let app_width = app_div.clientWidth;
+
+    // Height
+
+
     this.setState({ width: app_width });
   }
 
