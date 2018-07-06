@@ -7,6 +7,7 @@ import {
   scalePow 
 } from 'd3-scale';
 import { extent } from 'd3-array';
+import { color } from 'd3-color';
 import { community_scale, community_labels } from '../../utilities';
 
 export default class CommunityCloud extends React.Component {
@@ -35,16 +36,7 @@ export default class CommunityCloud extends React.Component {
     return (
       (nextProps.width !== this.state.width) ||
       (nextProps.view !== this.state.view) ||
-        // Handle newly selected communities
-        (
-          (selected === false) &&          
-          (nextProps.selected_community === this.state.community)
-        ) ||
-        // Handle deselected communities
-        (
-          (selected === true) &&
-          (nextProps.selected_community !== this.state.community)
-        )
+      (nextProps.selected_community !== this.state.selected_community)
     );
   }
 
@@ -86,23 +78,33 @@ export default class CommunityCloud extends React.Component {
   }
 
   render() {
+    let { community, selected_community } = this.state;
+
     let format_data = this.create_cloud_data()
-    //let font_scale = this.create_cloud_scale(format_data);
-    let font_scale = word => this.props.scale(word.value);
-    let selected = this.state.selected_community === this.state.community;
+    let font_scale = word => this.props.scale(word.value);  //let font_scale = this.create_cloud_scale(format_data);
+    
+
+    // Dont highlight + add borders if nothing is selected
+    let valid_selection = selected_community !== null;
+    let highlight = selected_community === community;
+
 
     // Dynamically set text color
-    let text_color = ((this.state.community === -1) ? 'white' : 'black') + ' !important';
+    //let text_color = ((this.state.community === -1) ? 'white' : 'black') + ' !important';
+
+    // Dynamically set cloud color
+    let topic_color = color(community_scale(community));
+    if (valid_selection && !highlight) topic_color.opacity = 0.5
 
     let styles = { 
-      'background': community_scale(this.state.community),
-      'outline': (selected) ? '2px solid black' : 'none',
+      'background': topic_color,
+      'outline': (highlight) ? '2px solid black' : 'none',
       'margin': '3px'
      };
 
     return (
-      <div style={styles} onClick={() => this.props.onClick(this.state.community)}>
-        <p className='text-center'><b>{community_labels(this.state.community)}</b></p>
+      <div style={styles} onClick={() => this.props.onClick(community)}>
+        <p className='text-center'><b>{community_labels(community)}</b></p>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
@@ -115,3 +117,16 @@ export default class CommunityCloud extends React.Component {
     );
   }
 }
+
+/*
+// Handle newly selected communities
+        (
+          (selected === false) &&          
+          (nextProps.selected_community === this.state.community)
+        ) ||
+        // Handle deselected communities
+        (
+          (selected === true) &&
+          (nextProps.selected_community !== this.state.community)
+        )
+*/

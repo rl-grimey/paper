@@ -8,9 +8,13 @@ import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
 import { stack, entries, color } from 'd3';
-import { communities, community_scale, community_highlight_scale, community_labels } from '../../utilities';
-
-// TESTING
+import { 
+  weeks,
+  communities, 
+  community_scale, 
+  community_highlight_scale, 
+  community_labels 
+} from '../../utilities';
 import ModalChart from '../widgets/ModalChart';
 
 
@@ -56,7 +60,7 @@ export default class CommunityTile extends React.Component {
     let padding = (width > 200) ? 0.4 : 0.075;
 
     let x_scale = scaleBand({
-      domain    : [-4, -3, -2, -1, 0, 1, 2, 3, 4],
+      domain    : weeks,
       rangeRound: [1, width-1],
       padding   : padding,
       paddingOuter: 0
