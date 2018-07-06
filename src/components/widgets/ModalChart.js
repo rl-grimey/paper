@@ -45,6 +45,4 @@ export default class ModalChart extends React.Component {
       </Modal>
     );
   }
-
-
 }
