@@ -192,9 +192,10 @@ export default class CommunityTile extends React.Component {
       scale={y_scale}
       top={margin_modal.top}
       left={margin_modal.left}
+      label={(this.state.view === 'absolute') ? 'Topic Tweet Counts' : 'Topic Contribution'}
       stroke={stroke}
       tickStroke={stroke}
-      // Tick formatting
+      //Tick formatting!
     />
 
     return (
@@ -232,6 +233,7 @@ export default class CommunityTile extends React.Component {
           width={screen_width}
           height={screen_height}
           info={this.state.info}
+          view={this.state.view}
           ref={this.modalRef}
         >
           {this.render_chart(screen_width, screen_height, margin_modal)}
