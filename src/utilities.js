@@ -7,7 +7,7 @@ import { scaleOrdinal, scaleLinear } from 'd3';
 export const communities =  [-1, 0, 1, 2, 3, 4];
 export const community_scale = scaleOrdinal()
   .domain(communities)
-  .range(['#bdbdbd', '#7fc97f','#ffff99','#fdc086', '#beaed4', '#ef3b2c']);
+  .range(['#bdbdbd', '#7fc97f','#ffff99','#fdc086', '#beaed4', '#fb6a4a']);
 export const community_labels = scaleOrdinal()
   .domain(communities)
   .range([
