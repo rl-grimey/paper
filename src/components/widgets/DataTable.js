@@ -20,7 +20,9 @@ class DataRow extends React.PureComponent {
       <tr>
         <td>{tweet.week}</td>
         <td>{tweet.message}</td>
-        <td bgcolor={sent_background}>{parsed}</td>
+        <td bgcolor={sent_background}>
+          <font color={'#fff'}>{parsed}</font>
+        </td>
         <td bgcolor={topic_background}>{tweet.Topic}</td>
       </tr>
     );
@@ -31,11 +33,7 @@ class DataRow extends React.PureComponent {
 export default class DataTable extends React.Component {
   constructor(props) {
     super();
-    let sorted = props.tweets.slice().sort((a, b) => a.polarity < b.polarity);
-
-    this.state = {
-      tweets: sorted
-    };
+    this.state = { tweets: props.tweets };
   }
 
   shouldComponentUpdate(nextProps, nextState) {

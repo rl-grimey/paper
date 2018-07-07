@@ -8,11 +8,13 @@ import { Group } from '@vx/group';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
 import { stack, color } from 'd3';
+import { Popover } from 'react-bootstrap';
 import { 
   weeks,
   week_labels,
   communities, 
-  community_scale, 
+  community_scale,
+  community_labels,
   margin_grid,
   margin_modal
 } from '../../utilities';
@@ -126,12 +128,25 @@ export default class CommunityTile extends React.Component {
     let comm_stroke = highlight_stroke(week_dist.key);
 
     // Details on Demand: tooltips
+    /*let bar_details = (<div>
+      <Popover
+        id={this.state.info.name + '-' + week_dist.key}
+        title={week_labels(+week_dist.key) + ' Topics'}
+      >
+        <div>
+          {communities.map((d, i) => {
+            <p><b>{community_labels(d)}: </b>0</p>
+          })}
+        </div>
+      </Popover>
+    </div>);*/
 
     return (
       <Group key={key} >
         {week_dist
           .filter(topic => (y_scale(topic[0]) - y_scale(topic[1]) > 0))
           .map((topic, i) => {
+            console.log(topic);
             return (
               <Bar
                 key={i}

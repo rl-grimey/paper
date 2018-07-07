@@ -73,10 +73,10 @@ export default class CommunityGrid extends React.Component {
     /* Creates a size scale based on values from all community tokens. */
 
     // Conditionally set the view, based on absolute (count) or relative (rank)
-    let absolute_scale = scaleSqrt().range([12, 36]);
+    let absolute_scale = scaleSqrt().range([10, 36]);
     let relative_scale = scaleQuantile()
       .domain([1, 20])
-      .range([12, 14, 18, 24, 36].reverse());
+      .range([10, 14, 20, 24, 36].reverse());
     
     if (this.state.data === {}) return null;
     else if (this.state.view === 'absolute') {

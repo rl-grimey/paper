@@ -61,8 +61,10 @@ export default class Cartogrid extends React.Component {
 
   componentWillMount() { 
     // Load data, and set our scales
-    let data = require('../data/visualization.json');
-    let tweets = require('../data/tweets.json')['11'].slice(0, 50);
+    var data = require('../data/visualization.json');
+
+    var tweets = (require('../data/tweets.json'))['tweets'].slice(100, 200);
+    tweets = tweets.sort((a, b) => +a.polarity - +b.polarity);
 
     // Compute scales
     let tile_scale = this.create_tile_scale(data, this.state.tile);
