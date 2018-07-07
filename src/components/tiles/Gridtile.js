@@ -107,8 +107,8 @@ export default class Gridtile extends React.Component {
           fontFamily={'sans-serif'}
           textAnchor={'end'}
           style={{'opacity': 0.8}}
-          x={this.state.width * 0.9}
-          y={this.state.height * 0.2}
+          x={this.state.width * 0.925}
+          y={this.state.height * 0.175}
         >{this.state.abbrv}
         </Text>
       </Group>

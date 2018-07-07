@@ -39,8 +39,24 @@ hr {
 
 /* Chart Modals */
 .chart-modal .modal-dialog {
-  width: 90% !important;
-  max-width: 90% !important;
+  width: 80% !important;
+  max-width: 80% !important;
+  height: 70%;
+  max-height: 70%;
+}
+
+.modal-container {
+  position: relative;
+  max-height: 80%;
+  overflow: auto;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+.modal-container .modal-content {
+  max-height: 70vh;
+  overflow: auto;
 }
 
 .chart-modal svg {

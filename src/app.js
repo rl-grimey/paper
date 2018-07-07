@@ -17,8 +17,8 @@ class App extends React.Component {
     super();
     this.state = {
       width  : 1000,
-      height : 700,
-      padding: 0.01,
+      height : 800,
+      padding: 0.00,
 
       chart    : 'topics',
       view     : 'absolute',
@@ -109,29 +109,30 @@ class App extends React.Component {
 
           <hr/>
 
-          {/* Dashboard row */}
-          <CommunityGrid
-            width={this.state.width}
-            height={this.state.height / 3}
-            community={this.state.community}
-            view={this.state.view}
-            onClickCloud={this.handleClickCloud}
-          />
-
-          <Row style={center_styles}>
-            <Cartogrid
+          <div id='figureDiv'>
+            {this.state.chart === 'topics' && <CommunityGrid
               width={this.state.width}
-              height={this.state.height}
-              padding={this.state.padding}
-              chart={this.state.chart}
-              view={this.state.view}
-              tile={this.state.tile}
+              height={this.state.height / 4}
               community={this.state.community}
-              onClickState={this.handleClickTile}
-              selected_state={this.state.statefp}
-              escape={this.handleEscape}
-            />
-          </Row>
+              view={this.state.view}
+              onClickCloud={this.handleClickCloud}
+            />}
+
+            <Row style={center_styles}>
+              <Cartogrid
+                width={this.state.width}
+                height={this.state.height}
+                padding={this.state.padding}
+                chart={this.state.chart}
+                view={this.state.view}
+                tile={this.state.tile}
+                community={this.state.community}
+                onClickState={this.handleClickTile}
+                selected_state={this.state.statefp}
+                escape={this.handleEscape}
+              />
+            </Row>
+          </div>
         </Grid>
       </div>
     );

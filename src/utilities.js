@@ -1,13 +1,13 @@
 /**
  * Helper functions used by more than one component.
  */
-import { scaleOrdinal } from 'd3';
+import { scaleOrdinal, scaleQuantile } from 'd3';
 
 /* Community Globals */
 export const communities =  [-1, 0, 1, 2, 3, 4];
 export const community_scale = scaleOrdinal()
   .domain(communities)
-  .range(['#bdbdbd', '#7fc97f','#ffff99','#fdc086', '#beaed4', '#fb6a4a']);
+  .range(['#bdbdbd', '#7fc97f','#ffff99','#fdc086', '#beaed4', '#fc9272']);
 export const community_labels = scaleOrdinal()
   .domain(communities)
   .range([
@@ -19,22 +19,11 @@ export const community_labels = scaleOrdinal()
     'Immigration Policies'
   ]);
 
+/* Sentiments */
+export const sentiment_scale = scaleQuantile()
+  .domain([-1, 1])
+  .range(['#b2182b','#ef8a62','#fddbc7','#d1e5f0','#67a9cf','#2166ac']);
 
-
-
-/* Styles */
-export const center_styles = {
-  'alignItems': 'center',
-  'justifyContent': 'center',
-  'margin': '3px'
-};
-export const margin_grid = {top: 0, right: 0, bottom: 0, left: 0};
-export const margin_modal = {
-  top: 20,
-  right: 20,
-  bottom: 20,
-  left: 50
-};
 
 /* Weeks */
 export const weeks = [-4, -3, -2, -1, 0, 1, 2, 3, 4];
@@ -52,5 +41,17 @@ export const week_labels = scaleOrdinal()
     'Feb 24th'
   ]);
 
-
+/* Styles */
+export const center_styles = {
+  'alignItems': 'center',
+  'justifyContent': 'center',
+  'margin': '3px'
+};
+export const margin_grid = {top: 0, right: 0, bottom: 0, left: 0};
+export const margin_modal = {
+  top: 20,
+  right: 20,
+  bottom: 20,
+  left: 50
+};
 //export const aspect_ratio = (width, height) => {}

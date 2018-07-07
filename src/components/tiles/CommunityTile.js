@@ -17,6 +17,7 @@ import {
   margin_modal
 } from '../../utilities';
 import ModalChart from '../widgets/ModalChart';
+import DataTable from '../widgets/DataTable';
 
 
 export default class CommunityTile extends React.Component {
@@ -123,6 +124,8 @@ export default class CommunityTile extends React.Component {
     let comm_color = color(community_scale(week_dist.key))
     comm_color.opacity = highlight_fill(week_dist.key);
     let comm_stroke = highlight_stroke(week_dist.key);
+
+    // Details on Demand: tooltips
 
     return (
       <Group key={key} >
@@ -242,18 +245,22 @@ export default class CommunityTile extends React.Component {
           onMouseOver={this.props.mouseOver}
           onMouseOut={this.props.mouseOut}
         />
-        <ModalChart
-          open={this.state.modal_open}
-          callback={this.render_modal}
-          width={screen_width}
-          height={screen_height}
-          info={this.state.info}
-          view={this.state.view}
-          ref={this.modalRef}
-        >
-          {this.render_chart(screen_width, screen_height, margin_modal)}
-          {this.render_axes(screen_width, screen_height)}
-        </ModalChart>
+        {this.state.modal_open &&
+          <ModalChart
+            open={this.state.modal_open}
+            callback={this.render_modal}
+            width={screen_width}
+            height={screen_height}
+            info={this.state.info}
+            view={this.state.view}
+            ref={this.modalRef}
+            tweets={this.props.tweets}
+          >
+            {this.render_chart(screen_width, screen_height * 0.7, margin_modal)}
+            {this.render_axes(screen_width, screen_height * 0.7)}
+            <DataTable tweets={this.state.tweets} />
+          </ModalChart>
+        }
       </Group>
     );
   }

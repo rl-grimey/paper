@@ -13,6 +13,14 @@ export default class ModalChart extends React.Component {
     this.render_title = this.render_title.bind(this);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    /* Only render if there's new children */
+    return (
+      (nextProps.children !== this.state.children) ||
+      (nextProps.open !== this.state.open)
+    );
+  }
+
   componentWillReceiveProps(nextProps) { 
     this.setState({ ...nextProps });
   }
@@ -34,26 +42,33 @@ export default class ModalChart extends React.Component {
 
   render() {
     return (
+      <div className={'modal-container'} style={{height: '70vh'}}>
       <Modal
         show={this.state.open}
-        onHide={this.handleClose}
+        //onHide={this.handleClose}\
+        //container={this}
         animation={false}
         autoFocus={true}
         keyboard={true}
         className={'chart-modal'}
+        aria-labelledby="contained-modal-title"
       >
         <Modal.Header>
-          <h3>{this.render_title()}</h3>
+          <Modal.Title id="contained-modal-title">
+            {this.render_title()}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <svg width={this.state.width} height={this.state.height}>
-            {this.props.children}
+          <svg width={this.state.width} height={this.state.height * 0.7}>
+            {this.props.children.slice(0, 2)}
           </svg>
+          {this.props.children[2]}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
+      </div>
     );
   }
 }

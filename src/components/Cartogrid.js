@@ -34,7 +34,7 @@ export default class Cartogrid extends React.Component {
 
     // Create the chart scales
     let { width, height, padding } = props;
-    width = width * 0.675;
+    width = width * 0.65;
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
@@ -45,6 +45,7 @@ export default class Cartogrid extends React.Component {
       y_scale           : y_scale,
       tile_scale        : undefined,
       data              : {},
+      tweets            : {},
       chart             : props.chart,
       view              : props.view,
       tile              : props.tile,
@@ -61,16 +62,17 @@ export default class Cartogrid extends React.Component {
   componentWillMount() { 
     // Load data, and set our scales
     let data = require('../data/visualization.json');
+    let tweets = require('../data/tweets.json')['11'].slice(0, 50);
 
     // Compute scales
     let tile_scale = this.create_tile_scale(data, this.state.tile);
 
-    this.setState({ data, tile_scale });
+    this.setState({ data, tweets, tile_scale });
   }
 
   componentWillReceiveProps(nextProps) {
     // Scale dimensions
-    let width   = nextProps.width * 0.675;
+    let width   = nextProps.width * 0.65;
     let height  = nextProps.height
     let padding = nextProps.padding
 
@@ -156,6 +158,7 @@ export default class Cartogrid extends React.Component {
           view={this.state.view}
           community={this.state.community}
           info={data.info}
+          tweets={this.state.tweets}
           />);
       case 'counts':
         return(<CountTile
