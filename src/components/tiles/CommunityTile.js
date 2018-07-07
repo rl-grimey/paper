@@ -146,7 +146,6 @@ export default class CommunityTile extends React.Component {
         {week_dist
           .filter(topic => (y_scale(topic[0]) - y_scale(topic[1]) > 0))
           .map((topic, i) => {
-            console.log(topic);
             return (
               <Bar
                 key={i}
