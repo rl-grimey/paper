@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Row, Button } from 'react-bootstrap';
+import { Modal, Row, Button, Glyphicon } from 'react-bootstrap';
 
 export default class ModalChart extends React.Component {
   constructor(props, context) {
@@ -36,38 +36,43 @@ export default class ModalChart extends React.Component {
     /* Creates a title depending on our chart and view. */
     let { info, view } = this.state;
     let state = info.name;
+    let desc = (view === 'absolute') ? 'Count' : '% Contribution';
 
-    return state + "'s Weekly Tweet Topics (Count)";
+    return state + "'s Weekly Tweet Topics (" + desc + ")";
   }
 
   render() {
     return (
       <div className={'modal-container'} style={{height: '70vh'}}>
-      <Modal
-        show={this.state.open}
-        //onHide={this.handleClose}\
-        //container={this}
-        animation={false}
-        autoFocus={true}
-        keyboard={true}
-        className={'chart-modal'}
-        aria-labelledby="contained-modal-title"
-      >
-        <Modal.Header>
-          <Modal.Title id="contained-modal-title">
-            {this.render_title()}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <svg width={this.state.width} height={this.state.height * 0.7}>
-            {this.props.children.slice(0, 2)}
-          </svg>
-          {this.props.children[2]}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.handleClose}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal
+          show={this.state.open}
+          //onHide={this.handleClose}\
+          //container={this}
+          animation={false}
+          autoFocus={true}
+          keyboard={true}
+          className={'chart-modal'}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Header>
+            <Modal.Title id="contained-modal-title">
+              {this.render_title()}
+              <Button 
+                onClick={this.handleClose}
+                className='pull-right'
+              ><Glyphicon glyph='resize-small'/></Button>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <svg width={this.state.width} height={this.state.height * 0.7}>
+              {this.props.children.slice(0, 2)}
+            </svg>
+            {this.props.children[2]}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
