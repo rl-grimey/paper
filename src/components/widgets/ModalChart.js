@@ -51,8 +51,8 @@ export default class ModalChart extends React.Component {
           //dialogClassName={'chart-modal-custom'}
           aria-labelledby="contained-modal-title"
         >
-          <Modal.Header>
-            <Modal.Title id="contained-modal-title">
+          <Modal.Header >
+            <Modal.Title>
               {this.render_title()}
               <Button 
                 onClick={this.handleClose}
@@ -60,12 +60,14 @@ export default class ModalChart extends React.Component {
               ><Glyphicon glyph='resize-small'/></Button>
             </Modal.Title>
           </Modal.Header>
+
           <Modal.Body>
             <svg width={this.state.width} height={this.state.height }>
-              {this.props.children.slice(0, 2)}
+              {this.props.children.slice(0, 3)}
             </svg>
-            {this.props.children[2]}
+            {this.props.children.slice(3)}
           </Modal.Body>
+
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
           </Modal.Footer>
