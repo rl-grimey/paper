@@ -41,7 +41,14 @@ export default class HelpButton extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <div>
-              <h4>Heading 4</h4>
+              <h4>Charts</h4>
+              <p>Example text explainging some things</p>
+              <hr/>
+              <h4>Data Views</h4>
+              <p>Example text explainging some things</p>
+              <p>Another example of text.</p>
+              <hr/>
+              <h4>Tile Sizing</h4>
               <p>Example text explainging some things</p>
               <hr/>
               <p>Hopefully an image or gif here demonstrating interactions...</p>
