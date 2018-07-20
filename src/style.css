@@ -39,10 +39,8 @@ hr {
 
 /* Chart Modals */
 .chart-modal .modal-dialog {
-  width: 65% !important;
-  max-width: 65% !important;
-  height: 70%;
-  max-height: 70%;
+  width: 60% !important;
+  max-width: 60% !important;
 }
 
 
