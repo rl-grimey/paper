@@ -21,9 +21,7 @@ export default class ModalChart extends React.Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) { 
-    this.setState({ ...nextProps });
-  }
+  componentWillReceiveProps(nextProps) { this.setState({ ...nextProps }) }
 
   handleOpen() { this.setState({ open: true }); }
 
@@ -46,12 +44,11 @@ export default class ModalChart extends React.Component {
       <div className={'modal-container'} style={{height: '70vh'}}>
         <Modal
           show={this.state.open}
-          //onHide={this.handleClose}\
-          //container={this}
           animation={false}
           autoFocus={true}
           keyboard={true}
           className={'chart-modal'}
+          //dialogClassName={'chart-modal-custom'}
           aria-labelledby="contained-modal-title"
         >
           <Modal.Header>
@@ -64,7 +61,7 @@ export default class ModalChart extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <svg width={this.state.width} height={this.state.height * 0.7}>
+            <svg width={this.state.width} height={this.state.height }>
               {this.props.children.slice(0, 2)}
             </svg>
             {this.props.children[2]}
