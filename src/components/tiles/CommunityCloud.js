@@ -76,7 +76,7 @@ export default class CommunityCloud extends React.Component {
         style={styles} 
         onClick={() => this.props.onClick(community)}
       >
-        <h5 className='text-center'><strong>{community_labels(community)}</strong></h5>
+        <h4 className='text-center'><strong>{community_labels(community)}</strong></h4>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
