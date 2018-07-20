@@ -4,9 +4,7 @@
 
 import React from 'react';
 import { Row, Col, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
-import html2canvas from 'html2canvas';
 import HelpButton from './HelpButton';
-import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from 'constants';
 
 export default class Toolbar extends React.Component {
   constructor(props) {
@@ -58,7 +56,7 @@ export default class Toolbar extends React.Component {
           <h2 className="dashboard-title align-middle">
             <abbr 
               title="Cartographic Topic Visualization of Immigrant-related Tweets *before* and *after* the 2017 Muslim Travel Ban."
-            >CarSentoGram
+            >CarSenToGram
             </abbr>
           </h2>
         </Col>
