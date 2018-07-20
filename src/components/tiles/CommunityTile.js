@@ -7,7 +7,7 @@ import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import { stack, color } from 'd3';
+import { stack, color, format } from 'd3';
 import { Popover } from 'react-bootstrap';
 import { 
   weeks,
@@ -186,6 +186,9 @@ export default class CommunityTile extends React.Component {
     /* Renders axes for our details on demand modal chart. */
     // Axis styles
     const stroke = '#666666';
+    const kFormat = (this.state.view === 'absolute') ? 
+      format('.1s') :
+      format(".0%");
 
     // Create our scales
     let { x_scale, y_scale } = this.create_scales(
@@ -193,6 +196,15 @@ export default class CommunityTile extends React.Component {
       height - margin_modal.top - margin_modal.bottom, 
       this.state.view,
       this.state.weekly_max);
+
+    // Format our scaled
+    let tick_props = (value, index) => ({
+      fontSize: 14
+    });
+
+    let label_props = {
+      fontSize: 18
+    };
 
     // And axes
     let x_axis = <AxisBottom
@@ -202,17 +214,24 @@ export default class CommunityTile extends React.Component {
       stroke={stroke}
       tickStroke={stroke}
       tickFormat={(val, i) => week_labels(val)}
+      tickLabelProps={tick_props}
       label={'Weeks Before / After Travel Ban'}
+      labelProps={label_props}
     />
 
     let y_axis = <AxisLeft
       scale={y_scale}
       top={margin_modal.top}
       left={margin_modal.left}
-      label={(this.state.view === 'absolute') ? 'Topic Tweet Counts' : 'Topic Contribution'}
+      label={(this.state.view === 'absolute') ? 'Topic Tweet Counts' : 'Topic % Contribution'}
+      labelProps={label_props}
       stroke={stroke}
+      tickFormat={(val, i) => kFormat(val)}
       tickStroke={stroke}
-      //Tick formatting!
+      tickLabelProps={(value, index) => ({
+        fontSize: 14,
+        textAnchor: 'end'
+      })}
     />
 
     return (
@@ -242,8 +261,8 @@ export default class CommunityTile extends React.Component {
     let tile_height = this.state.height;
 
     // Get screen dimensions for modal chart
-    let screen_width = window.innerWidth * 0.7;
-    let screen_height = window.innerHeight * 0.7;
+    let screen_width = window.innerWidth * 0.5;
+    let screen_height = screen_width / 1.6;
 
     return (
       <Group>
@@ -270,8 +289,8 @@ export default class CommunityTile extends React.Component {
             ref={this.modalRef}
             tweets={this.props.tweets}
           >
-            {this.render_chart(screen_width, screen_height * 0.7, margin_modal)}
-            {this.render_axes(screen_width, screen_height * 0.7)}
+            {this.render_chart(screen_width, screen_height, margin_modal)}
+            {this.render_axes(screen_width, screen_height)}
             <DataTable tweets={this.state.tweets} />
           </ModalChart>
         }
