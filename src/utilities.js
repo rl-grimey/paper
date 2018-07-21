@@ -51,7 +51,7 @@ export const margin_grid = {top: 0, right: 0, bottom: 0, left: 0};
 export const margin_modal = {
   top: 10,
   right: 10,
-  bottom: 10,
+  bottom: 20,
   left: 75
 };
 //export const aspect_ratio = (width, height) => {}
