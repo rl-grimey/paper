@@ -199,11 +199,6 @@ export default class CommunityTile extends React.Component {
       this.state.view,
       this.state.weekly_max);
 
-    // Format our scaled
-    let tick_props = (value, index) => ({
-      fontSize: 12
-    });
-
     let label_props = {
       fontSize: 18,
       textAnchor: 'middle'
@@ -217,7 +212,10 @@ export default class CommunityTile extends React.Component {
       stroke={stroke}
       tickStroke={stroke}
       tickFormat={(val, i) => week_labels(val)}
-      tickLabelProps={tick_props}
+      tickLabelProps={(value, index) => ({
+        fontSize: 12,
+        textAnchor: 'middle'
+      })}
       label={'Weeks Before / After Travel Ban'}
       labelProps={label_props}
     />
