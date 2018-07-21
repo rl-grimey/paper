@@ -195,9 +195,9 @@ export default class Cartogrid extends React.Component {
       case 'topics':
         return 'Tweet Topics of Public Immigration Discourse before and after the Travel Ban';
       case 'sents':
-        return 'Sentiments';
+        return 'Extreme Tweet Sentiments of Public Immigration Discourse before and after the Travel Ban';
       case 'counts':
-        return 'Weekly Counts';
+        return 'Weekly Tweet Counts of Public Immigation Discourse before and after the Travel Ban';
       default:
         return 'CarSenToGram';
     };
@@ -206,11 +206,12 @@ export default class Cartogrid extends React.Component {
   render_global_tile() {
     return (
       <Gridtile
-        left={this.state.x_scale(7)}
-        top={35}
+        left={this.state.x_scale(2)}
+        top={120}
         width={this.state.x_scale.bandwidth()}
         height={this.state.y_scale.bandwidth()}
         abbrv={'U.S.'}
+        global={true}
       >
         <GlobalTile
           width={this.state.x_scale.bandwidth()}
