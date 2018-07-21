@@ -70,7 +70,7 @@ export default class Toolbar extends React.Component {
               defaultValue={'topics'}
               onChange={(evt) => this.handleChartBtn(evt)}
             >
-              <ToggleButton disabled value={''}><b>Charts</b></ToggleButton>
+              <ToggleButton disabled value={''}><b>Cartograms</b></ToggleButton>
               <ToggleButton value={'topics'}>Topic View</ToggleButton>
               <ToggleButton value={'sents'}>Sentiment View</ToggleButton>
               <ToggleButton value={'counts'}>Distribution View</ToggleButton>
