@@ -25,7 +25,8 @@ export default class CommunityCloud extends React.Component {
     /* Only update if width has changed, view has changed, 
       or community selection is different. */
     return (
-      (nextProps.width !== this.state.width) ||
+      (nextProps.width !== this.state.width) || 
+      (nextProps.height !== this.state.height) ||
       (nextProps.view !== this.state.view) ||
       (nextProps.selected_community !== this.state.selected_community)
     );

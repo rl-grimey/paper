@@ -38,6 +38,7 @@ export default class CommunityGrid extends React.Component {
     // Update if view has changed
     if ((nextProps.view !== this.state.view) || 
         (nextProps.width !== this.state.width) ||
+        (nextProps.height !== this.state.height) ||
         (nextProps.community !== this.state.community)) return true;
     else return false;
   }
