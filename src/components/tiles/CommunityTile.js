@@ -8,7 +8,7 @@ import { Group } from '@vx/group';
 import { Text } from '@vx/text';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import { stack, color, format } from 'd3';
+import { stack, color, format, stackOrderDescending } from 'd3';
 import { Popover } from 'react-bootstrap';
 import { 
   weeks,
@@ -111,7 +111,10 @@ export default class CommunityTile extends React.Component {
       reshaped.push(week_data);
     }
 
-   return stack().keys(community_scale.domain())(reshaped);
+   return stack()
+    .keys(community_scale.domain())
+    .order(stackOrderDescending)
+    (reshaped);
   }
 
   render_bars(week_dist, key, x_scale, y_scale) {
