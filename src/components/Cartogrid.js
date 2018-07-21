@@ -1,6 +1,7 @@
 /* Dependencies */
 import React from 'react';
 import { scaleBand } from '@vx/scale';
+import { Text } from '@vx/text';
 import * as d3 from 'd3';
 
 /* Components */
@@ -57,6 +58,7 @@ export default class Cartogrid extends React.Component {
     this.create_tile  = this.create_tile.bind(this);
     this.create_chart = this.create_chart.bind(this);
     this.create_tile_scale = this.create_tile_scale.bind(this);
+    this.render_title      = this.render_title.bind(this);
   }
 
   componentWillMount() { 
@@ -183,6 +185,20 @@ export default class Cartogrid extends React.Component {
     }
   }
 
+  render_title() {
+    /* Renders a title based on our view */
+    switch (this.state.chart) {
+      case 'topics':
+        return 'topics';
+      case 'sents':
+        return 'Sentiments';
+      case 'counts':
+        return 'Weekly Counts';
+      default:
+        return 'CarSenToGram';
+    };
+  }
+
   render() {
     // How are we looking?
     //console.log('-------\nCartogrid --------------------------------------------');
@@ -196,6 +212,13 @@ export default class Cartogrid extends React.Component {
       >
         {this.state.data && 
           d3.values(this.state.data).map((d, i) => this.create_tile(d, i))}
+        <Text
+          x={this.state.x_scale(1)}
+          y={this.state.y_scale(1) / 2}
+          fontSize={24}
+          fontWeight={700}
+        >{this.render_title()}
+        </Text>
       </svg>
     );
   } 
