@@ -212,9 +212,11 @@ export default class CommunityTile extends React.Component {
       scale={x_scale}
       top={height - margin_modal.bottom}
       left={margin_modal.left}
+      hideAxisLine={true}
       stroke={stroke}
       tickStroke={stroke}
-      tickFormat={(val, i) => week_labels(val)}
+      tickLength={6}
+      tickFormat={(val, i) => week_labels(val) + ' '}
       tickLabelProps={(value, index) => ({
         fontSize: 12,
         textAnchor: 'middle'
@@ -232,10 +234,12 @@ export default class CommunityTile extends React.Component {
       labelOffset={40}
       stroke={stroke}
       tickFormat={(val, i) => kFormat(val)}
+      tickLength={6}
       tickStroke={stroke}
       tickLabelProps={(value, index) => ({
         fontSize: 14,
-        textAnchor: 'end'
+        textAnchor: 'end',
+        verticalAnchor: 'middle'
       })}
     />
 
@@ -291,7 +295,7 @@ export default class CommunityTile extends React.Component {
     this.setState({ modal_open: !this.state.modal_open });
     
     // Clear selected states
-    this.props.click();
+    if (this.props.click !== undefined) this.props.click();
   }
 
   render() {
@@ -305,6 +309,8 @@ export default class CommunityTile extends React.Component {
     // Get screen dimensions for modal chart
     let screen_width = window.innerWidth * 0.5;
     let screen_height = screen_width / 1.6;
+
+    //console.log(this.state.data, stacked_data);
 
     return (
       <Group>
@@ -334,7 +340,7 @@ export default class CommunityTile extends React.Component {
             {this.render_chart(screen_width, screen_height, margin_modal)}
             {this.render_axes(screen_width, screen_height)}
             {this.render_legend(screen_width, screen_height)}
-            <DataTable tweets={this.state.tweets} />
+            {(this.state.tweets.length > 0) && <DataTable tweets={this.state.tweets} />}
           </ModalChart>
         }
       </Group>

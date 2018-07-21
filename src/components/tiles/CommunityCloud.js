@@ -40,7 +40,7 @@ export default class CommunityCloud extends React.Component {
     /* Extracts the top 20 community tokens. Formats for WordCloud<> */
 
     // Conditionally set the view, based on absolute (count) or relative (rank)
-    let view_attr = (this.state.view === 'absolute') ? 'docs' : 'rank';
+    let view_attr = (this.state.view === 'absolute') ? 'rank' : 'rank';
 
     // Select top 20 and format
     let top_20 = this.state.data.slice(0, 20).map(d => {
@@ -66,24 +66,31 @@ export default class CommunityCloud extends React.Component {
     if (valid_selection && !highlight) topic_color.opacity = 0.5
 
     // Inline JSX styles
-    let styles = { 
+    let div_styles = { 
       'background': topic_color,
       'outline': (highlight) ? '2px solid black' : 'none',
       'margin': '3px'
      };
+    let h_styles = {
+      marginTop: '5px',
+      marginBottom: '0px'
+    };
 
     return (
       <div 
-        style={styles} 
+        style={div_styles} 
         onClick={() => this.props.onClick(community)}
       >
-        <h4 className='text-center'><strong>{community_labels(community)}</strong></h4>
+        <h4 
+          className='text-center'
+          style={h_styles}
+        ><strong>{community_labels(community)}</strong></h4>
         <WordCloud
           data={format_data}
           fontSizeMapper={font_scale}
           width={this.state.width}
           height={this.state.height}
-          padding={3}
+          padding={2}
           font={'sans-serif'}
         />
       </div>      

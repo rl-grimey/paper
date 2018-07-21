@@ -10,6 +10,8 @@ import Gridtile from './tiles/Gridtile';
 import CommunityTile from './tiles/CommunityTile';
 import CountTile from './tiles/Counttile';
 import SentTile from './tiles/Senttile';
+import GlobalTile from './tiles/GlobalTile';
+
 
 /* Util */
 const get_scales = (width, height, padding) => {
@@ -59,6 +61,7 @@ export default class Cartogrid extends React.Component {
     this.create_chart = this.create_chart.bind(this);
     this.create_tile_scale = this.create_tile_scale.bind(this);
     this.render_title      = this.render_title.bind(this);
+    this.render_global_tile = this.render_global_tile.bind(this);
   }
 
   componentWillMount() { 
@@ -90,7 +93,8 @@ export default class Cartogrid extends React.Component {
       x_scale, 
       y_scale,
       tile_scale,
-      width 
+      width,
+      height
     });
   }
 
@@ -189,7 +193,7 @@ export default class Cartogrid extends React.Component {
     /* Renders a title based on our view */
     switch (this.state.chart) {
       case 'topics':
-        return 'topics';
+        return 'Tweet Topics of Public Immigration Discourse before and after the Travel Ban';
       case 'sents':
         return 'Sentiments';
       case 'counts':
@@ -199,10 +203,31 @@ export default class Cartogrid extends React.Component {
     };
   }
 
+  render_global_tile() {
+    return (
+      <Gridtile
+        left={this.state.x_scale(7)}
+        top={35}
+        width={this.state.x_scale.bandwidth()}
+        height={this.state.y_scale.bandwidth()}
+        abbrv={'U.S.'}
+      >
+        <GlobalTile
+          width={this.state.x_scale.bandwidth()}
+          height={this.state.y_scale.bandwidth()}
+          data={this.state.data}
+          chart={this.state.chart}
+          view={this.state.view}
+        />
+      </Gridtile>    
+    );
+  }
+
   render() {
     // How are we looking?
     //console.log('-------\nCartogrid --------------------------------------------');
     //console.log(this.state, this.props);
+
 
     return (
       <svg 
@@ -212,11 +237,13 @@ export default class Cartogrid extends React.Component {
       >
         {this.state.data && 
           d3.values(this.state.data).map((d, i) => this.create_tile(d, i))}
+        {this.state.data && this.render_global_tile()}
         <Text
           x={this.state.x_scale(1)}
-          y={this.state.y_scale(1) / 2}
+          y={35}
           fontSize={24}
           fontWeight={700}
+          verticalAnchor={'start'}
         >{this.render_title()}
         </Text>
       </svg>
