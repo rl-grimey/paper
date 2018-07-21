@@ -189,7 +189,7 @@ export default class CommunityTile extends React.Component {
     // Axis styles
     const stroke = '#666666';
     const kFormat = (this.state.view === 'absolute') ? 
-      format('.3s') :
+      format('.2s') :
       format(".0%");
 
     // Create our scales
@@ -268,8 +268,8 @@ export default class CommunityTile extends React.Component {
               fill={community_scale(d)}
             />
             <Text
-              x={legend_height * 2.6}
-              y={7}
+              x={legend_height * 2.75}
+              y={10}
               verticalAnchor={'middle'}
             >
               {community_labels(d)}
