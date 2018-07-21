@@ -74,8 +74,9 @@ export default class Cartogrid extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Scale dimensions
-    let width   = nextProps.width * 0.65;
-    let height  = nextProps.height
+    let width   = nextProps.width * 0.925; //* 0.65 
+    //let height  = nextProps.height
+    let height = width / 1.325;
     let padding = nextProps.padding
 
     // Create new scales
