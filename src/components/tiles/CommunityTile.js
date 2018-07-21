@@ -5,9 +5,10 @@
 import React from 'react';
 import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
+import { Text } from '@vx/text';
 import { AxisBottom, AxisLeft } from '@vx/axis';
 import { scaleBand, scaleLinear } from '@vx/scale';
-import { stack, color } from 'd3';
+import { stack, color, format } from 'd3';
 import { Popover } from 'react-bootstrap';
 import { 
   weeks,
@@ -53,6 +54,7 @@ export default class CommunityTile extends React.Component {
     this.render_modal      = this.render_modal.bind(this);
     this.render_chart      = this.render_chart.bind(this);
     this.render_axes       = this.render_axes.bind(this);
+    this.render_legend     = this.render_legend.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -186,6 +188,9 @@ export default class CommunityTile extends React.Component {
     /* Renders axes for our details on demand modal chart. */
     // Axis styles
     const stroke = '#666666';
+    const kFormat = (this.state.view === 'absolute') ? 
+      format('.3s') :
+      format(".0%");
 
     // Create our scales
     let { x_scale, y_scale } = this.create_scales(
@@ -194,31 +199,84 @@ export default class CommunityTile extends React.Component {
       this.state.view,
       this.state.weekly_max);
 
+    let label_props = {
+      fontSize: 18,
+      textAnchor: 'middle'
+    };
+
     // And axes
     let x_axis = <AxisBottom
       scale={x_scale}
-      top={height - margin_modal.top}
+      top={height - margin_modal.bottom}
       left={margin_modal.left}
       stroke={stroke}
       tickStroke={stroke}
       tickFormat={(val, i) => week_labels(val)}
+      tickLabelProps={(value, index) => ({
+        fontSize: 12,
+        textAnchor: 'middle'
+      })}
       label={'Weeks Before / After Travel Ban'}
+      labelProps={label_props}
     />
 
     let y_axis = <AxisLeft
       scale={y_scale}
       top={margin_modal.top}
       left={margin_modal.left}
-      label={(this.state.view === 'absolute') ? 'Topic Tweet Counts' : 'Topic Contribution'}
+      label={(this.state.view === 'absolute') ? 'Topic Tweet Counts' : 'Topic % Contribution'}
+      labelProps={label_props}
+      labelOffset={40}
       stroke={stroke}
+      tickFormat={(val, i) => kFormat(val)}
       tickStroke={stroke}
-      //Tick formatting!
+      tickLabelProps={(value, index) => ({
+        fontSize: 14,
+        textAnchor: 'end'
+      })}
     />
 
     return (
       <Group>
         {x_axis}
         {y_axis}
+      </Group>
+    );
+  }
+
+  render_legend(width, height) {
+    // Renders a legend for our modal chart
+    let ids = community_labels.domain().slice().reverse();
+    let labels = community_labels.range();
+
+    let legend_height = 20;
+    let legend_padding = 2;
+
+    return (
+      <Group top={margin_modal.top} left={margin_modal.left}>
+        {ids.map((d, i) => {
+          return (
+          <Group 
+            key={i}
+            top={i * (legend_height + legend_padding)}
+          >
+            <Bar
+              y={0}
+              x={10}
+              width={legend_height * 2}
+              height={legend_height - legend_padding}
+              fill={community_scale(d)}
+            />
+            <Text
+              x={legend_height * 2.6}
+              y={7}
+              verticalAnchor={'middle'}
+            >
+              {community_labels(d)}
+            </Text>
+          </Group>
+          );
+        })}
       </Group>
     );
   }
@@ -242,8 +300,8 @@ export default class CommunityTile extends React.Component {
     let tile_height = this.state.height;
 
     // Get screen dimensions for modal chart
-    let screen_width = window.innerWidth * 0.7;
-    let screen_height = window.innerHeight * 0.7;
+    let screen_width = window.innerWidth * 0.5;
+    let screen_height = screen_width / 1.6;
 
     return (
       <Group>
@@ -270,8 +328,9 @@ export default class CommunityTile extends React.Component {
             ref={this.modalRef}
             tweets={this.props.tweets}
           >
-            {this.render_chart(screen_width, screen_height * 0.7, margin_modal)}
-            {this.render_axes(screen_width, screen_height * 0.7)}
+            {this.render_chart(screen_width, screen_height, margin_modal)}
+            {this.render_axes(screen_width, screen_height)}
+            {this.render_legend(screen_width, screen_height)}
             <DataTable tweets={this.state.tweets} />
           </ModalChart>
         }

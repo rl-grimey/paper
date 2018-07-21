@@ -39,11 +39,11 @@ hr {
 
 /* Chart Modals */
 .chart-modal .modal-dialog {
-  width: 80% !important;
-  max-width: 80% !important;
-  height: 70%;
-  max-height: 70%;
+  width: 60% !important;
+  max-width: 60% !important;
 }
+
+
 
 .modal-container {
   position: relative;
@@ -53,6 +53,8 @@ hr {
 .modal-container .modal, .modal-container .modal-backdrop {
   position: absolute;
 }
+
+
 
 .modal-container .modal-content {
   max-height: 70vh;

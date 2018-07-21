@@ -49,9 +49,9 @@ export const center_styles = {
 };
 export const margin_grid = {top: 0, right: 0, bottom: 0, left: 0};
 export const margin_modal = {
-  top: 20,
-  right: 20,
+  top: 10,
+  right: 10,
   bottom: 20,
-  left: 50
+  left: 75
 };
 //export const aspect_ratio = (width, height) => {}

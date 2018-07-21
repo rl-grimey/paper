@@ -40,6 +40,7 @@ class App extends React.Component {
   componentDidMount() {
     /* Adds resize and escape handling */
     this.handleResize();
+    window.addEventListener('resize', this.handleResize);
 
     /* Clears our selected state/topic if escape is pressed */
     document.addEventListener('keydown', (evt) => {
@@ -55,11 +56,18 @@ class App extends React.Component {
 
   handleResize() {
     /* Adjust width to maximum possible after the component mounts. */
+    // Div dimensions
     let app_div = document.querySelector('#app_ref');
     let app_width = app_div.clientWidth;
 
-    // Height
-    this.setState({ width: app_width });
+    // Window dimensions
+    let window_width = window.innerWidth;
+    let window_height = window.innerHeight;
+
+    // Calculations to preserve a fixed aspect ratio
+    //let min_dim = Math.min(window_width, window_height);
+
+    this.setState({ width: window_width, height: window_height });
   }
 
   handleEscape(event) {
