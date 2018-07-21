@@ -7,7 +7,7 @@ import { Bar } from '@vx/shape';
 import { Group } from '@vx/group';
 import { AxisBottom } from '@vx/axis';
 import { scaleBand, scaleLinear, scaleOrdinal } from '@vx/scale';
-import { max } from 'd3';
+import { max, stack } from 'd3';
 import { weeks } from '../../utilities';
 
 
@@ -35,6 +35,7 @@ export default class SentTile extends React.Component {
     }
 
     this.create_chart_scales = this.create_chart_scales.bind(this);
+    this.create_stack_data = this.create_stack_data.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,6 +78,71 @@ export default class SentTile extends React.Component {
     })
 
     return { x_scale, y_scale };
+  }
+
+  create_stack_data() {
+    /* Creates our stack */
+    // Determine which attribute to use
+    let view_attr = (this.state.view === 'absolute') ? 'count' : 'perc';
+    let reshaped = {};
+
+    // Add positives
+    for (var pos_week in this.state.data.positive) {
+      let week_data = this.state.data.positive[pos_week];
+      let week = week_data.week;
+
+      if (week in reshaped) reshaped[week]['positive'] = week_data[view_attr];
+      else {
+        reshaped[week] = {};
+        reshaped[week]['positive'] = week_data[view_attr];
+      }
+    }
+
+    // Add negatives
+    for (var pos_week in this.state.data.negative) {
+      let week_data = this.state.data.negative[pos_week];
+      let week = week_data.week;
+
+      if (week in reshaped) reshaped[week]['negative'] = week_data[view_attr];
+      else {
+        reshaped[week] = {};
+        reshaped[week]['negative'] = week_data[view_attr];
+      }
+    }
+
+    // Reshape object to array
+    let final = Object.entries(reshaped).map(d => {
+      let week_vals = d[1];
+      week_vals['week'] = +d[0];
+      return week_vals;
+    })
+    
+
+    return stack().keys(['positive', 'negative'])(final);
+  }
+
+  render_bars(week, key, x_scale, y_scale) {
+    /* Renders bars */
+    
+
+    return (
+      <Group>
+
+      </Group>
+    );
+  }
+
+  render_chart(width, height, margin) {
+    /* Renders our chart */
+    let stack_data = this.create_stack_data();
+
+    let { x_scale, y_scale } = this.create_chart_scales(
+      width,
+      height,
+      this.state.view,
+      this.state.data);
+
+    
   }
 
   render() {

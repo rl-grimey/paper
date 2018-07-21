@@ -46,7 +46,7 @@ export default class ModalChart extends React.Component {
           show={this.state.open}
           animation={false}
           autoFocus={true}
-          keyboard={true}
+          keyboard
           className={'chart-modal'}
           //dialogClassName={'chart-modal-custom'}
           aria-labelledby="contained-modal-title"
