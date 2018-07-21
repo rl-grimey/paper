@@ -2,7 +2,7 @@ import React from 'react';
 import { Group } from '@vx/group';
 import { nest, sum } from 'd3';
 import CommunityTile from './CommunityTile';
-
+import SentTile from './Senttile';
 
 export default class GlobalTile extends React.Component {
   constructor(props) {
@@ -16,6 +16,8 @@ export default class GlobalTile extends React.Component {
     };
 
     this.sum_topic_data = this.sum_topic_data.bind(this);
+    this.sum_sent_data = this.sum_sent_data.bind(this);
+
     this.create_chart = this.create_chart.bind(this);
   }
 
@@ -75,22 +77,80 @@ export default class GlobalTile extends React.Component {
     return { grouped_data, weekly_max };
   }
 
+  sum_sent_data() {
+    /* Sums our weekly sent data */
+    let states = this.state.data;
+    let nation = {
+      positive: [],
+      negative: []
+    };
+    let pop17 = 0;
 
-  create_chart(chart) {
+    for (var state_fips in states) {
+      let sents = states[state_fips].sentiments;
+
+      pop17 += states[state_fips].info.pop17;
+      
+      sents.positive.forEach(d => nation.positive.push(d));
+      sents.negative.forEach(d => nation.negative.push(d));
+    }
+
+    let weekly_max = 0;
+    for (var sent in nation) {
+      var grouped_sent = nest()
+        .key(d => d.week)
+        .rollup(v => sum(v, d => d.count))
+        .entries(nation[sent]);
+
+      grouped_sent = grouped_sent.map(d => {
+        weekly_max = Math.max(d.value, weekly_max);
+
+        return {
+          week: d.key,
+          count: d.value
+        };
+      })
+
+      nation[sent] = grouped_sent;
+    }
+
+    // Add percentage of discourse
+    let total_sents = {};
+    for (var week in nation.positive) total_sents[week] = nation.positive[week].count;
+    for (var week in nation.negative) total_sents[week] += nation.negative[week].count;
+    for (var week in nation.positive) nation.positive[week].perc = nation.positive[week].count / total_sents[week];
+    for (var week in nation.negative) nation.negative[week].perc = nation.negative[week].count / total_sents[week];
+
+    return { grouped_data: nation, weekly_max };
+  }
+
+  create_chart() {
     let info = { name: 'United States' };
+    let { width, height, chart, view } = this.state;
 
     switch(chart) {
       case 'topics':
-        let { grouped_data, weekly_max } = this.sum_topic_data();
+        var { grouped_data, weekly_max } = this.sum_topic_data();
         return (
           <CommunityTile
-            width={this.state.width}
-            height={this.state.height}
+            width={width}
+            height={height}
             data={grouped_data}
             weekly_max={weekly_max}
             info={info}
-            view={this.state.view}
+            view={view}
             tweets={[]}
+          />
+        );
+      case 'sents':
+        var { grouped_data, weekly_max } = this.sum_sent_data();
+        return (
+          <SentTile
+            width={width}
+            height={height}
+            data={grouped_data}
+            weekly_max={weekly_max}
+            view={view}
           />
         );
       default:
@@ -99,6 +159,8 @@ export default class GlobalTile extends React.Component {
   }
 
   render() {
-    return (this.create_chart(this.state.chart));
+    this.sum_sent_data();
+
+    return (this.create_chart());
   }
 }
