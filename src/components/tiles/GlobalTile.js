@@ -1,8 +1,10 @@
 import React from 'react';
 import { Group } from '@vx/group';
 import { nest, sum } from 'd3';
+
 import CommunityTile from './CommunityTile';
 import SentTile from './Senttile';
+import CountTile from './Counttile';
 
 export default class GlobalTile extends React.Component {
   constructor(props) {
@@ -16,9 +18,9 @@ export default class GlobalTile extends React.Component {
     };
 
     this.sum_topic_data = this.sum_topic_data.bind(this);
-    this.sum_sent_data = this.sum_sent_data.bind(this);
-
-    this.create_chart = this.create_chart.bind(this);
+    this.sum_sent_data  = this.sum_sent_data.bind(this);
+    this.sum_dist_data  = this.sum_dist_data.bind(this);
+    this.create_chart   = this.create_chart.bind(this);
   }
 
   componentWillReceiveProps(props) { this.setState({ ...props }); }
@@ -124,6 +126,40 @@ export default class GlobalTile extends React.Component {
     return { grouped_data: nation, weekly_max };
   }
 
+  sum_dist_data() {
+    /* Sums our count data */
+    let states = this.state.data;
+    let nation = [];
+    let pop17 = 0;
+    let weekly_max = 0;
+
+    for (var state_fips in states) {
+      pop17 += states[state_fips].info.pop17
+
+      var counts = states[state_fips].counts;
+      counts.forEach(d => nation.push(d));
+    }
+
+    let grouped_data = nest()
+      .key(d => d.week)
+      .rollup(v => sum(v, d => d.count))
+      .entries(nation);
+
+    // Weekly max
+    grouped_data.forEach(d => weekly_max = Math.max(d.value, weekly_max));
+
+    // Add tweet rate
+    grouped_data = grouped_data.map(d => {
+      return {
+        week: d.key,
+        count: d.value,
+        rate: (d.value / pop17) * 10
+      };
+    })
+
+    return {grouped_data, weekly_max};
+  }
+
   create_chart() {
     let info = { name: 'United States' };
     let { width, height, chart, view } = this.state;
@@ -153,13 +189,24 @@ export default class GlobalTile extends React.Component {
             view={view}
           />
         );
+      case 'counts':
+        var { grouped_data, weekly_max } = this.sum_dist_data();
+        return (
+          <CountTile
+            width={width}
+            height={height}
+            data={grouped_data}
+            weekly_max={weekly_max}
+            view={view}
+          />
+        );
       default:
         return <Group></Group>
     }
   }
 
   render() {
-    this.sum_sent_data();
+    this.sum_dist_data();
 
     return (this.create_chart());
   }
