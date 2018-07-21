@@ -16,7 +16,7 @@ export const community_labels = scaleOrdinal()
     'Islam and Religion',
     "Trump's Order",
     'Refugee Crises',
-    'Immigration Policies'
+    'Immigration Policy'
   ]);
 
 /* Sentiments */
