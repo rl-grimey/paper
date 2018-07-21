@@ -102,7 +102,7 @@ export default class Gridtile extends React.Component {
         />
         {childrenWithProps}
         <Text
-          fontSize={11}
+          fontSize={14}
           fontWeight={hover ? '700' : '500'}
           fontFamily={'sans-serif'}
           textAnchor={'end'}
