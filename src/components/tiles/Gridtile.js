@@ -17,7 +17,8 @@ export default class Gridtile extends React.Component {
       abbrv : props.abbrv,
       view  : props.view,
       selected: false,
-      hover: false
+      hover: props.hover || false,
+      global: props.global || false
     }
 
     this.click = this.click.bind(this);    
@@ -80,11 +81,16 @@ export default class Gridtile extends React.Component {
       });
     });
 
+    const shadow_styles = {
+      boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    }
+
     return (
       <Group
         top={this.state.top}
         left={this.state.left}
         id={"tile-" + this.state.abbrv}
+        style={(this.state.global === true) ? shadow_styles : {}}
       >
         <Bar
           className={'tile-bg'}
