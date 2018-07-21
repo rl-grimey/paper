@@ -105,6 +105,8 @@ class App extends React.Component {
     //console.log('/* App ---------------------------------------------------*/');
     //console.log(this.state);
 
+    let cloud_tile_height = Math.min(this.state.height / 4, 275);
+
     return (
       <div className="App">
         <Grid fluid={true} id="app_ref">
@@ -120,7 +122,7 @@ class App extends React.Component {
           <div id='figureDiv'>
             {this.state.chart === 'topics' && <CommunityGrid
               width={this.state.width}
-              height={this.state.height / 4}
+              height={cloud_tile_height}
               community={this.state.community}
               view={this.state.view}
               onClickCloud={this.handleClickCloud}
