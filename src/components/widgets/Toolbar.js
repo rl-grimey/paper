@@ -66,6 +66,7 @@ export default class Toolbar extends React.Component {
             <ToggleButtonGroup 
               type="radio" 
               name="charts"
+              bsSize="sm"
               value={this.state.chart}
               defaultValue={'topics'}
               onChange={(evt) => this.handleChartBtn(evt)}
@@ -83,6 +84,7 @@ export default class Toolbar extends React.Component {
             <ToggleButtonGroup 
               type="radio" 
               name="views"
+              bsSize="sm"
               value={this.state.view}
               defaultValue={'absolute'}
               onChange={(evt) => this.handleViewBtn(evt)}
@@ -99,6 +101,7 @@ export default class Toolbar extends React.Component {
             <ToggleButtonGroup 
               type="radio" 
               name="tiles"
+              bsSize="sm"
               value={this.state.tile}
               defaultValue={'total_tweets'}
               onChange={(evt) => this.handleTileBtn(evt)}
