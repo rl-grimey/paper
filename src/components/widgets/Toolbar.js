@@ -50,7 +50,7 @@ export default class Toolbar extends React.Component {
 
   render() {
     return (
-      <Row className={'justify-content-between'}>
+      <Row id="Toolbar">
 
         <Col>
           <h2 className="dashboard-title align-middle">
@@ -62,7 +62,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar style={{'marginTop': '20px'}}>
+          <ButtonToolbar >
             <ToggleButtonGroup 
               type="radio" 
               name="charts"
@@ -80,7 +80,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar style={{'marginTop': '20px'}}>
+          <ButtonToolbar >
             <ToggleButtonGroup 
               type="radio" 
               name="views"
@@ -97,7 +97,7 @@ export default class Toolbar extends React.Component {
         </Col>
 
         <Col>
-          <ButtonToolbar style={{'marginTop': '20px'}}>
+          <ButtonToolbar >
             <ToggleButtonGroup 
               type="radio" 
               name="tiles"
