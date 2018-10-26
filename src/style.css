@@ -20,6 +20,28 @@ hr {
 }
 
 
+/* Toolbar */
+/* Unobstrusive button group labels */
+button[disabled=""],
+label[disabled=""] {
+  pointer-events: none;
+  border-color: none;
+}
+
+/* Flexible buttons */
+#Toolbar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+/* Disable uneven margins */
+#Toolbar * {
+  margin-top: 5px;
+}
+
+
+/* Cartogram */
 .cartogrid {
   display: block;
   margin: auto;
