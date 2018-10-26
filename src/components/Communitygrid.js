@@ -13,14 +13,14 @@ export default class CommunityGrid extends React.Component {
     this.state = {
       width      : props.width,
       height     : props.height,
-      scale      : this.create_clouds_scale(props.width),
+      scale      : this.create_clouds_width(props.width, props.height),
       community  : props.community,
       communities: communities,
       view       : props.view,
       data       : {}
     }
 
-    this.create_clouds_scale = this.create_clouds_scale.bind(this);
+    this.create_clouds_width = this.create_clouds_width.bind(this);
     this.create_cloud = this.create_cloud.bind(this);
     this.create_cloud_data = this.create_cloud_data.bind(this);
     this.create_intercloud_scale = this.create_intercloud_scale.bind(this);
@@ -45,16 +45,23 @@ export default class CommunityGrid extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     /* Update the community, view, and dimensions */
-    let scale = this.create_clouds_scale(nextProps.width);
+    let scale = this.create_clouds_width(nextProps.width, nextProps.height);
     this.setState({ ...nextProps, scale });
   }
 
-  create_clouds_scale(width) {
+  create_clouds_width(width, height) {
     /* Creates a scale to fit our 6 communities reasonably. */
-    return scaleBand()
+
+    // Create the scale from the widths using a D3 scale (full width case)
+    const band_scale = scaleBand()
       .domain(communities)
       .range([0, width])
       .padding(0.1);
+    const band_width = band_scale.bandwidth();
+
+    return Math.min(height-10, band_width);
+
+
   }
 
   create_cloud_data(community) {
@@ -98,9 +105,12 @@ export default class CommunityGrid extends React.Component {
     let data = community.value;
     let this_community = community.key;
 
+    // Conditionally create the cloud width. 
+    // If our scale's bandwidth 
+
     return (<CommunityCloud
       key={key}
-      width={this.state.scale.bandwidth()}
+      width={this.state.scale}
       height={this.state.height}
       scale={scale}
       view={this.state.view}

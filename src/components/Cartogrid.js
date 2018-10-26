@@ -5,7 +5,6 @@ import { Text } from '@vx/text';
 import * as d3 from 'd3';
 
 /* Components */
-import CartoLegend from './widgets/CartoLegend';
 import Gridtile from './tiles/Gridtile';
 import CommunityTile from './tiles/CommunityTile';
 import CountTile from './tiles/Counttile';
@@ -37,7 +36,10 @@ export default class Cartogrid extends React.Component {
 
     // Create the chart scales
     let { width, height, padding } = props;
-    width = width * 0.65;
+    let aspect_ratio = Math.min(width, height);
+    width = aspect_ratio;
+    height = aspect_ratio;
+    
     let {x_scale, y_scale} = get_scales(width, height, padding);
 
     this.state = {
